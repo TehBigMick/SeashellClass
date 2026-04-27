@@ -16,25 +16,26 @@
 
   <main>
     <!-- Phonics Category -->
-    <div class="resource-button" onclick="toggleLinks('phonics-links')">
-      Phonics
+    <div class="bubble-button" onclick="toggleLinks('phonics-links')">
+      🎵 Phonics
     </div>
     <div id="phonics-links" class="sub-buttons">
-      <a href="resources/phonics-level1.html" class="sub-button">Level 1</a>
-      <a href="resources/phonics-level2.html" class="sub-button">Level 2</a>
-      <a href="resources/phonics-level3.html" class="sub-button">Level 3</a>
+      <a href="resources/phonics-level1.html" class="sub-bubble">Level 1</a>
+      <a href="resources/phonics-level2.html" class="sub-bubble">Level 2</a>
+      <a href="resources/phonics-level3.html" class="sub-bubble">Level 3</a>
     </div>
 
     <!-- ESL Category -->
-    <div class="resource-button" onclick="toggleLinks('esl-links')">
-      ESL
+    <div class="bubble-button" onclick="toggleLinks('esl-links')">
+      🐾 ESL
     </div>
     <div id="esl-links" class="sub-buttons">
-      <a href="resources/esl-i-have-a-pet.html" class="sub-button">I Have a Pet</a>
+      <a href="resources/esl-i-have-a-pet.html" class="sub-bubble">I Have a Pet</a>
     </div>
   </main>
 
   <script>
+    // Toggle visibility of sections
     function toggleLinks(id) {
       const elem = document.getElementById(id);
       elem.style.display = (elem.style.display === 'block') ? 'none' : 'block';
