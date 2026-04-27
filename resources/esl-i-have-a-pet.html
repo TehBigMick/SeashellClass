@@ -1,1 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ESL - I Have a Pet</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <img src="assets/seashell-banner.webp" alt="Seashell Class Banner" class="banner">
+    <h1>ESL: I Have a Pet</h1>
+    <a href="resources.html" class="back-link">← Back to Resources</a>
+  </header>
 
+  <main>
+    <!-- Song Video Button -->
+    <div class="resource-button" onclick="toggleDisplay('song-video')">
+      Play Song Video
+    </div>
+    <div id="song-video" class="video-container">
+      <video controls width="480">
+        <source src="resources/video/i-have-a-pet-song.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <!-- Flashcards Button -->
+    <div class="resource-button" onclick="toggleDisplay('flashcards')">
+      Flashcards
+    </div>
+    <div id="flashcards" class="flashcards-container">
+      <div class="flashcard">
+        <span>Dog</span>
+        <button onclick="playAudio('dog')">🔊</button>
+      </div>
+      <div class="flashcard">
+        <span>Cat</span>
+        <button onclick="playAudio('cat')">🔊</button>
+      </div>
+      <div class="flashcard">
+        <span>Fish</span>
+        <button onclick="playAudio('fish')">🔊</button>
+      </div>
+      <div class="flashcard">
+        <span>Bird</span>
+        <button onclick="playAudio('bird')">🔊</button>
+      </div>
+      <div class="flashcard">
+        <span>Rabbit</span>
+        <button onclick="playAudio('rabbit')">🔊</button>
+      </div>
+      <div class="flashcard">
+        <span>Hamster</span>
+        <button onclick="playAudio('hamster')">🔊</button>
+      </div>
+      <div class="flashcard">
+        <span>Guinea Pig</span>
+        <button onclick="playAudio('guinea-pig')">🔊</button>
+      </div>
+    </div>
+
+    <!-- Sentence Button -->
+    <div class="resource-button" onclick="playAudio('sentence')">
+      Play Sentence Audio
+    </div>
+  </main>
+
+  <script>
+    // Toggle visibility of sections
+    function toggleDisplay(id) {
+      const elem = document.getElementById(id);
+      elem.style.display = (elem.style.display === 'block') ? 'none' : 'block';
+    }
+
+    // Play specific audio files
+    function playAudio(name) {
+      const audio = new Audio(`resources/audio/${name}.mp3`);
+      audio.play();
+    }
+  </script>
+</body>
+</html>
