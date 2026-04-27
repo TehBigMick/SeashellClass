@@ -81,3 +81,53 @@ header p {
 .flashcard button:hover {
   color: #ffa500;
 }
+
+/* Bubble-style main category buttons */
+.bubble-button {
+  display: block;
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  background: linear-gradient(135deg, #ffb347, #ffcc33);
+  color: white;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+  border-radius: 50px; /* bubble shape */
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
+
+.bubble-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+}
+
+/* Sub-buttons for expanded items */
+.sub-buttons {
+  display: none; /* hidden by default */
+  max-width: 400px;
+  margin: 10px auto 30px auto;
+  text-align: center;
+}
+
+.sub-bubble {
+  display: block;
+  margin: 10px auto;
+  padding: 15px 20px;
+  max-width: 250px;
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 50px; /* bubble shape */
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.sub-bubble:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
