@@ -9,14 +9,14 @@
 <body>
   <header>
     <img src="assets/seashell-banner.webp" alt="Seashell Class Banner" class="banner">
-    <h1>ESL: I Have a Pet</h1>
+    <h1>🐾 I Have a Pet</h1>
     <a href="resources.html" class="back-link">← Back to Resources</a>
   </header>
 
   <main>
-    <!-- Song Video Button -->
-    <div class="resource-button" onclick="toggleDisplay('song-video')">
-      Play Song Video
+    <!-- Song Video -->
+    <div class="bubble-button" onclick="toggleDisplay('song-video')">
+      🎵 Play Song Video
     </div>
     <div id="song-video" class="video-container">
       <video controls width="480">
@@ -25,55 +25,67 @@
       </video>
     </div>
 
-    <!-- Flashcards Button -->
-    <div class="resource-button" onclick="toggleDisplay('flashcards')">
-      Flashcards
+    <!-- Flashcards -->
+    <div class="bubble-button" onclick="toggleDisplay('flashcards')">
+      🃏 Flashcards
     </div>
     <div id="flashcards" class="flashcards-container">
       <div class="flashcard">
+        <img src="assets/animals/dog.webp" alt="Dog">
         <span>Dog</span>
         <button onclick="playAudio('dog')">🔊</button>
       </div>
       <div class="flashcard">
+        <img src="assets/animals/cat.webp" alt="Cat">
         <span>Cat</span>
         <button onclick="playAudio('cat')">🔊</button>
       </div>
       <div class="flashcard">
+        <img src="assets/animals/fish.webp" alt="Fish">
         <span>Fish</span>
         <button onclick="playAudio('fish')">🔊</button>
       </div>
       <div class="flashcard">
+        <img src="assets/animals/bird.webp" alt="Bird">
         <span>Bird</span>
         <button onclick="playAudio('bird')">🔊</button>
       </div>
       <div class="flashcard">
+        <img src="assets/animals/rabbit.webp" alt="Rabbit">
         <span>Rabbit</span>
         <button onclick="playAudio('rabbit')">🔊</button>
       </div>
       <div class="flashcard">
+        <img src="assets/animals/hamster.webp" alt="Hamster">
         <span>Hamster</span>
         <button onclick="playAudio('hamster')">🔊</button>
       </div>
       <div class="flashcard">
+        <img src="assets/animals/guinea-pig.webp" alt="Guinea Pig">
         <span>Guinea Pig</span>
         <button onclick="playAudio('guinea-pig')">🔊</button>
       </div>
     </div>
 
-    <!-- Sentence Button -->
-    <div class="resource-button" onclick="playAudio('sentence')">
-      Play Sentence Audio
+    <!-- Sentence -->
+    <div class="bubble-button" onclick="playAudio('sentence')">
+      🗣️ Play Sentence
+    </div>
+
+    <!-- Game -->
+    <div class="bubble-button" onclick="location.href='resources/esl-i-have-a-pet-game.html'">
+      🎮 Play Game
     </div>
   </main>
 
   <script>
-    // Toggle visibility of sections
+    // Toggle visibility
     function toggleDisplay(id) {
       const elem = document.getElementById(id);
       elem.style.display = (elem.style.display === 'block') ? 'none' : 'block';
     }
 
-    // Play specific audio files
+    // Play audio files
     function playAudio(name) {
       const audio = new Audio(`resources/audio/${name}.mp3`);
       audio.play();
