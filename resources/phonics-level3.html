@@ -1,1 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Phonics Level 3</title>
 
+  <!-- Root path ensures it works from /resources/ -->
+  <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <img src="/assets/images/logo.png" class="logo">
+    <h1>🌊 Phonics Level 3</h1>
+  </div>
+
+  <!-- PHONEMES -->
+  <div class="card">
+    <h2>🔤 Tap the Sounds</h2>
+
+    <div class="phoneme-row">
+      <span class="phoneme" onclick="playSound('h')">h</span>
+      <span class="phoneme" onclick="playSound('b')">b</span>
+      <span class="phoneme" onclick="playSound('f')">f</span>
+      <span class="phoneme" onclick="playSound('ff')">ff</span>
+      <span class="phoneme" onclick="playSound('l')">l</span>
+      <span class="phoneme" onclick="playSound('ll')">ll</span>
+      <span class="phoneme" onclick="playSound('ss')">ss</span>
+    </div>
+  </div>
+
+  <!-- WORDS -->
+  <div class="card">
+    <h2>📖 Build the Words</h2>
+    <p class="instruction">Tap each sound, then listen to the word.</p>
+
+    <!-- WORD LIST -->
+
+    <div class="word-row">
+      <span onclick="playSound('b')">b</span>
+      <span onclick="playSound('a')">a</span>
+      <span onclick="playSound('d')">d</span>
+      <button class="bubble-btn" onclick="playWord('bad')">🔊</button>
+    </div>
+
+    <div class="word-row">
+      <span onclick="playSound('k')">k</span>
+      <span onclick="playSound('i')">i</span>
+      <span onclick="playSound('ss')">ss</span>
+      <button class="bubble-btn" onclick="playWord('kiss')">🔊</button>
+    </div>
+
+    <div class="word-row">
+      <span onclick="playSound('b')">b</span>
+      <span onclick="playSound('e')">e</span>
+      <span onclick="playSound('ll')">ll</span>
+      <button class="bubble-btn" onclick="playWord('bell')">🔊</button>
+    </div>
+
+    <div class="word-row">
+      <span onclick="playSound('b')">b</span>
+      <span onclick="playSound('u')">u</span>
+      <span onclick="playSound('g')">g</span>
+      <button class="bubble-btn" onclick="playWord('bug')">🔊</button>
+    </div>
+
+    <div class="word-row">
+      <span onclick="playSound('f')">f</span>
+      <span onclick="playSound('o')">o</span>
+      <span onclick="playSound('g')">g</span>
+      <button class="bubble-btn" onclick="playWord('fog')">🔊</button>
+    </div>
+
+    <div class="word-row">
+      <span onclick="playSound('f')">f</span>
+      <span onclick="playSound('u')">u</span>
+      <span onclick="playSound('ss')">ss</span>
+      <button class="bubble-btn" onclick="playWord('fuss')">🔊</button>
+    </div>
+
+    <div class="word-row">
+      <span onclick="playSound('h')">h</span>
+      <span onclick="playSound('i')">i</span>
+      <span onclick="playSound('ll')">ll</span>
+      <button class="bubble-btn" onclick="playWord('hill')">🔊</button>
+    </div>
+
+    <div class="word-row">
+      <span onclick="playSound('h')">h</span>
+      <span onclick="playSound('a')">a</span>
+      <span onclick="playSound('t')">t</span>
+      <button class="bubble-btn" onclick="playWord('hat')">🔊</button>
+    </div>
+
+    <div class="word-row">
+      <span onclick="playSound('m')">m</span>
+      <span onclick="playSound('e')">e</span>
+      <span onclick="playSound('ss')">ss</span>
+      <button class="bubble-btn" onclick="playWord('mess')">🔊</button>
+    </div>
+
+    <div class="word-row">
+      <span onclick="playSound('m')">m</span>
+      <span onclick="playSound('i')">i</span>
+      <span onclick="playSound('ll')">ll</span>
+      <button class="bubble-btn" onclick="playWord('mill')">🔊</button>
+    </div>
+
+  </div>
+
+  <!-- NAV -->
+  <div class="section">
+    <a href="/resources/level3-wordbank.html">
+      <button class="bubble-btn game-btn">📚 Full Word Bank</button>
+    </a>
+  </div>
+
+</div>
+
+<script>
+function playSound(letter) {
+  new Audio("/assets/audio/phonemes/" + letter + ".mp3").play();
+}
+
+function playWord(word) {
+  new Audio("/assets/audio/words/" + word + ".mp3").play();
+}
+</script>
+
+</body>
+</html>
