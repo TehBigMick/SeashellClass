@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <title>Phonics Level 1</title>
 
-  <!-- IMPORTANT: adjust path if needed -->
-  <link rel="stylesheet" href="../styles.css">
+  <!-- Always load from root so paths never break -->
+  <link rel="stylesheet" href="/styles.css">
 </head>
 
 <body>
@@ -14,8 +14,8 @@
 
   <!-- HEADER -->
   <div class="header">
-    <img src="../assets/seashell-banner.webp" class="logo">
-    <h1> Phonics Level 1</h1>
+    <img src="/assets/images/logo.png" class="logo">
+    <h1>🌊 Phonics Level 1</h1>
   </div>
 
   <!-- PHONEMES -->
@@ -37,6 +37,7 @@
   <!-- WORDS -->
   <div class="card">
     <h2>📖 Build the Words</h2>
+    <p class="instruction">Tap each sound, then listen to the word.</p>
 
     <div class="word-row">
       <span onclick="playSound('s')">s</span>
@@ -87,34 +88,26 @@
       <button class="bubble-btn" onclick="playWord('dip')">🔊</button>
     </div>
 
-    <button class="bubble-btn" onclick="playBlend()">🔊 Listen & Blend</button>
-  </div>
-
-  <!-- GAME -->
-  <div class="card">
-    <h2>🎮 Tap the Sounds!</h2>
-
-    <div class="listen-box">
-  <button class="bubble-btn listen-btn" onclick="playTargetWord()">
-    🔊 Listen
-  </button>
-</div>
-
-    <div id="game-letters" class="phoneme-row"></div>
-
-    <p id="game-feedback"></p>
-
-    <button class="bubble-btn" onclick="nextWord()">Next Word</button>
   </div>
 
   <!-- NAV -->
   <div class="section">
-    <a href="level1-wordbank.html">
+    <a href="/resources/level1-wordbank.html">
       <button class="bubble-btn game-btn">📚 Full Word Bank</button>
     </a>
   </div>
 
 </div>
+
+<script>
+function playSound(letter) {
+  new Audio("/assets/audio/phonemes/" + letter + ".mp3").play();
+}
+
+function playWord(word) {
+  new Audio("/assets/audio/words/" + word + ".mp3").play();
+}
+</script>
 
 </body>
 </html>
