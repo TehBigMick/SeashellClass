@@ -1,1 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Phonics Level 1</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
+<div class="container">
+
+  <h1>Phonics Level 1</h1>
+
+  <!-- ===== PHONEMES ===== -->
+  <div class="section">
+    <h2>Phonemes</h2>
+    <div class="phoneme-row">
+      <span class="phoneme" onclick="playSound('s')">s</span>
+      <span class="phoneme" onclick="playSound('a')">a</span>
+      <span class="phoneme" onclick="playSound('t')">t</span>
+      <span class="phoneme" onclick="playSound('p')">p</span>
+      <span class="phoneme" onclick="playSound('i')">i</span>
+      <span class="phoneme" onclick="playSound('n')">n</span>
+      <span class="phoneme" onclick="playSound('m')">m</span>
+      <span class="phoneme" onclick="playSound('d')">d</span>
+    </div>
+  </div>
+
+  <!-- ===== WORD BANK ===== -->
+  <div class="section">
+    <h2>Word Bank</h2>
+
+    <div class="word-row">
+      <span onclick="playSound('s')">s</span>
+      <span onclick="playSound('a')">a</span>
+      <span onclick="playSound('t')">t</span>
+      <button onclick="playWord('sat')">🔊</button>
+    </div>
+
+    <div class="word-row">
+      <span onclick="playSound('s')">s</span>
+      <span onclick="playSound('i')">i</span>
+      <span onclick="playSound('t')">t</span>
+      <button onclick="playWord('sit')">🔊</button>
+    </div>
+
+    <div class="word-row">
+      <span onclick="playSound('t')">t</span>
+      <span onclick="playSound('a')">a</span>
+      <span onclick="playSound('p')">p</span>
+      <button onclick="playWord('tap')">🔊</button>
+    </div>
+
+    <div class="word-row">
+      <span onclick="playSound('p')">p</span>
+      <span onclick="playSound('i')">i</span>
+      <span onclick="playSound('n')">n</span>
+      <button onclick="playWord('pin')">🔊</button>
+    </div>
+
+    <div class="word-row">
+      <span onclick="playSound('p')">p</span>
+      <span onclick="playSound('a')">a</span>
+      <span onclick="playSound('n')">n</span>
+      <button onclick="playWord('pan')">🔊</button>
+    </div>
+
+    <div class="word-row">
+      <span onclick="playSound('m')">m</span>
+      <span onclick="playSound('a')">a</span>
+      <span onclick="playSound('t')">t</span>
+      <button onclick="playWord('mat')">🔊</button>
+    </div>
+
+    <div class="word-row">
+      <span onclick="playSound('d')">d</span>
+      <span onclick="playSound('i')">i</span>
+      <span onclick="playSound('p')">p</span>
+      <button onclick="playWord('dip')">🔊</button>
+    </div>
+
+  </div>
+
+  <!-- ===== LISTEN & REPEAT ===== -->
+  <div class="section">
+    <button class="bubble-btn" onclick="playBlend()">🔊 Listen & Blend</button>
+  </div>
+
+</div>
+
+<script>
+
+function playSound(letter) {
+  let audio = new Audio("assets/audio/phonemes/" + letter + ".mp3");
+  audio.play();
+}
+
+function playWord(word) {
+  let audio = new Audio("assets/audio/words/" + word + ".mp3");
+  audio.play();
+}
+
+function playBlend() {
+  let sequence = ["s", "a", "t"];
+  let index = 0;
+
+  function playNext() {
+    if (index < sequence.length) {
+      let audio = new Audio("assets/audio/phonemes/" + sequence[index] + ".mp3");
+      audio.play();
+      index++;
+      audio.onended = playNext;
+    } else {
+      let word = new Audio("assets/audio/words/sat.mp3");
+      word.play();
+    }
+  }
+
+  playNext();
+}
+
+</script>
+
+</body>
+</html>
