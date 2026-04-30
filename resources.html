@@ -4,42 +4,63 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Seashell Class Resources</title>
-  <link rel="stylesheet" href="styles.css">
+
+  <!-- Use root path so it works everywhere -->
+  <link rel="stylesheet" href="/styles.css">
 </head>
+
 <body>
-  <header>
-    <img src="assets/seashell-banner.webp" alt="Seashell Class Banner" class="banner">
-    <h1>Seashell Class Resources</h1>
-    <p>Click a category to view available materials</p>
-    <a href="index.html" class="back-link">← Back to Homepage</a>
-  </header>
 
-  <main>
-    <!-- Phonics Category -->
-    <div class="bubble-button" onclick="toggleLinks('phonics-links')">
+<div class="container">
+
+  <!-- HEADER CARD -->
+  <div class="card hero-card">
+
+    <div class="logo-wrap">
+      <img src="/assets/seashell-banner.webp" alt="Seashell Class Banner" class="hero-logo">
+    </div>
+
+    <h1>📚 Seashell Class Resources</h1>
+    <p class="subtitle">Choose a category below</p>
+
+    <a href="/index.html">
+      <button class="bubble-btn">⬅ Back to Homepage</button>
+    </a>
+
+  </div>
+
+  <!-- PHONICS -->
+  <div class="card">
+    <button class="bubble-btn large-btn" onclick="toggleLinks('phonics-links')">
       🎵 Phonics
-    </div>
+    </button>
+
     <div id="phonics-links" class="sub-buttons">
-      <a href="resources/phonics-level1.html" class="sub-bubble">Level 1</a>
-      <a href="resources/phonics-level2.html" class="sub-bubble">Level 2</a>
-      <a href="resources/phonics-level3.html" class="sub-bubble">Level 3</a>
+      <a href="/resources/phonics-level1.html" class="sub-bubble">Level 1</a>
+      <a href="/resources/phonics-level2.html" class="sub-bubble">Level 2</a>
+      <a href="/resources/phonics-level3.html" class="sub-bubble">Level 3</a>
     </div>
+  </div>
 
-    <!-- ESL Category -->
-    <div class="bubble-button" onclick="toggleLinks('esl-links')">
+  <!-- ESL -->
+  <div class="card">
+    <button class="bubble-btn large-btn" onclick="toggleLinks('esl-links')">
       🐾 ESL
-    </div>
-    <div id="esl-links" class="sub-buttons">
-      <a href="resources/esl-i-have-a-pet.html" class="sub-bubble">I Have a Pet</a>
-    </div>
-  </main>
+    </button>
 
-  <script>
-    // Toggle visibility of sections
-    function toggleLinks(id) {
-      const elem = document.getElementById(id);
-      elem.style.display = (elem.style.display === 'block') ? 'none' : 'block';
-    }
-  </script>
+    <div id="esl-links" class="sub-buttons">
+      <a href="/resources/esl-i-have-a-pet.html" class="sub-bubble">I Have a Pet</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function toggleLinks(id) {
+  const el = document.getElementById(id);
+  el.style.display = (el.style.display === "flex") ? "none" : "flex";
+}
+</script>
+
 </body>
 </html>
