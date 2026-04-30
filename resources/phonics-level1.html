@@ -9,11 +9,12 @@
 
 <div class="container">
 
-  <h1>Phonics Level 1</h1>
+  <h1>🌊 Phonics Level 1</h1>
 
   <!-- ===== PHONEMES ===== -->
-  <div class="section">
-    <h2>Phonemes</h2>
+  <div class="card">
+    <h2>🔤 Tap the Sounds</h2>
+
     <div class="phoneme-row">
       <span class="phoneme" onclick="playSound('s')">s</span>
       <span class="phoneme" onclick="playSound('a')">a</span>
@@ -27,8 +28,8 @@
   </div>
 
   <!-- ===== WORD BANK ===== -->
-  <div class="section">
-    <h2>Word Bank</h2>
+  <div class="card">
+    <h2>📖 Build the Words</h2>
 
     <div class="word-row">
       <span onclick="playSound('s')">s</span>
@@ -79,11 +80,27 @@
       <button onclick="playWord('dip')">🔊</button>
     </div>
 
+    <button class="bubble-btn" onclick="playBlend()">🔊 Listen & Blend</button>
   </div>
 
-  <!-- ===== LISTEN & REPEAT ===== -->
+  <!-- ===== GAME ===== -->
+  <div class="card">
+    <h2>🎮 Game: Tap the Sounds!</h2>
+
+    <p id="game-word">Word: sat</p>
+
+    <div id="game-letters" class="phoneme-row"></div>
+
+    <p id="game-feedback"></p>
+
+    <button class="bubble-btn" onclick="nextWord()">Next Word</button>
+  </div>
+
+  <!-- ===== NAV ===== -->
   <div class="section">
-    <button class="bubble-btn" onclick="playBlend()">🔊 Listen & Blend</button>
+    <a href="level1-wordbank.html">
+      <button class="bubble-btn game-btn">📚 Full Word Bank</button>
+    </a>
   </div>
 
 </div>
@@ -91,33 +108,76 @@
 <script>
 
 function playSound(letter) {
-  let audio = new Audio("assets/audio/phonemes/" + letter + ".mp3");
-  audio.play();
+  new Audio("assets/audio/phonemes/" + letter + ".mp3").play();
 }
 
 function playWord(word) {
-  let audio = new Audio("assets/audio/words/" + word + ".mp3");
-  audio.play();
+  new Audio("assets/audio/words/" + word + ".mp3").play();
 }
 
 function playBlend() {
   let sequence = ["s", "a", "t"];
-  let index = 0;
+  let i = 0;
 
-  function playNext() {
-    if (index < sequence.length) {
-      let audio = new Audio("assets/audio/phonemes/" + sequence[index] + ".mp3");
+  function next() {
+    if (i < sequence.length) {
+      let audio = new Audio("assets/audio/phonemes/" + sequence[i] + ".mp3");
       audio.play();
-      index++;
-      audio.onended = playNext;
+      i++;
+      audio.onended = next;
     } else {
-      let word = new Audio("assets/audio/words/sat.mp3");
-      word.play();
+      playWord("sat");
     }
   }
 
-  playNext();
+  next();
 }
+
+/* ===== GAME ===== */
+
+const words = ["sat","sit","tap","pin","pan","mat","dip"];
+let currentWord = "";
+let index = 0;
+
+function nextWord() {
+  currentWord = words[Math.floor(Math.random() * words.length)];
+  index = 0;
+
+  document.getElementById("game-word").innerText = "Word: " + currentWord;
+  document.getElementById("game-feedback").innerText = "";
+
+  let container = document.getElementById("game-letters");
+  container.innerHTML = "";
+
+  let shuffled = currentWord.split('').sort(() => Math.random() - 0.5);
+
+  shuffled.forEach(letter => {
+    let el = document.createElement("span");
+    el.className = "phoneme";
+    el.innerText = letter;
+
+    el.onclick = () => check(letter, el);
+    container.appendChild(el);
+  });
+}
+
+function check(letter, el) {
+  if (letter === currentWord[index]) {
+    playSound(letter);
+    el.style.background = "#81c784";
+    index++;
+
+    if (index === currentWord.length) {
+      document.getElementById("game-feedback").innerText = "⭐ Great!";
+      playWord(currentWord);
+    }
+  } else {
+    el.style.background = "#ef5350";
+    document.getElementById("game-feedback").innerText = "Try again!";
+  }
+}
+
+nextWord();
 
 </script>
 
