@@ -1,124 +1,140 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f8ff;
-  color: #034f84;
+/* ===== RESET ===== */
+* {
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  box-sizing: border-box;
 }
 
-header {
-  text-align: center;
-  margin: 50px 0 30px 0;
+/* ===== BODY + BACKGROUND ===== */
+body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+
+  background-image: url("assets/images/underwater-bg.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  color: #333;
 }
 
-header h1 {
-  font-size: 2.5rem;
-  margin: 10px 0;
+/* Soft overlay so background isn’t distracting */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background: rgba(255, 255, 255, 0.75);
+  z-index: -1;
+  pointer-events: none;
 }
 
-header p {
-  font-size: 1.2rem;
-  margin: 0;
-}
-
-.banner {
-  max-width: 300px;
-  height: auto;
-  margin-bottom: 20px;
-}
-
-.back-link {
-  display: inline-block;
-  margin-top: 10px;
-  margin-bottom: 30px;
-  color: #034f84;
-  text-decoration: none;
-  font-size: 1rem;
-}
-
-.back-link:hover {
-  text-decoration: underline;
-}
-
-/* Main category bubble buttons */
-.bubble-button {
-  display: block;
-  max-width: 400px;
-  margin: 15px auto;
+/* ===== MAIN CONTAINER ===== */
+.container {
+  max-width: 1100px;
+  margin: 40px auto;
   padding: 20px;
-  background: linear-gradient(135deg, #ffb347, #ffcc33);
-  color: white;
+
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+
+  text-align: centre;
+}
+
+/* ===== HEADINGS ===== */
+h1, h2, h3 {
   text-align: center;
-  font-size: 1.3rem;
+  margin-bottom: 20px;
+  color: #2c7da0;
+}
+
+/* ===== BUBBLE BUTTONS ===== */
+button,
+.bubble-btn {
+  display: inline-block;
+  padding: 12px 24px;
+  margin: 10px;
+
+  font-size: 16px;
   font-weight: bold;
+
+  color: white;
+  background: linear-gradient(145deg, #4fc3f7, #0288d1);
+
+  border: none;
   border-radius: 50px;
+
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+
+  box-shadow: 0 6px 0 #0277bd;
+  transition: all 0.2s ease;
 }
 
-.bubble-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+button:hover,
+.bubble-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 #01579b;
 }
 
-/* Sub-buttons for resources */
-.sub-buttons {
-  display: none; /* hidden by default */
-  max-width: 400px;
-  margin: 10px auto 30px auto;
+button:active,
+.bubble-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 3px 0 #01579b;
+}
+
+/* ===== SECTION TOGGLES (hidden content) ===== */
+.hidden {
+  display: none;
+}
+
+.section {
+  margin-top: 20px;
   text-align: center;
 }
 
-.sub-bubble {
-  display: block;
-  margin: 10px auto;
-  padding: 15px 20px;
-  max-width: 250px;
-  background: linear-gradient(135deg, #00c6ff, #0072ff);
-  color: white;
-  text-decoration: none;
-  font-size: 1.1rem;
-  font-weight: bold;
-  border-radius: 50px;
-  transition: transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
-
-.sub-bubble:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-}
-
-/* Video container & flashcards */
-.video-container, .flashcards-container {
-  display: none; /* hidden initially */
-  max-width: 500px;
-  margin: 15px auto 30px auto;
+/* ===== VIDEO PLAYER ===== */
+.video-container {
+  margin-top: 20px;
   text-align: center;
 }
 
-/* Flashcards styling */
-.flashcards-container {
+video {
+  max-width: 100%;
+  border-radius: 12px;
+}
+
+/* ===== FLASHCARDS ===== */
+.flashcard-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 15px;
+  gap: 20px;
+
+  margin-top: 20px;
 }
 
 .flashcard {
-  background-color: #ffe0b2;
-  border-radius: 15px;
+  width: 140px;
+  height: 160px;
+
+  background: white;
+  border-radius: 16px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
   padding: 10px;
-  min-width: 120px;
-  text-align: center;
-  font-weight: bold;
-  font-size: 1.1rem;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  transition: transform 0.2s;
+
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+
+  transition: transform 0.2s ease;
 }
 
 .flashcard:hover {
@@ -126,43 +142,66 @@ header p {
 }
 
 .flashcard img {
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-  margin-bottom: 5px;
+  max-width: 80px;
+  max-height: 80px;
 }
 
-.flashcard button {
+.flashcard p {
+  font-weight: bold;
   margin-top: 5px;
-  background: none;
-  border: none;
+}
+
+/* Audio icon */
+.audio-btn {
   cursor: pointer;
-  font-size: 1.2rem;
+  font-size: 20px;
+  margin-top: 5px;
 }
 
-.flashcard button:hover {
-  color: #ff8c00;
-}
-/* Center main content */
-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
+/* ===== NAVIGATION (if used) ===== */
+.navbar {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-/* Ensure flashcards wrap nicely and remain centered */
-.flashcards-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
+.navbar a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #0288d1;
+  font-weight: bold;
 }
 
-/* Video container centered */
-.video-container {
-  display: flex;
-  justify-content: center;
-  margin: 15px auto 30px auto;
+.navbar a:hover {
+  text-decoration: underline;
+}
+
+/* ===== GAME PAGE LINK BUTTON ===== */
+.game-btn {
+  background: linear-gradient(145deg, #81c784, #388e3c);
+  box-shadow: 0 6px 0 #2e7d32;
+}
+
+.game-btn:hover {
+  box-shadow: 0 8px 0 #1b5e20;
+}
+
+.game-btn:active {
+  box-shadow: 0 3px 0 #1b5e20;
+}
+
+/* ===== MOBILE RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .container {
+    margin: 20px;
+    padding: 15px;
+  }
+
+  .flashcard {
+    width: 120px;
+    height: 150px;
+  }
+
+  button {
+    width: 80%;
+  }
 }
