@@ -249,3 +249,68 @@ video {
 .word-row span:hover {
   background: #d0f0ff;
 }
+/* ===== CARD SECTIONS ===== */
+.card {
+  background: rgba(255,255,255,0.95);
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+/* ===== PHONEMES ===== */
+.phoneme-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.phoneme {
+  font-size: 28px;
+  font-weight: bold;
+  background: #4fc3f7;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.phoneme:hover {
+  transform: scale(1.1);
+}
+
+/* ===== WORDS ===== */
+.word-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin: 10px 0;
+}
+
+.word-row span {
+  font-size: 24px;
+  background: #ffffff;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+.word-row span:hover {
+  background: #b3e5fc;
+}
+
+/* ===== GAME TEXT ===== */
+#game-word {
+  font-size: 22px;
+  margin: 10px 0;
+}
+
+#game-feedback {
+  font-size: 18px;
+  margin: 10px 0;
+  font-weight: bold;
+}
