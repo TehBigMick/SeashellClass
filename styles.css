@@ -314,3 +314,13 @@ video {
   margin: 10px 0;
   font-weight: bold;
 }
+/* GAME AREA */
+#game-area {
+  min-height: 80px;
+  margin: 20px 0;
+}
+
+/* MODE BUTTONS */
+.card h3 {
+  margin-bottom: 10px;
+}
