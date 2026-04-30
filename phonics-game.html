@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Phonics Game</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="container">
+
+  <h1>🎮 Phonics Game</h1>
+
+  <div class="card">
+    <h2 id="mode-title">Tap the Sounds</h2>
+
+    <p id="target-word">Word: ---</p>
+
+    <div id="game-area" class="phoneme-row"></div>
+
+    <p id="feedback"></p>
+
+    <button class="bubble-btn" onclick="nextRound()">Next</button>
+  </div>
+
+  <div class="card">
+    <h3>Game Mode</h3>
+
+    <button class="bubble-btn" onclick="setMode('tap')">Tap Sounds</button>
+    <button class="bubble-btn" onclick="setMode('build')">Build Word</button>
+  </div>
+
+</div>
+
+<script src="phonics-data.js"></script>
+<script src="phonics-engine.js"></script>
+
+</body>
+</html>
