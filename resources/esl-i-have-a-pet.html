@@ -1,11 +1,12 @@
 <main style="display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%;">
+
   <!-- Song Video -->
   <div class="bubble-button" onclick="toggleDisplay('song-video')">
     🎵 Play Song Video
   </div>
-  <div id="song-video" class="video-container">
-    <video controls width="480">
-      <source src="video/i-have-a-pet-song.mp4" type="video/mp4">
+  <div id="song-video" class="video-container" style="display:none; margin:12px 0;">
+    <video controls width="360">
+      <source src="../assets/video/i-have-a-pet-song.mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
   </div>
@@ -14,39 +15,39 @@
   <div class="bubble-button" onclick="toggleDisplay('flashcards')">
     🃏 Flashcards
   </div>
-  <div id="flashcards" class="flashcards-container">
-    <div class="flashcard">
-      <img src="../assets/animals/dog.webp" alt="Dog">
+  <div id="flashcards" class="flashcards-container" style="display:none; margin:12px 0; display:flex; flex-wrap:wrap; justify-content:center; gap:16px;">
+    <div class="flashcard" style="display:flex; flex-direction:column; align-items:center; max-width:120px;">
+      <img src="../assets/animals/dog.webp" alt="Dog" style="width:100px; height:100px; object-fit:contain; border-radius:8px;">
       <span>Dog</span>
       <button onclick="playAudio('dog')">🔊</button>
     </div>
-    <div class="flashcard">
-      <img src="../assets/animals/cat.webp" alt="Cat">
+    <div class="flashcard" style="display:flex; flex-direction:column; align-items:center; max-width:120px;">
+      <img src="../assets/animals/cat.webp" alt="Cat" style="width:100px; height:100px; object-fit:contain; border-radius:8px;">
       <span>Cat</span>
       <button onclick="playAudio('cat')">🔊</button>
     </div>
-    <div class="flashcard">
-      <img src="../assets/animals/fish.webp" alt="Fish">
+    <div class="flashcard" style="display:flex; flex-direction:column; align-items:center; max-width:120px;">
+      <img src="../assets/animals/fish.webp" alt="Fish" style="width:100px; height:100px; object-fit:contain; border-radius:8px;">
       <span>Fish</span>
       <button onclick="playAudio('fish')">🔊</button>
     </div>
-    <div class="flashcard">
-      <img src="../assets/animals/bird.webp" alt="Bird">
+    <div class="flashcard" style="display:flex; flex-direction:column; align-items:center; max-width:120px;">
+      <img src="../assets/animals/bird.webp" alt="Bird" style="width:100px; height:100px; object-fit:contain; border-radius:8px;">
       <span>Bird</span>
       <button onclick="playAudio('bird')">🔊</button>
     </div>
-    <div class="flashcard">
-      <img src="../assets/animals/rabbit.webp" alt="Rabbit">
+    <div class="flashcard" style="display:flex; flex-direction:column; align-items:center; max-width:120px;">
+      <img src="../assets/animals/rabbit.webp" alt="Rabbit" style="width:100px; height:100px; object-fit:contain; border-radius:8px;">
       <span>Rabbit</span>
       <button onclick="playAudio('rabbit')">🔊</button>
     </div>
-    <div class="flashcard">
-      <img src="../assets/animals/hamster.webp" alt="Hamster">
+    <div class="flashcard" style="display:flex; flex-direction:column; align-items:center; max-width:120px;">
+      <img src="../assets/animals/hamster.webp" alt="Hamster" style="width:100px; height:100px; object-fit:contain; border-radius:8px;">
       <span>Hamster</span>
       <button onclick="playAudio('hamster')">🔊</button>
     </div>
-    <div class="flashcard">
-      <img src="../assets/animals/guinea-pig.webp" alt="Guinea Pig">
+    <div class="flashcard" style="display:flex; flex-direction:column; align-items:center; max-width:120px;">
+      <img src="../assets/animals/guinea-pig.webp" alt="Guinea Pig" style="width:100px; height:100px; object-fit:contain; border-radius:8px;">
       <span>Guinea Pig</span>
       <button onclick="playAudio('guinea-pig')">🔊</button>
     </div>
@@ -61,4 +62,18 @@
   <div class="bubble-button" onclick="location.href='esl-i-have-a-pet-game.html'">
     🎮 Play Game
   </div>
+
 </main>
+
+<script>
+function toggleDisplay(id) {
+  const el = document.getElementById(id);
+  el.style.display = (el.style.display === "none" || el.style.display === "") ? "flex" : "none";
+}
+
+// Example playAudio function — adjust if your audio folder differs
+function playAudio(word) {
+  const audio = new Audio(`../assets/audio/${word}.m4a`);
+  audio.play();
+}
+</script>
