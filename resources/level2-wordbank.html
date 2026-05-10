@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Level 2 Word Bank</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .word-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 15px;
+      width: 100%;
+      max-width: 700px;
+      margin-bottom: 30px;
+    }
+
+    .word-cell {
+      background: #FFD966;
+      padding: 15px;
+      border-radius: 15px;
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.2s, background 0.2s;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .word-cell:hover {
+      transform: scale(1.05);
+      background: #FFB300;
+    }
+
+    .audio-button {
+      background: transparent;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .section-title {
+      margin-top: 30px;
+      font-size: 1.5rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Level 2 Word Bank</h1>
+
+    <!-- CVC / Basic Words -->
+    <div class="word-grid">
+      <div class="word-cell">cat <button class="audio-button" onclick="playAudio('cat')">🔊</button></div>
+      <div class="word-cell">pen <button class="audio-button" onclick="playAudio('pen')">🔊</button></div>
+      <div class="word-cell">rat <button class="audio-button" onclick="playAudio('rat')">🔊</button></div>
+      <div class="word-cell">den <button class="audio-button" onclick="playAudio('den')">🔊</button></div>
+      <div class="word-cell">cup <button class="audio-button" onclick="playAudio('cup')">🔊</button></div>
+      <div class="word-cell">pet <button class="audio-button" onclick="playAudio('pet')">🔊</button></div>
+      <div class="word-cell">dot <button class="audio-button" onclick="playAudio('dot')">🔊</button></div>
+      <div class="word-cell">dig <button class="audio-button" onclick="playAudio('dig')">🔊</button></div>
+      <div class="word-cell">cut <button class="audio-button" onclick="playAudio('cut')">🔊</button></div>
+      <div class="word-cell">kid <button class="audio-button" onclick="playAudio('kid')">🔊</button></div>
+      <div class="word-cell">duck <button class="audio-button" onclick="playAudio('duck')">🔊</button></div>
+      <div class="word-cell">dog <button class="audio-button" onclick="playAudio('dog')">🔊</button></div>
+      <div class="word-cell">mud <button class="audio-button" onclick="playAudio('mud')">🔊</button></div>
+      <div class="word-cell">men <button class="audio-button" onclick="playAudio('men')">🔊</button></div>
+      <div class="word-cell">kick <button class="audio-button" onclick="playAudio('kick')">🔊</button></div>
+      <div class="word-cell">pack <button class="audio-button" onclick="playAudio('pack')">🔊</button></div>
+      <div class="word-cell">net <button class="audio-button" onclick="playAudio('net')">🔊</button></div>
+      <div class="word-cell">met <button class="audio-button" onclick="playAudio('met')">🔊</button></div>
+      <div class="word-cell">ran <button class="audio-button" onclick="playAudio('ran')">🔊</button></div>
+      <div class="word-cell">pick <button class="audio-button" onclick="playAudio('pick')">🔊</button></div>
+      <div class="word-cell">nut <button class="audio-button" onclick="playAudio('nut')">🔊</button></div>
+      <div class="word-cell">red <button class="audio-button" onclick="playAudio('red')">🔊</button></div>
+      <div class="word-cell">sick <button class="audio-button" onclick="playAudio('sick')">🔊</button></div>
+      <div class="word-cell">us <button class="audio-button" onclick="playAudio('us')">🔊</button></div>
+      <div class="word-cell">sun <button class="audio-button" onclick="playAudio('sun')">🔊</button></div>
+      <div class="word-cell">rock <button class="audio-button" onclick="playAudio('rock')">🔊</button></div>
+      <div class="word-cell">sock <button class="audio-button" onclick="playAudio('sock')">🔊</button></div>
+      <div class="word-cell">top <button class="audio-button" onclick="playAudio('top')">🔊</button></div>
+      <div class="word-cell">ten <button class="audio-button" onclick="playAudio('ten')">🔊</button></div>
+      <div class="word-cell">run <button class="audio-button" onclick="playAudio('run')">🔊</button></div>
+    </div>
+
+    <!-- High-Frequency Words -->
+    <div class="section-title">High-Frequency Words</div>
+    <div class="word-grid">
+      <div class="word-cell">and <button class="audio-button" onclick="playAudio('and')">🔊</button></div>
+      <div class="word-cell">can <button class="audio-button" onclick="playAudio('can')">🔊</button></div>
+      <div class="word-cell">get <button class="audio-button" onclick="playAudio('get')">🔊</button></div>
+      <div class="word-cell">got <button class="audio-button" onclick="playAudio('got')">🔊</button></div>
+      <div class="word-cell">Mum <button class="audio-button" onclick="playAudio('Mum')">🔊</button></div>
+      <div class="word-cell">not <button class="audio-button" onclick="playAudio('not')">🔊</button></div>
+      <div class="word-cell">on <button class="audio-button" onclick="playAudio('on')">🔊</button></div>
+      <div class="word-cell">up <button class="audio-button" onclick="playAudio('up')">🔊</button></div>
+    </div>
+  </main>
+
+  <script>
+    function playAudio(word) {
+      const audio = new Audio(`assets/audio/words/${word}.m4a`);
+      audio.play();
+    }
+  </script>
+</body>
+</html>
