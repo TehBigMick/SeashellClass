@@ -1,196 +1,336 @@
-<div class="word-section">
-  <!-- Row 1 -->
-  <div class="word-card">
-    <div class="letters">
-      <div class="letter" onclick="playAudio('d')">d</div>
-      <div class="letter" onclick="playAudio('i')">i</div>
-      <div class="letter" onclick="playAudio('d')">d</div>
-    </div>
-    <button class="audio-btn" onclick="playAudio('did')">🔊 did</button>
-  </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Level 1 Word Bank</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 20px;
+    }
 
-  <div class="word-card">
-    <div class="letters">
-      <div class="letter" onclick="playAudio('m')">m</div>
-      <div class="letter" onclick="playAudio('a')">a</div>
-      <div class="letter" onclick="playAudio('n')">n</div>
-    </div>
-    <button class="audio-btn" onclick="playAudio('man')">🔊 man</button>
-  </div>
+    h2 {
+      margin-top: 24px;
+      font-size: 1.6rem;
+      text-align: center;
+      color: #34495e;
+    }
 
-  <div class="word-card">
-    <div class="letters">
-      <div class="letter" onclick="playAudio('a')">a</div>
-      <div class="letter" onclick="playAudio('m')">m</div>
-    </div>
-    <button class="audio-btn" onclick="playAudio('am')">🔊 am</button>
-  </div>
+    .word-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 12px;
+    }
 
-  <!-- Row 2 -->
-  <div class="word-card">
-    <div class="letters">
-      <div class="letter" onclick="playAudio('m')">m</div>
-      <div class="letter" onclick="playAudio('a')">a</div>
-      <div class="letter" onclick="playAudio('d')">d</div>
-    </div>
-    <button class="audio-btn" onclick="playAudio('mad')">🔊 mad</button>
-  </div>
+    .word-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: #fdf2f2;
+      border-radius: 12px;
+      padding: 12px;
+      min-width: 100px;
+      font-family: 'Comic Sans MS', sans-serif;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
 
-  <div class="word-card">
-    <div class="letters">
-      <div class="letter" onclick="playAudio('d')">d</div>
-      <div class="letter" onclick="playAudio('i')">i</div>
-      <div class="letter" onclick="playAudio('m')">m</div>
-    </div>
-    <button class="audio-btn" onclick="playAudio('dim')">🔊 dim</button>
-  </div>
+    .letters {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 8px;
+    }
 
-  <div class="word-card">
-    <div class="letters">
-      <div class="letter" onclick="playAudio('m')">m</div>
-      <div class="letter" onclick="playAudio('a')">a</div>
-      <div class="letter" onclick="playAudio('p')">p</div>
-    </div>
-    <button class="audio-btn" onclick="playAudio('map')">🔊 map</button>
-  </div>
+    .letter {
+      width: 24px;
+      height: 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #fff3bf;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1.2rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+      transition: transform 0.1s;
+    }
 
-  <!-- Row 3 -->
-  <div class="word-card">
-    <div class="letters">
-      <div class="letter" onclick="playAudio('p')">p</div>
-      <div class="letter" onclick="playAudio('a')">a</div>
-      <div class="letter" onclick="playAudio('n')">n</div>
-    </div>
-    <button class="audio-btn" onclick="playAudio('pan')">🔊 pan</button>
-  </div>
+    .letter:active {
+      transform: scale(1.2);
+    }
 
-  <div class="word-card">
-    <div class="letters">
-      <div class="letter" onclick="playAudio('m')">m</div>
-      <div class="letter" onclick="playAudio('a')">a</div>
-      <div class="letter" onclick="playAudio('t')">t</div>
-    </div>
-    <button class="audio-btn" onclick="playAudio('mat')">🔊 mat</button>
-  </div>
+    .audio-btn {
+      cursor: pointer;
+      font-size: 1.2rem;
+      background-color: #ffd6e0;
+      border: none;
+      border-radius: 6px;
+      padding: 4px 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+      transition: background 0.2s;
+    }
 
-  <div class="word-card">
-    <div class="letters">
-      <div class="letter" onclick="playAudio('d')">d</div>
-      <div class="letter" onclick="playAudio('i')">i</div>
-      <div class="letter" onclick="playAudio('p')">p</div>
-    </div>
-    <button class="audio-btn" onclick="playAudio('dip')">🔊 dip</button>
-  </div>
+    .audio-btn:hover {
+      background-color: #ffb6c1;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h2>CVC Words</h2>
+    <div class="word-section">
+      <!-- All CVC word cards -->
+      <!-- Row 1 -->
+      <div class="word-card">
+        <div class="letters">
+          <div class="letter" onclick="playAudio('d')">d</div>
+          <div class="letter" onclick="playAudio('i')">i</div>
+          <div class="letter" onclick="playAudio('d')">d</div>
+        </div>
+        <button class="audio-btn" onclick="playAudio('did')">🔊 did</button>
+      </div>
+      <div class="word-card">
+        <div class="letters">
+          <div class="letter" onclick="playAudio('m')">m</div>
+          <div class="letter" onclick="playAudio('a')">a</div>
+          <div class="letter" onclick="playAudio('n')">n</div>
+        </div>
+        <button class="audio-btn" onclick="playAudio('man')">🔊 man</button>
+      </div>
+      <div class="word-card">
+        <div class="letters">
+          <div class="letter" onclick="playAudio('a')">a</div>
+          <div class="letter" onclick="playAudio('m')">m</div>
+        </div>
+        <button class="audio-btn" onclick="playAudio('am')">🔊 am</button>
+      </div>
+      <div class="word-card">
+        <div class="letters">
+          <div class="letter" onclick="playAudio('m')">m</div>
+          <div class="letter" onclick="playAudio('a')">a</div>
+          <div class="letter" onclick="playAudio('d')">d</div>
+        </div>
+        <button class="audio-btn" onclick="playAudio('mad')">🔊 mad</button>
+      </div>
+      <div class="word-card">
+        <div class="letters">
+          <div class="letter" onclick="playAudio('d')">d</div>
+          <div class="letter" onclick="playAudio('i')">i</div>
+          <div class="letter" onclick="playAudio('m')">m</div>
+        </div>
+        <button class="audio-btn" onclick="playAudio('dim')">🔊 dim</button>
+      </div>
+      <div class="word-card">
+        <div class="letters">
+          <div class="letter" onclick="playAudio('m')">m</div>
+          <div class="letter" onclick="playAudio('a')">a</div>
+          <div class="letter" onclick="playAudio('p')">p</div>
+        </div>
+        <button class="audio-btn" onclick="playAudio('map')">🔊 map</button>
+      </div>
 
-  <!-- Row 4 -->
-  <div class="word-card">
-    <div class="letters">
-      <div class="letter" onclick="playAudio('p')">p</div>
-      <div class="letter" onclick="playAudio('i')">i</div>
-      <div class="letter" onclick="playAudio('t')">t</div>
-    </div>
-    <button class="audio-btn" onclick="playAudio('pit')">🔊 pit</button>
-  </div>
+      <!-- Row 2 -->
+      <div class="word-card">
+        <div class="letters">
+          <div class="letter" onclick="playAudio('p')">p</div>
+          <div class="letter" onclick="playAudio('a')">a</div>
+          <div class="letter" onclick="playAudio('n')">n</div>
+        </div>
+        <button class="audio-btn" onclick="playAudio('pan')">🔊 pan</button>
+      </div>
+      <div class="word-card">
+        <div class="letters">
+          <div class="letter" onclick="playAudio('m')">m</div>
+          <div class="letter" onclick="playAudio('a')">a</div>
+          <div class="letter" onclick="playAudio('t')">t</div>
+        </div>
+        <button class="audio-btn" onclick="playAudio('mat')">🔊 mat</button>
+      </div>
+      <div class="word-card">
+        <div class="letters">
+          <div class="letter" onclick="playAudio('d')">d</div>
+          <div class="letter" onclick="playAudio('i')">i</div>
+          <div class="letter" onclick="playAudio('p')">p</div>
+        </div>
+        <button class="audio-btn" onclick="playAudio('dip')">🔊 dip</button>
+      </div>
+      <div class="word-card">
+        <div class="letters">
+          <div class="letter" onclick="playAudio('p')">p</div>
+          <div class="letter" onclick="playAudio('i')">i</div>
+          <div class="letter" onclick="playAudio('t')">t</div>
+        </div>
+        <button class="audio-btn" onclick="playAudio('pit')">🔊 pit</button>
+      </div>
+      <div class="word-card">
+        <div class="letters">
+          <div class="letter" onclick="playAudio('p')">p</div>
+          <div class="letter" onclick="playAudio('a')">a</div>
+          <div class="letter" onclick="playAudio('t')">t</div>
+        </div>
+        <button class="audio-btn" onclick="playAudio('pat')">🔊 pat</button>
+      </div>
+      <div class="word-card">
+        <div class="letters">
+          <div class="letter" onclick="playAudio('n')">n</div>
+          <div class="letter" onclick="playAudio('a')">a</div>
+          <div class="letter" onclick="playAudio('p')">p</div>
+        </div>
+        <button class="audio-btn" onclick="playAudio('nap')">🔊 nap</button>
+      </div>
 
-  <div class="word-card">
-    <div class="letters">
-      <div class="letter" onclick="playAudio('p')">p</div>
-      <div class="letter" onclick="playAudio('a')">a</div>
-      <div class="letter" onclick="playAudio('t')">t</div>
-    </div>
-    <button class="audio-btn" onclick="playAudio('pat')">🔊 pat</button>
-  </div>
+      <!-- Row 3 -->
+      <div class="word-card">
+        <div class="letters">
+          <div class="letter" onclick="playAudio('s')">s</div>
+          <div class="letter" onclick="playAudio('a')">a</div>
+          <div class="letter" onclick="playAudio('t')">t</div>
+        </div>
+        <button class="audio-btn" onclick="playAudio('sat')">🔊 sat</button>
+      </div>
+      <div class="word-card">
+        <div class="letters">
+          <div class="letter" onclick="playAudio('p')">p</div>
+          <div class="letter" onclick="playAudio('a')">a</div>
+          <div class="letter" onclick="playAudio('d')">d</div>
+        </div>
+        <button class="audio-btn" onclick="playAudio('pad')">🔊 pad</button>
+      </div>
+      <div class="word-card">
+        <div class="letters">
+          <div class="letter" onclick="playAudio('p')">p</div>
+          <div class="letter" onclick="playAudio('i')">i</div>
+          <div class="letter" onclick="playAudio('n')">n</div>
+        </div>
+        <button class="audio-btn" onclick="playAudio('pin')">🔊 pin</button>
+      </div>
+      <div class="word-card">
+        <div class="letters">
+          <div class="letter" onclick="playAudio('t')">t</div>
+          <div class="letter" onclick="playAudio('a')">a</div>
+          <div class="letter" onclick="playAudio('p')">p</div>
+        </div>
+        <button class="audio-btn" onclick="playAudio('tap')">🔊 tap</button>
+      </div>
+      <div class="word-card">
+        <div class="letters">
+          <div class="letter" onclick="playAudio('s')">s</div>
+          <div class="letter" onclick="playAudio('i')">i</div>
+          <div class="letter" onclick="playAudio('p')">p</div>
+        </div>
+        <button class="audio-btn" onclick="playAudio('sip')">🔊 sip</button>
+      </div>
+      <div class="word-card">
+        <div class="letters">
+          <div class="letter" onclick="playAudio('s')">s</div>
+          <div class="letter" onclick="playAudio('a')">a</div>
+          <div class="letter" onclick="playAudio('d')">d</div>
+        </div>
+        <button class="audio-btn" onclick="playAudio('sad')">🔊 sad</button>
+      </div>
 
-  <div class="word-card">
-    <div class="letters">
-      <div class="letter" onclick="playAudio('n')">n</div>
-      <div class="letter" onclick="playAudio('a')">a</div>
-      <div class="letter" onclick="playAudio('p')">p</div>
+      <!-- Row 4 -->
+      <div class="word-card">
+        <div class="letters">
+          <div class="letter" onclick="playAudio('t')">t</div>
+          <div class="letter" onclick="playAudio('i')">i</div>
+          <div class="letter" onclick="playAudio('p')">p</div>
+        </div>
+        <button class="audio-btn" onclick="playAudio('tip')">🔊 tip</button>
+      </div>
+      <div class="word-card">
+        <div class="letters">
+          <div class="letter" onclick="playAudio('t')">t</div>
+          <div class="letter" onclick="playAudio('i')">i</div>
+          <div class="letter" onclick="playAudio('n')">n</div>
+        </div>
+        <button class="audio-btn" onclick="playAudio('tin')">🔊 tin</button>
+      </div>
+      <div class="word-card">
+        <div class="letters">
+          <div class="letter" onclick="playAudio('s')">s</div>
+          <div class="letter" onclick="playAudio('i')">i</div>
+          <div class="letter" onclick="playAudio('t')">t</div>
+        </div>
+        <button class="audio-btn" onclick="playAudio('sit')">🔊 sit</button>
+      </div>
     </div>
-    <button class="audio-btn" onclick="playAudio('nap')">🔊 nap</button>
-  </div>
 
-  <!-- Row 5 -->
-  <div class="word-card">
-    <div class="letters">
-      <div class="letter" onclick="playAudio('s')">s</div>
-      <div class="letter" onclick="playAudio('a')">a</div>
-      <div class="letter" onclick="playAudio('t')">t</div>
+    <!-- High-Frequency Words -->
+    <h2>High-Frequency Words</h2>
+    <div class="word-section">
+      <div class="word-card">
+        <div class="letters">
+          <div class="letter" onclick="playAudio('a')">a</div>
+        </div>
+        <button class="audio-btn" onclick="playAudio('a')">🔊 a</button>
+      </div>
+      <div class="word-card">
+        <div class="letters">
+          <div class="letter" onclick="playAudio('a')">a</div>
+          <div class="letter" onclick="playAudio('n')">n</div>
+        </div>
+        <button class="audio-btn" onclick="playAudio('an')">🔊 an</button>
+      </div>
+      <div class="word-card">
+        <div class="letters">
+          <div class="letter" onclick="playAudio('a')">a</div>
+          <div class="letter" onclick="playAudio('t')">t</div>
+        </div>
+        <button class="audio-btn" onclick="playAudio('at')">🔊 at</button>
+      </div>
+      <div class="word-card">
+        <div class="letters">
+          <div class="letter" onclick="playAudio('D')">D</div>
+          <div class="letter" onclick="playAudio('a')">a</div>
+          <div class="letter" onclick="playAudio('d')">d</div>
+        </div>
+        <button class="audio-btn" onclick="playAudio('Dad')">🔊 Dad</button>
+      </div>
+      <div class="word-card">
+        <div class="letters">
+          <div class="letter" onclick="playAudio('i')">i</div>
+          <div class="letter" onclick="playAudio('n')">n</div>
+        </div>
+        <button class="audio-btn" onclick="playAudio('in')">🔊 in</button>
+      </div>
+      <div class="word-card">
+        <div class="letters">
+          <div class="letter" onclick="playAudio('i')">i</div>
+          <div class="letter" onclick="playAudio('t')">t</div>
+        </div>
+        <button class="audio-btn" onclick="playAudio('it')">🔊 it</button>
+      </div>
     </div>
-    <button class="audio-btn" onclick="playAudio('sat')">🔊 sat</button>
-  </div>
 
-  <div class="word-card">
-    <div class="letters">
-      <div class="letter" onclick="playAudio('p')">p</div>
-      <div class="letter" onclick="playAudio('a')">a</div>
-      <div class="letter" onclick="playAudio('d')">d</div>
+    <!-- Tricky Words -->
+    <h2>Tricky Words</h2>
+    <div class="word-section">
+      <div class="word-card">
+        <button class="audio-btn" onclick="playAudio('as')">🔊 as</button>
+      </div>
+      <div class="word-card">
+        <button class="audio-btn" onclick="playAudio('I')">🔊 I</button>
+      </div>
+      <div class="word-card">
+        <button class="audio-btn" onclick="playAudio('is')">🔊 is</button>
+      </div>
     </div>
-    <button class="audio-btn" onclick="playAudio('pad')">🔊 pad</button>
-  </div>
+  </main>
 
-  <div class="word-card">
-    <div class="letters">
-      <div class="letter" onclick="playAudio('p')">p</div>
-      <div class="letter" onclick="playAudio('i')">i</div>
-      <div class="letter" onclick="playAudio('n')">n</div>
-    </div>
-    <button class="audio-btn" onclick="playAudio('pin')">🔊 pin</button>
-  </div>
-
-  <!-- Row 6 -->
-  <div class="word-card">
-    <div class="letters">
-      <div class="letter" onclick="playAudio('t')">t</div>
-      <div class="letter" onclick="playAudio('a')">a</div>
-      <div class="letter" onclick="playAudio('p')">p</div>
-    </div>
-    <button class="audio-btn" onclick="playAudio('tap')">🔊 tap</button>
-  </div>
-
-  <div class="word-card">
-    <div class="letters">
-      <div class="letter" onclick="playAudio('s')">s</div>
-      <div class="letter" onclick="playAudio('i')">i</div>
-      <div class="letter" onclick="playAudio('p')">p</div>
-    </div>
-    <button class="audio-btn" onclick="playAudio('sip')">🔊 sip</button>
-  </div>
-
-  <div class="word-card">
-    <div class="letters">
-      <div class="letter" onclick="playAudio('s')">s</div>
-      <div class="letter" onclick="playAudio('a')">a</div>
-      <div class="letter" onclick="playAudio('d')">d</div>
-    </div>
-    <button class="audio-btn" onclick="playAudio('sad')">🔊 sad</button>
-  </div>
-
-  <!-- Row 7 -->
-  <div class="word-card">
-    <div class="letters">
-      <div class="letter" onclick="playAudio('t')">t</div>
-      <div class="letter" onclick="playAudio('i')">i</div>
-      <div class="letter" onclick="playAudio('p')">p</div>
-    </div>
-    <button class="audio-btn" onclick="playAudio('tip')">🔊 tip</button>
-  </div>
-
-  <div class="word-card">
-    <div class="letters">
-      <div class="letter" onclick="playAudio('t')">t</div>
-      <div class="letter" onclick="playAudio('i')">i</div>
-      <div class="letter" onclick="playAudio('n')">n</div>
-    </div>
-    <button class="audio-btn" onclick="playAudio('tin')">🔊 tin</button>
-  </div>
-
-  <div class="word-card">
-    <div class="letters">
-      <div class="letter" onclick="playAudio('s')">s</div>
-      <div class="letter" onclick="playAudio('i')">i</div>
-      <div class="letter" onclick="playAudio('t')">t</div>
-    </div>
-    <button class="audio-btn" onclick="playAudio('sit')">🔊 sit</button>
-  </div>
-</div>
+  <script>
+    function playAudio(word) {
+      const audio = new Audio(`../assets/audio/${word}.m4a`);
+      audio.play();
+    }
+  </script>
+</body>
+</html>
