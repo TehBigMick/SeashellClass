@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Level 1 Word Bank</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="../styles.css">
   <style>
     main {
       display: flex;
@@ -136,7 +136,6 @@
         </div>
         <button class="audio-btn" onclick="playAudio('map')">🔊 map</button>
       </div>
-
       <!-- Row 2 -->
       <div class="word-card">
         <div class="letters">
@@ -267,30 +266,12 @@
     <!-- High-Frequency Words -->
     <h2>High-Frequency Words</h2>
     <div class="word-section">
-      <div class="word-card">
-        <div class="letters"><div class="letter" onclick="playAudio('a')">a</div></div>
-        <button class="audio-btn" onclick="playAudio('a')">🔊 a</button>
-      </div>
-      <div class="word-card">
-        <div class="letters"><div class="letter" onclick="playAudio('a')">a</div><div class="letter" onclick="playAudio('n')">n</div></div>
-        <button class="audio-btn" onclick="playAudio('an')">🔊 an</button>
-      </div>
-      <div class="word-card">
-        <div class="letters"><div class="letter" onclick="playAudio('a')">a</div><div class="letter" onclick="playAudio('t')">t</div></div>
-        <button class="audio-btn" onclick="playAudio('at')">🔊 at</button>
-      </div>
-      <div class="word-card">
-        <div class="letters"><div class="letter" onclick="playAudio('D')">D</div><div class="letter" onclick="playAudio('a')">a</div><div class="letter" onclick="playAudio('d')">d</div></div>
-        <button class="audio-btn" onclick="playAudio('Dad')">🔊 Dad</button>
-      </div>
-      <div class="word-card">
-        <div class="letters"><div class="letter" onclick="playAudio('i')">i</div><div class="letter" onclick="playAudio('n')">n</div></div>
-        <button class="audio-btn" onclick="playAudio('in')">🔊 in</button>
-      </div>
-      <div class="word-card">
-        <div class="letters"><div class="letter" onclick="playAudio('i')">i</div><div class="letter" onclick="playAudio('t')">t</div></div>
-        <button class="audio-btn" onclick="playAudio('it')">🔊 it</button>
-      </div>
+      <div class="word-card"><div class="letters"><div class="letter" onclick="playAudio('a')">a</div></div><button class="audio-btn" onclick="playAudio('a')">🔊 a</button></div>
+      <div class="word-card"><div class="letters"><div class="letter" onclick="playAudio('a')">a</div><div class="letter" onclick="playAudio('n')">n</div></div><button class="audio-btn" onclick="playAudio('an')">🔊 an</button></div>
+      <div class="word-card"><div class="letters"><div class="letter" onclick="playAudio('a')">a</div><div class="letter" onclick="playAudio('t')">t</div></div><button class="audio-btn" onclick="playAudio('at')">🔊 at</button></div>
+      <div class="word-card"><div class="letters"><div class="letter" onclick="playAudio('D')">D</div><div class="letter" onclick="playAudio('a')">a</div><div class="letter" onclick="playAudio('d')">d</div></div><button class="audio-btn" onclick="playAudio('Dad')">🔊 Dad</button></div>
+      <div class="word-card"><div class="letters"><div class="letter" onclick="playAudio('i')">i</div><div class="letter" onclick="playAudio('n')">n</div></div><button class="audio-btn" onclick="playAudio('in')">🔊 in</button></div>
+      <div class="word-card"><div class="letters"><div class="letter" onclick="playAudio('i')">i</div><div class="letter" onclick="playAudio('t')">t</div></div><button class="audio-btn" onclick="playAudio('it')">🔊 it</button></div>
     </div>
 
     <!-- Tricky Words -->
@@ -304,9 +285,11 @@
 
   <script>
     function playAudio(word) {
+      // Letters are phonemes, everything else is a word
       const phonemes = ['a','d','i','m','n','p','s','t'];
       const folder = phonemes.includes(word) ? 'phonemes' : 'words';
-      const audio = new Audio(`../assets/audio/${folder}/${word}.m4a`);
+      const ext = phonemes.includes(word) ? 'mp3' : 'm4a';
+      const audio = new Audio(`../assets/audio/${folder}/${word}.${ext}`);
       audio.play();
     }
   </script>
