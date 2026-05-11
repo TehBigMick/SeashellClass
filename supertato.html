@@ -6,55 +6,67 @@
   <title>Supertato - Seashell Class</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      font-family: sans-serif;
-      background: #f0fff4;
-      padding: 20px;
-    }
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    font-family: sans-serif;
+    background: #f0fff4;
+    padding: 20px;
+  }
 
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
 
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* wider for larger images */
+    gap: 20px;
+    width: 100%;
+    max-width: 900px;
+  }
+
+  .grid-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .grid-item img {
+    width: 140px;      /* larger */
+    height: 140px;     /* maintain square */
+    object-fit: contain; /* ensures whole image is visible, no cropping */
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+    transition: transform 0.2s;
+  }
+
+  .grid-item img:hover {
+    transform: scale(1.15);
+  }
+
+  .grid-item span {
+    margin-top: 8px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  /* Make it even more responsive on small screens */
+  @media (max-width: 500px) {
     .grid {
-      display: grid;
       grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
       gap: 15px;
-      width: 100%;
-      max-width: 800px;
     }
-
-    .grid-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      cursor: pointer;
-    }
-
     .grid-item img {
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
-      border-radius: 15px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      transition: transform 0.2s;
+      width: 120px;
+      height: 120px;
     }
-
-    .grid-item img:hover {
-      transform: scale(1.1);
-    }
-
-    .grid-item span {
-      margin-top: 5px;
-      font-weight: bold;
-      text-align: center;
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
   <h1>🥦 Supertato! 🥔</h1>
