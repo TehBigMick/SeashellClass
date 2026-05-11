@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Supertato - Seashell Class</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      font-family: sans-serif;
+      background: #f0fff4;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 15px;
+      width: 100%;
+      max-width: 800px;
+    }
+
+    .grid-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .grid-item img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: transform 0.2s;
+    }
+
+    .grid-item img:hover {
+      transform: scale(1.1);
+    }
+
+    .grid-item span {
+      margin-top: 5px;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>🥦 Supertato! 🥔</h1>
+
+  <div class="grid">
+    <div class="grid-item" onclick="playAudio('broccoli')">
+      <img src="assets/images/broccoli.webp" alt="Broccoli">
+      <span>Broccoli</span>
+    </div>
+
+    <div class="grid-item" onclick="playAudio('carrot')">
+      <img src="assets/images/carrot.webp" alt="Carrot">
+      <span>Carrot</span>
+    </div>
+
+    <div class="grid-item" onclick="playAudio('cucumber')">
+      <img src="assets/images/cucumber.webp" alt="Cucumber">
+      <span>Cucumber</span>
+    </div>
+
+    <div class="grid-item" onclick="playAudio('eggplant')">
+      <img src="assets/images/eggplant.webp" alt="Eggplant">
+      <span>Eggplant</span>
+    </div>
+
+    <div class="grid-item" onclick="playAudio('grapefruit')">
+      <img src="assets/images/grapefruit.webp" alt="Grapefruit">
+      <span>Grapefruit</span>
+    </div>
+
+    <div class="grid-item" onclick="playAudio('pea')">
+      <img src="assets/images/pea.webp" alt="Pea">
+      <span>Pea</span>
+    </div>
+
+    <div class="grid-item" onclick="playAudio('pear')">
+      <img src="assets/images/pear.webp" alt="Pear">
+      <span>Pear</span>
+    </div>
+
+    <div class="grid-item" onclick="playAudio('pineapple')">
+      <img src="assets/images/pineapple.webp" alt="Pineapple">
+      <span>Pineapple</span>
+    </div>
+
+    <div class="grid-item" onclick="playAudio('potato')">
+      <img src="assets/images/potato.webp" alt="Potato">
+      <span>Potato</span>
+    </div>
+
+    <div class="grid-item" onclick="playAudio('strawberry')">
+      <img src="assets/images/strawberry.webp" alt="Strawberry">
+      <span>Strawberry</span>
+    </div>
+
+    <div class="grid-item" onclick="playAudio('tomato')">
+      <img src="assets/images/tomato.webp" alt="Tomato">
+      <span>Tomato</span>
+    </div>
+
+    <div class="grid-item" onclick="playAudio('watermelon')">
+      <img src="assets/images/watermelon.webp" alt="Watermelon">
+      <span>Watermelon</span>
+    </div>
+  </div>
+
+  <audio id="audio-player"></audio>
+
+  <script>
+    function playAudio(fruit) {
+      const audio = document.getElementById('audio-player');
+      audio.src = `assets/audio/words/${fruit}.m4a`;
+      audio.play();
+    }
+  </script>
+</body>
+</html>
