@@ -1,6 +1,6 @@
 // ===== Data for all pages =====
 const bookPages = [
-  { image: 'pirate-pat-1.webp', teacherText: '', teacherAudio: '', cvcWords: [] },
+  { image: 'pirate-pat-1.webp', teacherText: '', teacherAudio: '', cvcWords: [] }, // Title page
   { image: 'pirate-pat-2.webp', teacherText: "The night was cold,\nthe sky was black,\nthe window rattled...", teacherAudio: 'pat-page1.m4a', cvcWords: ['tap'] },
   { image: 'pirate-pat-3.webp', teacherText: "There's someone there,\nI'm sure of it!\nSam, do stop barking.", teacherAudio: 'pat-page2.m4a', cvcWords: ['sit', 'sam', 'sit'] },
   { image: 'pirate-pat-4.webp', teacherText: "Well, we were scared,\nbut not our Gran.\nShe went to look:", teacherAudio: 'pat-page3.m4a', cvcWords: ['it', 'is', 'a', 'man'] },
@@ -13,7 +13,8 @@ const bookPages = [
   { image: 'pirate-pat-11.webp', teacherText: "Well done\nPirate Pat!", teacherAudio: 'pat-page10.m4a', cvcWords: ['pat', 'pat', 'pat'] }
 ];
 
-let currentPage = 0;
+// ===== Start on title page =====
+let currentPage = 0; // Title page first
 
 // ===== Load a page =====
 function loadPage(index) {
