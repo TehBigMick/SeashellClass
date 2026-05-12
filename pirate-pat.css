@@ -1,4 +1,4 @@
-/* General body & container */
+/* ===== General body & container ===== */
 body {
   font-family: sans-serif;
   display: flex;
@@ -13,7 +13,7 @@ body {
   align-items: center;
 }
 
-/* Book page styling */
+/* ===== Book page styling ===== */
 .page {
   width: 600px;
   padding: 20px;
@@ -23,9 +23,11 @@ body {
   text-align: center;
 }
 
-/* Teacher Section */
+/* ===== Teacher Section ===== */
 .teacher-section img {
-  max-width: 100%;
+  width: 100%;       /* Always fill page width */
+  max-width: 550px;  /* Don’t get too big on desktop */
+  height: auto;      /* Maintain aspect ratio */
   border-radius: 8px;
   margin-bottom: 10px;
 }
@@ -44,7 +46,7 @@ body {
   transform: scale(1.1);
 }
 
-/* Student Section */
+/* ===== Student Section ===== */
 .student-section {
   margin-top: 20px;
 }
@@ -92,7 +94,7 @@ body {
   transform: scale(1.1);
 }
 
-/* Navigation buttons */
+/* ===== Navigation buttons ===== */
 .nav-button {
   font-size: 2em;
   background: none;
@@ -105,4 +107,30 @@ body {
 
 .nav-button:hover {
   transform: scale(1.2);
+}
+
+/* ===== Responsive adjustments ===== */
+@media screen and (max-width: 400px) {
+  .page {
+    width: 90%; /* Shrink container on small screens */
+    padding: 10px;
+  }
+
+  .teacher-section img {
+    max-width: 100%; /* Image fills container */
+  }
+
+  .nav-button {
+    font-size: 1.8em;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .page {
+    width: 650px; /* Slightly bigger container on large screens */
+  }
+
+  .teacher-section img {
+    max-width: 600px; /* Slightly bigger image */
+  }
 }
