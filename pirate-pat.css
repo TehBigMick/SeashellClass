@@ -1,0 +1,44 @@
+body {
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  background: #f0f8ff;
+}
+
+.book-container {
+  display: flex;
+  align-items: center;
+}
+
+.page {
+  width: 600px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+.teacher-section img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.teacher-section button,
+.student-section button {
+  margin: 5px;
+  padding: 10px 15px;
+  border-radius: 20px;
+  border: none;
+  background-color: #ffcc00;
+  cursor: pointer;
+}
+
+.nav-button {
+  font-size: 2em;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
