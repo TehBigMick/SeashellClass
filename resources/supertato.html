@@ -3,132 +3,147 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Supertato - Seashell Class</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Supertato!</title>
+  <link rel="stylesheet" href="/styles.css">
   <style>
     body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      font-family: sans-serif;
-      background: #f0fff4;
+      font-family: Arial, sans-serif;
       padding: 20px;
-    }
-
-    h1 {
+      max-width: 900px;
+      margin: auto;
       text-align: center;
+    }
+    h1 {
       margin-bottom: 20px;
     }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 15px;
-      width: 100%;
-      max-width: 800px;
+    .flashcards-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
     }
-
-    .grid-item {
+    .flashcard {
+      background-color: #f1f1f1;
+      border-radius: 10px;
+      padding: 15px;
+      width: 150px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      cursor: pointer;
     }
-
-    .grid-item img {
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
-      border-radius: 15px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      transition: transform 0.2s;
+    .flashcard img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 5px;
+      margin-bottom: 10px;
     }
-
-    .grid-item img:hover {
-      transform: scale(1.1);
-    }
-
-    .grid-item span {
-      margin-top: 5px;
+    .flashcard span {
+      margin-bottom: 8px;
       font-weight: bold;
-      text-align: center;
+    }
+    .flashcard button {
+      background-color: #2196F3;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .flashcard button:hover {
+      background-color: #0b7dda;
     }
   </style>
 </head>
 <body>
-  <h1>🥦 Supertato! 🥔</h1>
 
-  <div class="grid">
-    <div class="grid-item" onclick="playAudio('broccoli')">
-      <img src="assets/images/broccoli.webp" alt="Broccoli">
-      <span>Broccoli</span>
-    </div>
+  <h1>🥔 Supertato!</h1>
+  <p>Click on an image to hear the word.</p>
 
-    <div class="grid-item" onclick="playAudio('carrot')">
-      <img src="assets/images/carrot.webp" alt="Carrot">
-      <span>Carrot</span>
-    </div>
+  <div class="flashcards-container">
 
-    <div class="grid-item" onclick="playAudio('cucumber')">
-      <img src="assets/images/cucumber.webp" alt="Cucumber">
-      <span>Cucumber</span>
-    </div>
-
-    <div class="grid-item" onclick="playAudio('eggplant')">
-      <img src="assets/images/eggplant.webp" alt="Eggplant">
-      <span>Eggplant</span>
-    </div>
-
-    <div class="grid-item" onclick="playAudio('grapefruit')">
-      <img src="assets/images/grapefruit.webp" alt="Grapefruit">
-      <span>Grapefruit</span>
-    </div>
-
-    <div class="grid-item" onclick="playAudio('pea')">
-      <img src="assets/images/pea.webp" alt="Pea">
-      <span>Pea</span>
-    </div>
-
-    <div class="grid-item" onclick="playAudio('pear')">
-      <img src="assets/images/pear.webp" alt="Pear">
-      <span>Pear</span>
-    </div>
-
-    <div class="grid-item" onclick="playAudio('pineapple')">
-      <img src="assets/images/pineapple.webp" alt="Pineapple">
-      <span>Pineapple</span>
-    </div>
-
-    <div class="grid-item" onclick="playAudio('potato')">
-      <img src="assets/images/potato.webp" alt="Potato">
+    <div class="flashcard">
+      <img src="/assets/images/potato.webp" alt="Potato">
       <span>Potato</span>
+      <button onclick="playAudio('potato')">🔊</button>
     </div>
 
-    <div class="grid-item" onclick="playAudio('strawberry')">
-      <img src="assets/images/strawberry.webp" alt="Strawberry">
-      <span>Strawberry</span>
+    <div class="flashcard">
+      <img src="/assets/images/carrot.webp" alt="Carrot">
+      <span>Carrot</span>
+      <button onclick="playAudio('carrot')">🔊</button>
     </div>
 
-    <div class="grid-item" onclick="playAudio('tomato')">
-      <img src="assets/images/tomato.webp" alt="Tomato">
+    <div class="flashcard">
+      <img src="/assets/images/broccoli.webp" alt="Broccoli">
+      <span>Broccoli</span>
+      <button onclick="playAudio('broccoli')">🔊</button>
+    </div>
+
+    <div class="flashcard">
+      <img src="/assets/images/pea.webp" alt="Pea">
+      <span>Pea</span>
+      <button onclick="playAudio('pea')">🔊</button>
+    </div>
+
+    <div class="flashcard">
+      <img src="/assets/images/tomato.webp" alt="Tomato">
       <span>Tomato</span>
+      <button onclick="playAudio('tomato')">🔊</button>
     </div>
 
-    <div class="grid-item" onclick="playAudio('watermelon')">
-      <img src="assets/images/watermelon.webp" alt="Watermelon">
-      <span>Watermelon</span>
+    <div class="flashcard">
+      <img src="/assets/images/cucumber.webp" alt="Cucumber">
+      <span>Cucumber</span>
+      <button onclick="playAudio('cucumber')">🔊</button>
     </div>
+
+    <div class="flashcard">
+      <img src="/assets/images/eggplant.webp" alt="Eggplant">
+      <span>Eggplant</span>
+      <button onclick="playAudio('eggplant')">🔊</button>
+    </div>
+
+    <div class="flashcard">
+      <img src="/assets/images/watermelon.webp" alt="Watermelon">
+      <span>Watermelon</span>
+      <button onclick="playAudio('watermelon')">🔊</button>
+    </div>
+
+    <div class="flashcard">
+      <img src="/assets/images/pear.webp" alt="Pear">
+      <span>Pear</span>
+      <button onclick="playAudio('pear')">🔊</button>
+    </div>
+
+    <div class="flashcard">
+      <img src="/assets/images/grapefruit.webp" alt="Grapefruit">
+      <span>Grapefruit</span>
+      <button onclick="playAudio('grapefruit')">🔊</button>
+    </div>
+
+    <div class="flashcard">
+      <img src="/assets/images/pineapple.webp" alt="Pineapple">
+      <span>Pineapple</span>
+      <button onclick="playAudio('pineapple')">🔊</button>
+    </div>
+
+    <div class="flashcard">
+      <img src="/assets/images/strawberry.webp" alt="Strawberry">
+      <span>Strawberry</span>
+      <button onclick="playAudio('strawberry')">🔊</button>
+    </div>
+
   </div>
 
-  <audio id="audio-player"></audio>
-
   <script>
-    function playAudio(fruit) {
-      const audio = document.getElementById('audio-player');
-      audio.src = `assets/audio/words/${fruit}.m4a`;
+    function playAudio(word) {
+      const audio = new Audio(`/assets/audio/words/${word}.m4a`);
       audio.play();
     }
   </script>
+
 </body>
 </html>
