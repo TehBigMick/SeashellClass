@@ -4,63 +4,62 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Seashell Class Resources</title>
-
-  <!-- Use root path so it works everywhere -->
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Bubble button style */
+    .bubble-button {
+      display: inline-block;
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 20px;
+      margin: 8px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 16px;
+      text-align: center;
+      transition: background-color 0.2s;
+    }
+    .bubble-button:hover {
+      background-color: #45a049;
+    }
+  </style>
 </head>
-
 <body>
 
-<div class="container">
+  <header>
+    <h1>Seashell Class Resources</h1>
+  </header>
 
-  <!-- HEADER CARD -->
-  <div class="card hero-card">
-
-    <div class="logo-wrap">
-      <img src="/assets/seashell-banner.webp" alt="Seashell Class Banner" class="hero-logo">
+  <main>
+    <h2>ESL Resources</h2>
+    <div id="esl-bubbles">
+      <!-- ESL bubbles will be injected here -->
     </div>
+  </main>
 
-    <h1>📚 Seashell Class Resources</h1>
-    <p class="subtitle">Choose a category below</p>
+  <script>
+    // Define ESL resources
+    const eslResources = [
+      { name: "Opposites", icon: "🔄", url: "opposites.html" },
+      { name: "Hobbies", icon: "🎳", url: "hobbies.html" },
+      { name: "How are you today?", icon: "😊", url: "how-are-you.html" },
+      { name: "Weather", icon: "☀️", url: "weather.html" },
+      { name: "What's wrong?", icon: "🤒", url: "whats-wrong.html" },
+      { name: "Supertato", icon: "🥔", url: "supertato.html" }
+    ];
 
-    <a href="/index.html">
-      <button class="bubble-btn">⬅ Back to Homepage</button>
-    </a>
+    const eslContainer = document.getElementById("esl-bubbles");
 
-  </div>
-
-  <!-- PHONICS -->
-  <div class="card">
-    <button class="bubble-btn large-btn" onclick="toggleLinks('phonics-links')">
-      🎵 Phonics
-    </button>
-
-    <div id="phonics-links" class="sub-buttons">
-      <a href="/resources/phonics-level1.html" class="sub-bubble">Level 1</a>
-      <a href="/resources/phonics-level2.html" class="sub-bubble">Level 2</a>
-      <a href="/resources/phonics-level3.html" class="sub-bubble">Level 3</a>
-    </div>
-  </div>
-
-  <!-- ESL -->
-  <div class="card">
-    <button class="bubble-btn large-btn" onclick="toggleLinks('esl-links')">
-      🐾 ESL
-    </button>
-
-    <div id="esl-links" class="sub-buttons">
-      <a href="/resources/esl-i-have-a-pet.html" class="sub-bubble">I Have a Pet</a>
-    </div>
-  </div>
-
-</div>
-
-<script>
-function toggleLinks(id) {
-  const el = document.getElementById(id);
-  el.style.display = (el.style.display === "flex") ? "none" : "flex";
-}
-</script>
+    eslResources.forEach(resource => {
+      const bubble = document.createElement("div");
+      bubble.className = "bubble-button";
+      bubble.innerHTML = `${resource.icon} ${resource.name}`;
+      bubble.onclick = () => {
+        window.location.href = resource.url;
+      };
+      eslContainer.appendChild(bubble);
+    });
+  </script>
 
 </body>
 </html>
