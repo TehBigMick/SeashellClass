@@ -1,1 +1,202 @@
-placeholder
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comic Story</title>
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    .flashcards-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+    .flashcard {
+      background-color: #f1f1f1;
+      border-radius: 10px;
+      padding: 10px;
+      width: 120px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .flashcard img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 5px;
+      margin-bottom: 8px;
+    }
+    .flashcard span {
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+    .flashcard button {
+      background-color: #2196F3;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .flashcard button:hover {
+      background-color: #0b7dda;
+    }
+
+    /* Comic Board */
+    .comic-board {
+      border: 2px dashed #4CAF50;
+      height: 400px;
+      margin-bottom: 20px;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+    }
+    .character-palette {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+    .character-palette img {
+      width: 80px;
+      height: 80px;
+      cursor: grab;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📖 Comic Story</h1>
+  <p>Learn the characters and drag them onto the comic board!</p>
+
+  <!-- Vocabulary Flashcards -->
+  <h2>Vocabulary Basics</h2>
+  <div class="flashcards-container">
+    <div class="flashcard">
+      <img src="/assets/images/lion.webp" alt="Lion">
+      <span>Lion</span>
+      <button onclick="playAudio('lion')">🔊</button>
+    </div>
+    <div class="flashcard">
+      <img src="/assets/images/cat.webp" alt="Cat">
+      <span>Cat</span>
+      <button onclick="playAudio('cat')">🔊</button>
+    </div>
+    <div class="flashcard">
+      <img src="/assets/images/dog.webp" alt="Dog">
+      <span>Dog</span>
+      <button onclick="playAudio('dog')">🔊</button>
+    </div>
+    <div class="flashcard">
+      <img src="/assets/images/superhero.webp" alt="Superhero">
+      <span>Superhero</span>
+      <button onclick="playAudio('superhero')">🔊</button>
+    </div>
+    <div class="flashcard">
+      <img src="/assets/images/princess.webp" alt="Princess">
+      <span>Princess</span>
+      <button onclick="playAudio('princess')">🔊</button>
+    </div>
+    <div class="flashcard">
+      <img src="/assets/images/astronaut.webp" alt="Astronaut">
+      <span>Astronaut</span>
+      <button onclick="playAudio('astronaut')">🔊</button>
+    </div>
+    <div class="flashcard">
+      <img src="/assets/images/pirate.webp" alt="Pirate">
+      <span>Pirate</span>
+      <button onclick="playAudio('pirate')">🔊</button>
+    </div>
+    <div class="flashcard">
+      <img src="/assets/images/fairy.webp" alt="Fairy">
+      <span>Fairy</span>
+      <button onclick="playAudio('fairy')">🔊</button>
+    </div>
+    <div class="flashcard">
+      <img src="/assets/images/dragon.webp" alt="Dragon">
+      <span>Dragon</span>
+      <button onclick="playAudio('dragon')">🔊</button>
+    </div>
+    <div class="flashcard">
+      <img src="/assets/images/robot.webp" alt="Robot">
+      <span>Robot</span>
+      <button onclick="playAudio('robot')">🔊</button>
+    </div>
+  </div>
+
+  <!-- Comic Board -->
+  <h2>Comic Board</h2>
+  <div class="comic-board" id="comic-board" style="background-image:url('/assets/images/comic-background1.webp');">
+    <!-- Children can drag characters here -->
+  </div>
+
+  <!-- Character Palette -->
+  <h3>Character Palette</h3>
+  <div class="character-palette">
+    <img src="/assets/images/lion.webp" alt="Lion" draggable="true" id="drag-lion" class="draggable">
+    <img src="/assets/images/cat.webp" alt="Cat" draggable="true" id="drag-cat" class="draggable">
+    <img src="/assets/images/dog.webp" alt="Dog" draggable="true" id="drag-dog" class="draggable">
+    <img src="/assets/images/superhero.webp" alt="Superhero" draggable="true" id="drag-superhero" class="draggable">
+    <img src="/assets/images/princess.webp" alt="Princess" draggable="true" id="drag-princess" class="draggable">
+    <img src="/assets/images/astronaut.webp" alt="Astronaut" draggable="true" id="drag-astronaut" class="draggable">
+    <img src="/assets/images/pirate.webp" alt="Pirate" draggable="true" id="drag-pirate" class="draggable">
+    <img src="/assets/images/fairy.webp" alt="Fairy" draggable="true" id="drag-fairy" class="draggable">
+    <img src="/assets/images/dragon.webp" alt="Dragon" draggable="true" id="drag-dragon" class="draggable">
+    <img src="/assets/images/robot.webp" alt="Robot" draggable="true" id="drag-robot" class="draggable">
+  </div>
+
+  <script>
+    // Play audio
+    function playAudio(word) {
+      const audio = new Audio(`/assets/audio/words/${word}.m4a`);
+      audio.play();
+    }
+
+    // Drag-and-drop
+    const draggables = document.querySelectorAll('.draggable');
+    const board = document.getElementById('comic-board');
+
+    draggables.forEach(item => {
+      item.addEventListener('dragstart', dragStart);
+    });
+
+    board.addEventListener('dragover', dragOver);
+    board.addEventListener('drop', dropItem);
+
+    function dragStart(e) {
+      e.dataTransfer.setData('text/plain', e.target.id);
+    }
+
+    function dragOver(e) {
+      e.preventDefault();
+    }
+
+    function dropItem(e) {
+      e.preventDefault();
+      const id = e.dataTransfer.getData('text');
+      const draggedEl = document.getElementById(id).cloneNode(true);
+      draggedEl.style.position = 'absolute';
+      draggedEl.style.left = `${e.offsetX - draggedEl.width/2}px`;
+      draggedEl.style.top = `${e.offsetY - draggedEl.height/2}px`;
+      draggedEl.classList.remove('draggable'); // prevent dragging again
+      board.appendChild(draggedEl);
+    }
+  </script>
+
+</body>
+</html>
