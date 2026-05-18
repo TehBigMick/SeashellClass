@@ -6,7 +6,7 @@
   <title>Seashell Class Resources</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* Bubble button style */
+    /* Restored bubble-button styling */
     .bubble-button {
       display: inline-block;
       background-color: #4CAF50;
@@ -32,34 +32,16 @@
 
   <main>
     <h2>ESL Resources</h2>
-    <div id="esl-bubbles">
-      <!-- ESL bubbles will be injected here -->
-    </div>
+    
+    <!-- Static ESL bubbles -->
+    <div class="bubble-button" onclick="window.location.href='opposites.html'">🔄 Opposites</div>
+    <div class="bubble-button" onclick="window.location.href='hobbies.html'">🎳 Hobbies</div>
+    <div class="bubble-button" onclick="window.location.href='how-are-you.html'">😊 How are you today?</div>
+    <div class="bubble-button" onclick="window.location.href='weather.html'">☀️ Weather</div>
+    <div class="bubble-button" onclick="window.location.href='whats-wrong.html'">🤒 What's wrong?</div>
+    <div class="bubble-button" onclick="window.location.href='supertato.html'">🥔 Supertato</div>
+
   </main>
-
-  <script>
-    // Define ESL resources
-    const eslResources = [
-      { name: "Opposites", icon: "🔄", url: "opposites.html" },
-      { name: "Hobbies", icon: "🎳", url: "hobbies.html" },
-      { name: "How are you today?", icon: "😊", url: "how-are-you.html" },
-      { name: "Weather", icon: "☀️", url: "weather.html" },
-      { name: "What's wrong?", icon: "🤒", url: "whats-wrong.html" },
-      { name: "Supertato", icon: "🥔", url: "supertato.html" }
-    ];
-
-    const eslContainer = document.getElementById("esl-bubbles");
-
-    eslResources.forEach(resource => {
-      const bubble = document.createElement("div");
-      bubble.className = "bubble-button";
-      bubble.innerHTML = `${resource.icon} ${resource.name}`;
-      bubble.onclick = () => {
-        window.location.href = resource.url;
-      };
-      eslContainer.appendChild(bubble);
-    });
-  </script>
 
 </body>
 </html>
