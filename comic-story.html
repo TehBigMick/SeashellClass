@@ -136,7 +136,7 @@
   </div>
 
   <!-- Comic Board -->
-  <div class="comic-board" id="comic-board" style="background-image:url('/assets/images/background-1.webp');"></div>
+  <div class="comic-board" id="comic-board" style="background-image:url('/assets/images/background-1.png');"></div>
 
   <!-- Character Palette -->
   <h3>Character Palette</h3>
@@ -156,6 +156,8 @@
   <audio id="audio-player"></audio>
 
   <script>
+    const board = document.getElementById('comic-board');
+
     // Play audio
     function playAudio(word) {
       const audio = document.getElementById('audio-player');
@@ -163,14 +165,9 @@
       audio.play();
     }
 
-    // Drag-and-drop
+    // Drag from palette -> board
     const draggables = document.querySelectorAll('.draggable');
-    const board = document.getElementById('comic-board');
-
-    draggables.forEach(item => {
-      item.addEventListener('dragstart', dragStart);
-    });
-
+    draggables.forEach(item => item.addEventListener('dragstart', dragStart));
     board.addEventListener('dragover', dragOver);
     board.addEventListener('drop', dropItem);
 
@@ -187,22 +184,76 @@
       const id = e.dataTransfer.getData('text');
       const draggedEl = document.getElementById(id).cloneNode(true);
 
-      // Scale dropped character to fit comic board
+      // Scale dropped character
       const boardWidth = board.clientWidth;
-      const scale = boardWidth / 900; // scales proportionally based on board width
+      const scale = boardWidth / 900;
       draggedEl.style.width = `${80 * scale}px`;
       draggedEl.style.height = `${80 * scale}px`;
 
       draggedEl.style.position = 'absolute';
       draggedEl.style.left = `${e.offsetX - (40 * scale)}px`;
       draggedEl.style.top = `${e.offsetY - (40 * scale)}px`;
+      draggedEl.style.cursor = 'move';
       draggedEl.classList.remove('draggable');
+
+      // Make it movable (mouse + touch)
+      makeMovable(draggedEl);
+
       board.appendChild(draggedEl);
+    }
+
+    function makeMovable(elem) {
+      let offsetX, offsetY;
+
+      // Mouse events
+      elem.addEventListener('mousedown', startMove);
+      function startMove(e) {
+        offsetX = e.clientX - elem.getBoundingClientRect().left;
+        offsetY = e.clientY - elem.getBoundingClientRect().top;
+        document.addEventListener('mousemove', move);
+        document.addEventListener('mouseup', stopMove);
+      }
+      function move(e) {
+        moveAt(e.clientX, e.clientY);
+      }
+      function stopMove() {
+        document.removeEventListener('mousemove', move);
+        document.removeEventListener('mouseup', stopMove);
+      }
+
+      // Touch events
+      elem.addEventListener('touchstart', startTouchMove);
+      function startTouchMove(e) {
+        const touch = e.touches[0];
+        offsetX = touch.clientX - elem.getBoundingClientRect().left;
+        offsetY = touch.clientY - elem.getBoundingClientRect().top;
+        document.addEventListener('touchmove', touchMove, { passive: false });
+        document.addEventListener('touchend', stopTouchMove);
+      }
+      function touchMove(e) {
+        e.preventDefault();
+        const touch = e.touches[0];
+        moveAt(touch.clientX, touch.clientY);
+      }
+      function stopTouchMove() {
+        document.removeEventListener('touchmove', touchMove);
+        document.removeEventListener('touchend', stopTouchMove);
+      }
+
+      function moveAt(clientX, clientY) {
+        const rect = board.getBoundingClientRect();
+        let left = clientX - rect.left - offsetX;
+        let top = clientY - rect.top - offsetY;
+        left = Math.max(0, Math.min(left, board.clientWidth - elem.offsetWidth));
+        top = Math.max(0, Math.min(top, board.clientHeight - elem.offsetHeight));
+        elem.style.left = left + 'px';
+        elem.style.top = top + 'px';
+      }
     }
 
     // Change background
     function changeBackground(number) {
-      board.style.backgroundImage = `url('/assets/images/background-${number}.webp')`;
+      board.style.backgroundImage = `url('/assets/images/background-${number}.png')`;
     }
   </script>
 
