@@ -3,30 +3,62 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Seashell Class - Parent Hub</title>
+  <title>Seashell Class Homepage</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    .bubble-button {
+      display: inline-block;
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 20px;
+      margin: 8px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 16px;
+      text-align: center;
+      transition: background-color 0.2s;
+    }
+    .bubble-button:hover {
+      background-color: #45a049;
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <div class="card hero-card">
-      <!-- FIXED BANNER -->
-      <div class="logo-wrap">
-        <img src="assets/seashell-banner.webp" alt="Seashell Class Banner" class="hero-logo">
-      </div>
-      <h1>🌊 Seashell Class</h1>
-      <p class="subtitle">Parent Resource Hub</p>
-      
-      <div class="button-group">
-        <a href="resources.html">
-          <button class="bubble-btn">📚 Go to Resources</button>
-        </a>
 
-        <!-- New Supertato Button -->
-        <a href="supertato.html">
-          <button class="bubble-btn">🥔 Supertato!</button>
-        </a>
-      </div>
+  <header>
+    <h1>Seashell Class Homepage</h1>
+  </header>
+
+  <main>
+    <h2>ESL Section</h2>
+    <div id="homepage-esl">
+      <!-- ESL bubbles will be injected here -->
     </div>
-  </div>
+  </main>
+
+  <script>
+    // Homepage ESL buttons
+    const homepageESL = [
+      { name: "Opposites", icon: "🔄", url: "opposites.html" },
+      { name: "Hobbies", icon: "🎳", url: "hobbies.html" },
+      { name: "How are you today?", icon: "😊", url: "how-are-you.html" },
+      { name: "Weather", icon: "☀️", url: "weather.html" },
+      { name: "What's wrong?", icon: "🤒", url: "whats-wrong.html" },
+      { name: "Comic Story", icon: "📖", url: "comic-story.html" } // Replaces Supertato
+    ];
+
+    const eslContainer = document.getElementById("homepage-esl");
+
+    homepageESL.forEach(resource => {
+      const bubble = document.createElement("div");
+      bubble.className = "bubble-button";
+      bubble.innerHTML = `${resource.icon} ${resource.name}`;
+      bubble.onclick = () => {
+        window.location.href = resource.url;
+      };
+      eslContainer.appendChild(bubble);
+    });
+  </script>
+
 </body>
 </html>
