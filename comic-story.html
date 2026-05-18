@@ -186,10 +186,17 @@
       e.preventDefault();
       const id = e.dataTransfer.getData('text');
       const draggedEl = document.getElementById(id).cloneNode(true);
+
+      // Scale dropped character to fit comic board
+      const boardWidth = board.clientWidth;
+      const scale = boardWidth / 900; // scales proportionally based on board width
+      draggedEl.style.width = `${80 * scale}px`;
+      draggedEl.style.height = `${80 * scale}px`;
+
       draggedEl.style.position = 'absolute';
-      draggedEl.style.left = `${e.offsetX - draggedEl.width/2}px`;
-      draggedEl.style.top = `${e.offsetY - draggedEl.height/2}px`;
-      draggedEl.classList.remove('draggable'); // prevent further dragging
+      draggedEl.style.left = `${e.offsetX - (40 * scale)}px`;
+      draggedEl.style.top = `${e.offsetY - (40 * scale)}px`;
+      draggedEl.classList.remove('draggable');
       board.appendChild(draggedEl);
     }
 
