@@ -13,9 +13,11 @@
       padding: 20px;
       text-align: center;
     }
-    h1 {
-      margin-bottom: 20px;
+    h1, h2, h3 {
+      margin-bottom: 15px;
     }
+
+    /* Vocabulary Flashcards */
     .flashcards-container {
       display: flex;
       flex-wrap: wrap;
@@ -65,11 +67,35 @@
       background-size: cover;
       background-position: center;
     }
+
+    /* Background Selector */
+    .background-selector {
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .background-selector button {
+      padding: 6px 12px;
+      border-radius: 10px;
+      border: 1px solid #4CAF50;
+      cursor: pointer;
+      background-color: white;
+      transition: 0.2s;
+    }
+    .background-selector button:hover {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    /* Character Palette */
     .character-palette {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 15px;
+      margin-bottom: 30px;
     }
     .character-palette img {
       width: 80px;
@@ -82,68 +108,35 @@
 <body>
 
   <h1>📖 Comic Story</h1>
-  <p>Learn the characters and drag them onto the comic board!</p>
+  <p>Learn the characters and drag them onto different backgrounds!</p>
 
   <!-- Vocabulary Flashcards -->
   <h2>Vocabulary Basics</h2>
   <div class="flashcards-container">
-    <div class="flashcard">
-      <img src="/assets/images/lion.webp" alt="Lion">
-      <span>Lion</span>
-      <button onclick="playAudio('lion')">🔊</button>
-    </div>
-    <div class="flashcard">
-      <img src="/assets/images/cat.webp" alt="Cat">
-      <span>Cat</span>
-      <button onclick="playAudio('cat')">🔊</button>
-    </div>
-    <div class="flashcard">
-      <img src="/assets/images/dog.webp" alt="Dog">
-      <span>Dog</span>
-      <button onclick="playAudio('dog')">🔊</button>
-    </div>
-    <div class="flashcard">
-      <img src="/assets/images/superhero.webp" alt="Superhero">
-      <span>Superhero</span>
-      <button onclick="playAudio('superhero')">🔊</button>
-    </div>
-    <div class="flashcard">
-      <img src="/assets/images/princess.webp" alt="Princess">
-      <span>Princess</span>
-      <button onclick="playAudio('princess')">🔊</button>
-    </div>
-    <div class="flashcard">
-      <img src="/assets/images/astronaut.webp" alt="Astronaut">
-      <span>Astronaut</span>
-      <button onclick="playAudio('astronaut')">🔊</button>
-    </div>
-    <div class="flashcard">
-      <img src="/assets/images/pirate.webp" alt="Pirate">
-      <span>Pirate</span>
-      <button onclick="playAudio('pirate')">🔊</button>
-    </div>
-    <div class="flashcard">
-      <img src="/assets/images/fairy.webp" alt="Fairy">
-      <span>Fairy</span>
-      <button onclick="playAudio('fairy')">🔊</button>
-    </div>
-    <div class="flashcard">
-      <img src="/assets/images/dragon.webp" alt="Dragon">
-      <span>Dragon</span>
-      <button onclick="playAudio('dragon')">🔊</button>
-    </div>
-    <div class="flashcard">
-      <img src="/assets/images/robot.webp" alt="Robot">
-      <span>Robot</span>
-      <button onclick="playAudio('robot')">🔊</button>
-    </div>
+    <div class="flashcard"><img src="/assets/images/lion.webp" alt="Lion"><span>Lion</span><button onclick="playAudio('lion')">🔊</button></div>
+    <div class="flashcard"><img src="/assets/images/cat.webp" alt="Cat"><span>Cat</span><button onclick="playAudio('cat')">🔊</button></div>
+    <div class="flashcard"><img src="/assets/images/dog.webp" alt="Dog"><span>Dog</span><button onclick="playAudio('dog')">🔊</button></div>
+    <div class="flashcard"><img src="/assets/images/superhero.webp" alt="Superhero"><span>Superhero</span><button onclick="playAudio('superhero')">🔊</button></div>
+    <div class="flashcard"><img src="/assets/images/princess.webp" alt="Princess"><span>Princess</span><button onclick="playAudio('princess')">🔊</button></div>
+    <div class="flashcard"><img src="/assets/images/astronaut.webp" alt="Astronaut"><span>Astronaut</span><button onclick="playAudio('astronaut')">🔊</button></div>
+    <div class="flashcard"><img src="/assets/images/pirate.webp" alt="Pirate"><span>Pirate</span><button onclick="playAudio('pirate')">🔊</button></div>
+    <div class="flashcard"><img src="/assets/images/fairy.webp" alt="Fairy"><span>Fairy</span><button onclick="playAudio('fairy')">🔊</button></div>
+    <div class="flashcard"><img src="/assets/images/dragon.webp" alt="Dragon"><span>Dragon</span><button onclick="playAudio('dragon')">🔊</button></div>
+    <div class="flashcard"><img src="/assets/images/robot.webp" alt="Robot"><span>Robot</span><button onclick="playAudio('robot')">🔊</button></div>
+  </div>
+
+  <!-- Background Selector -->
+  <h3>Select Background</h3>
+  <div class="background-selector">
+    <button onclick="changeBackground(1)">Background 1</button>
+    <button onclick="changeBackground(2)">Background 2</button>
+    <button onclick="changeBackground(3)">Background 3</button>
+    <button onclick="changeBackground(4)">Background 4</button>
+    <button onclick="changeBackground(5)">Background 5</button>
   </div>
 
   <!-- Comic Board -->
-  <h2>Comic Board</h2>
-  <div class="comic-board" id="comic-board" style="background-image:url('/assets/images/comic-background1.webp');">
-    <!-- Children can drag characters here -->
-  </div>
+  <div class="comic-board" id="comic-board" style="background-image:url('/assets/images/background-1.webp');"></div>
 
   <!-- Character Palette -->
   <h3>Character Palette</h3>
@@ -160,10 +153,13 @@
     <img src="/assets/images/robot.webp" alt="Robot" draggable="true" id="drag-robot" class="draggable">
   </div>
 
+  <audio id="audio-player"></audio>
+
   <script>
     // Play audio
     function playAudio(word) {
-      const audio = new Audio(`/assets/audio/words/${word}.m4a`);
+      const audio = document.getElementById('audio-player');
+      audio.src = `/assets/audio/words/${word}.m4a`;
       audio.play();
     }
 
@@ -193,8 +189,13 @@
       draggedEl.style.position = 'absolute';
       draggedEl.style.left = `${e.offsetX - draggedEl.width/2}px`;
       draggedEl.style.top = `${e.offsetY - draggedEl.height/2}px`;
-      draggedEl.classList.remove('draggable'); // prevent dragging again
+      draggedEl.classList.remove('draggable'); // prevent further dragging
       board.appendChild(draggedEl);
+    }
+
+    // Change background
+    function changeBackground(number) {
+      board.style.backgroundImage = `url('/assets/images/background-${number}.webp')`;
     }
   </script>
 
