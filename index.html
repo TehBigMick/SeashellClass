@@ -3,45 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Seashell Class Homepage</title>
+  <title>Seashell Class - Parent Hub</title>
   <link rel="stylesheet" href="styles.css">
-  <style>
-    /* Restored bubble-button styling */
-    .bubble-button {
-      display: inline-block;
-      background-color: #4CAF50;
-      color: white;
-      padding: 12px 20px;
-      margin: 8px;
-      border-radius: 25px;
-      cursor: pointer;
-      font-size: 16px;
-      text-align: center;
-      transition: background-color 0.2s;
-    }
-    .bubble-button:hover {
-      background-color: #45a049;
-    }
-  </style>
 </head>
 <body>
+  <div class="container">
+    <div class="card hero-card">
+      <!-- FIXED BANNER -->
+      <div class="logo-wrap">
+        <img src="assets/seashell-banner.webp" alt="Seashell Class Banner" class="hero-logo">
+      </div>
+      <h1>🌊 Seashell Class</h1>
+      <p class="subtitle">Parent Resource Hub</p>
+      
+      <div class="button-group">
+        <a href="resources.html">
+          <button class="bubble-btn">📚 Go to Resources</button>
+        </a>
 
-  <header>
-    <h1>Seashell Class Homepage</h1>
-  </header>
-
-  <main>
-    <h2>ESL Section</h2>
-
-    <!-- Static ESL bubbles -->
-    <div class="bubble-button" onclick="window.location.href='opposites.html'">🔄 Opposites</div>
-    <div class="bubble-button" onclick="window.location.href='hobbies.html'">🎳 Hobbies</div>
-    <div class="bubble-button" onclick="window.location.href='how-are-you.html'">😊 How are you today?</div>
-    <div class="bubble-button" onclick="window.location.href='weather.html'">☀️ Weather</div>
-    <div class="bubble-button" onclick="window.location.href='whats-wrong.html'">🤒 What's wrong?</div>
-    <div class="bubble-button" onclick="window.location.href='comic-story.html'">📖 Comic Story</div>
-
-  </main>
-
+        <!-- Replaced Supertato with Comic Book -->
+        <a href="comic-story.html">
+          <button class="bubble-btn">📖 Comic Book</button>
+        </a>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
