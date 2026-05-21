@@ -15,7 +15,7 @@ body {
 
 /* ===== Book page styling ===== */
 .page {
-  width: 600px;
+  width: 650px; /* slightly larger to make images bigger */
   padding: 20px;
   background: #fff;
   border-radius: 10px;
@@ -24,12 +24,20 @@ body {
 }
 
 /* ===== Teacher Section ===== */
+.teacher-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .teacher-section img {
-  width: 100%;       /* Always fill page width */
-  max-width: 550px;  /* Don’t get too big on desktop */
-  height: auto;      /* Maintain aspect ratio */
+  width: 100%;       /* fill the page width */
+  max-width: 600px;  /* larger than before to match Pirate Pat */
+  height: auto;      /* maintain aspect ratio */
   border-radius: 8px;
   margin-bottom: 10px;
+  position: relative;
+  z-index: 1;
 }
 
 .teacher-section button {
@@ -112,12 +120,12 @@ body {
 /* ===== Responsive adjustments ===== */
 @media screen and (max-width: 400px) {
   .page {
-    width: 90%; /* Shrink container on small screens */
+    width: 90%; /* shrink container on small screens */
     padding: 10px;
   }
 
   .teacher-section img {
-    max-width: 100%; /* Image fills container */
+    max-width: 100%; /* fill container */
   }
 
   .nav-button {
@@ -127,10 +135,10 @@ body {
 
 @media screen and (min-width: 1200px) {
   .page {
-    width: 650px; /* Slightly bigger container on large screens */
+    width: 700px; /* slightly bigger container for large screens */
   }
 
   .teacher-section img {
-    max-width: 600px; /* Slightly bigger image */
+    max-width: 650px; /* larger image on big desktop screens */
   }
 }
