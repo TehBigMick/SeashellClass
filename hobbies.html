@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What do you like to do?</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Comic Sans MS", "Trebuchet MS", Arial, sans-serif;
+      background: linear-gradient(180deg, #dff7ff 0%, #f8fdff 100%);
+      color: #16435c;
+      min-height: 100vh;
+      padding: 24px;
+    }
+
+    .page-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .back-button {
+      display: inline-block;
+      margin-bottom: 20px;
+      padding: 12px 22px;
+      background: #ffffff;
+      color: #16435c;
+      border: 4px solid #7ed6df;
+      border-radius: 999px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 6px 0 #4db6c4;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .back-button:hover {
+      transform: translateY(2px);
+      box-shadow: 0 4px 0 #4db6c4;
+    }
+
+    h1 {
+      display: inline-block;
+      background: #ffffff;
+      padding: 18px 34px;
+      border-radius: 40px;
+      border: 5px solid #ffcf5c;
+      box-shadow: 0 8px 0 #f4a742;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: #ff7a59;
+      margin: 10px 0 34px;
+    }
+
+    .instruction {
+      font-size: 1.25rem;
+      margin-bottom: 28px;
+      color: #2e6078;
+      font-weight: bold;
+    }
+
+    .hobby-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 28px;
+      margin-top: 20px;
+    }
+
+    .hobby-card {
+      background: #ffffff;
+      border: 5px solid #9be7ff;
+      border-radius: 34px;
+      padding: 18px;
+      box-shadow: 0 9px 0 #59c6df;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .hobby-card:hover {
+      transform: translateY(3px);
+      box-shadow: 0 6px 0 #59c6df;
+    }
+
+    .hobby-card:active {
+      transform: translateY(7px);
+      box-shadow: 0 2px 0 #59c6df;
+    }
+
+    .hobby-image-wrap {
+      width: 100%;
+      height: 170px;
+      border-radius: 26px;
+      background: #f1fbff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+
+    .hobby-image {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .hobby-word {
+      background: #ffe985;
+      border: 4px solid #ffc94d;
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-size: 1.35rem;
+      font-weight: bold;
+      color: #16435c;
+      width: 100%;
+    }
+
+    .speak-button {
+      margin-top: 12px;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 999px;
+      background: #ff8fab;
+      color: #ffffff;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 5px 0 #d95f81;
+      font-family: inherit;
+    }
+
+    .speak-button:hover {
+      transform: translateY(2px);
+      box-shadow: 0 3px 0 #d95f81;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 16px;
+      }
+
+      .hobby-grid {
+        grid-template-columns: 1fr;
+        gap: 22px;
+      }
+
+      .hobby-card {
+        min-height: 250px;
+      }
+
+      .hobby-image-wrap {
+        height: 150px;
+      }
+
+      .hobby-word {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page-wrap">
+    <a href="index.html" class="back-button">← Back</a>
+
+    <h1>What do you like to do?</h1>
+
+    <p class="instruction">Click a bubble to hear the word.</p>
+
+    <section class="hobby-grid">
+
+      <div class="hobby-card" onclick="playAudio('skiing')">
+        <div class="hobby-image-wrap">
+          <img src="assets/images/skiing.webp" alt="Skiing" class="hobby-image">
+        </div>
+        <div class="hobby-word">Skiing</div>
+        <button class="speak-button" onclick="event.stopPropagation(); playAudio('skiing')">Listen</button>
+      </div>
+
+      <div class="hobby-card" onclick="playAudio('shopping')">
+        <div class="hobby-image-wrap">
+          <img src="assets/images/shopping.webp" alt="Shopping" class="hobby-image">
+        </div>
+        <div class="hobby-word">Shopping</div>
+        <button class="speak-button" onclick="event.stopPropagation(); playAudio('shopping')">Listen</button>
+      </div>
+
+      <div class="hobby-card" onclick="playAudio('dancing')">
+        <div class="hobby-image-wrap">
+          <img src="assets/images/dancing.webp" alt="Dancing" class="hobby-image">
+        </div>
+        <div class="hobby-word">Dancing</div>
+        <button class="speak-button" onclick="event.stopPropagation(); playAudio('dancing')">Listen</button>
+      </div>
+
+      <div class="hobby-card" onclick="playAudio('bowling')">
+        <div class="hobby-image-wrap">
+          <img src="assets/images/bowling.webp" alt="Bowling" class="hobby-image">
+        </div>
+        <div class="hobby-word">Bowling</div>
+        <button class="speak-button" onclick="event.stopPropagation(); playAudio('bowling')">Listen</button>
+      </div>
+
+      <div class="hobby-card" onclick="playAudio('swimming')">
+        <div class="hobby-image-wrap">
+          <img src="assets/images/swimming.webp" alt="Swimming" class="hobby-image">
+        </div>
+        <div class="hobby-word">Swimming</div>
+        <button class="speak-button" onclick="event.stopPropagation(); playAudio('swimming')">Listen</button>
+      </div>
+
+      <div class="hobby-card" onclick="playAudio('ice-skating')">
+        <div class="hobby-image-wrap">
+          <img src="assets/images/ice-skating.webp" alt="Ice Skating" class="hobby-image">
+        </div>
+        <div class="hobby-word">Ice Skating</div>
+        <button class="speak-button" onclick="event.stopPropagation(); playAudio('ice-skating')">Listen</button>
+      </div>
+
+      <div class="hobby-card" onclick="playAudio('reading-books')">
+        <div class="hobby-image-wrap">
+          <img src="assets/images/reading-books.webp" alt="Reading Books" class="hobby-image">
+        </div>
+        <div class="hobby-word">Reading Books</div>
+        <button class="speak-button" onclick="event.stopPropagation(); playAudio('reading-books')">Listen</button>
+      </div>
+
+    </section>
+  </main>
+
+  <script>
+    let currentAudio = null;
+
+    function playAudio(fileName) {
+      if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+      }
+
+      currentAudio = new Audio(`assets/audio/words/${fileName}.m4a`);
+      currentAudio.play().catch(error => {
+        console.log("Audio could not play:", error);
+      });
+    }
+  </script>
+</body>
+</html>
