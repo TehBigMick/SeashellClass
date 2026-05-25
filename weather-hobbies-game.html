@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Weather and Hobbies Sentence Game</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Comic Sans MS", "Trebuchet MS", Arial, sans-serif;
+      background: linear-gradient(180deg, #dff7ff 0%, #f8fdff 100%);
+      color: #16435c;
+      min-height: 100vh;
+      padding: 24px;
+    }
+
+    .page-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .back-button {
+      display: inline-block;
+      margin-bottom: 20px;
+      padding: 12px 22px;
+      background: #ffffff;
+      color: #16435c;
+      border: 4px solid #7ed6df;
+      border-radius: 999px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 6px 0 #4db6c4;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .back-button:hover {
+      transform: translateY(2px);
+      box-shadow: 0 4px 0 #4db6c4;
+    }
+
+    h1 {
+      display: inline-block;
+      background: #ffffff;
+      padding: 18px 34px;
+      border-radius: 40px;
+      border: 5px solid #ffcf5c;
+      box-shadow: 0 8px 0 #f4a742;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      color: #ff7a59;
+      margin: 10px 0 20px;
+    }
+
+    .instruction {
+      font-size: 1.25rem;
+      margin-bottom: 24px;
+      color: #2e6078;
+      font-weight: bold;
+    }
+
+    .sentence-box {
+      max-width: 900px;
+      margin: 0 auto 34px;
+      background: #ffffff;
+      border: 5px solid #b18cff;
+      border-radius: 36px;
+      padding: 24px;
+      box-shadow: 0 8px 0 #7d5fd6;
+    }
+
+    .sentence-text {
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      font-weight: bold;
+      color: #6a4ccf;
+      line-height: 1.35;
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .blank {
+      display: inline-block;
+      min-width: 140px;
+      padding: 4px 14px;
+      border-bottom: 5px dashed #ff8fab;
+      color: #ff7a59;
+    }
+
+    .sentence-buttons {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .listen-button,
+    .reset-button {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 999px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      font-family: inherit;
+      color: #ffffff;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .listen-button {
+      background: #ff8fab;
+      box-shadow: 0 5px 0 #d95f81;
+    }
+
+    .reset-button {
+      background: #7ed6df;
+      box-shadow: 0 5px 0 #4db6c4;
+    }
+
+    .listen-button:hover,
+    .reset-button:hover {
+      transform: translateY(2px);
+    }
+
+    .listen-button:hover {
+      box-shadow: 0 3px 0 #d95f81;
+    }
+
+    .reset-button:hover {
+      box-shadow: 0 3px 0 #4db6c4;
+    }
+
+    .choice-area {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 34px;
+      align-items: start;
+    }
+
+    .choice-section {
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 34px;
+      padding: 20px;
+      border: 4px solid rgba(126, 214, 223, 0.6);
+    }
+
+    .choice-section h2 {
+      margin: 0 0 18px;
+      color: #ff7a59;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+    }
+
+    .choice-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+      gap: 18px;
+    }
+
+    .choice-card {
+      background: #ffffff;
+      border: 5px solid #9be7ff;
+      border-radius: 28px;
+      padding: 12px;
+      box-shadow: 0 7px 0 #59c6df;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+      min-height: 190px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .choice-card:hover {
+      transform: translateY(3px);
+      box-shadow: 0 4px 0 #59c6df;
+    }
+
+    .choice-card.selected {
+      border-color: #ffcf5c;
+      box-shadow: 0 7px 0 #f4a742;
+      background: #fff9dd;
+    }
+
+    .image-wrap {
+      width: 100%;
+      height: 110px;
+      border-radius: 22px;
+      background: #f1fbff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+
+    .choice-image {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .choice-word {
+      background: #ffe985;
+      border: 4px solid #ffc94d;
+      border-radius: 999px;
+      padding: 8px 10px;
+      font-size: 1rem;
+      font-weight: bold;
+      color: #16435c;
+      width: 100%;
+    }
+
+    @media (max-width: 900px) {
+      .choice-area {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 16px;
+      }
+
+      h1 {
+        padding: 15px 24px;
+      }
+
+      .sentence-box {
+        padding: 18px;
+      }
+
+      .choice-section {
+        padding: 16px;
+      }
+
+      .choice-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+      }
+
+      .choice-card {
+        min-height: 170px;
+        padding: 10px;
+      }
+
+      .image-wrap {
+        height: 95px;
+      }
+
+      .choice-word {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page-wrap">
+    <a href="index.html" class="back-button">← Back</a>
+
+    <h1>Make a Sentence</h1>
+
+    <p class="instruction">Choose the weather. Choose a hobby. Then read your sentence!</p>
+
+    <section class="sentence-box">
+      <div class="sentence-text" id="sentenceText">
+        On <span class="blank">weather</span> days, I like to <span class="blank">hobby</span>.
+      </div>
+
+      <div class="sentence-buttons">
+        <button class="listen-button" onclick="speakSentence()">▶ Say Sentence</button>
+        <button class="reset-button" onclick="resetGame()">Reset</button>
+      </div>
+    </section>
+
+    <section class="choice-area">
+
+      <div class="choice-section">
+        <h2>1. Choose the weather</h2>
+
+        <div class="choice-grid" id="weatherGrid">
+
+          <div class="choice-card" onclick="chooseWeather(this, 'sunny')">
+            <div class="image-wrap">
+              <img src="assets/images/sunny.webp" alt="Sunny" class="choice-image">
+            </div>
+            <div class="choice-word">Sunny</div>
+          </div>
+
+          <div class="choice-card" onclick="chooseWeather(this, 'cloudy')">
+            <div class="image-wrap">
+              <img src="assets/images/cloudy.webp" alt="Cloudy" class="choice-image">
+            </div>
+            <div class="choice-word">Cloudy</div>
+          </div>
+
+          <div class="choice-card" onclick="chooseWeather(this, 'rainy')">
+            <div class="image-wrap">
+              <img src="assets/images/rainy.webp" alt="Rainy" class="choice-image">
+            </div>
+            <div class="choice-word">Rainy</div>
+          </div>
+
+          <div class="choice-card" onclick="chooseWeather(this, 'snowy')">
+            <div class="image-wrap">
+              <img src="assets/images/snowy.webp" alt="Snowy" class="choice-image">
+            </div>
+            <div class="choice-word">Snowy</div>
+          </div>
+
+          <div class="choice-card" onclick="chooseWeather(this, 'windy')">
+            <div class="image-wrap">
+              <img src="assets/images/windy.webp" alt="Windy" class="choice-image">
+            </div>
+            <div class="choice-word">Windy</div>
+          </div>
+
+          <div class="choice-card" onclick="chooseWeather(this, 'stormy')">
+            <div class="image-wrap">
+              <img src="assets/images/stormy.webp" alt="Stormy" class="choice-image">
+            </div>
+            <div class="choice-word">Stormy</div>
+          </div>
+
+          <div class="choice-card" onclick="chooseWeather(this, 'hot')">
+            <div class="image-wrap">
+              <img src="assets/images/hot.webp" alt="Hot" class="choice-image">
+            </div>
+            <div class="choice-word">Hot</div>
+          </div>
+
+          <div class="choice-card" onclick="chooseWeather(this, 'warm')">
+            <div class="image-wrap">
+              <img src="assets/images/warm.webp" alt="Warm" class="choice-image">
+            </div>
+            <div class="choice-word">Warm</div>
+          </div>
+
+          <div class="choice-card" onclick="chooseWeather(this, 'cold')">
+            <div class="image-wrap">
+              <img src="assets/images/cold.webp" alt="Cold" class="choice-image">
+            </div>
+            <div class="choice-word">Cold</div>
+          </div>
+
+          <div class="choice-card" onclick="chooseWeather(this, 'freezing')">
+            <div class="image-wrap">
+              <img src="assets/images/freezing.webp" alt="Freezing" class="choice-image">
+            </div>
+            <div class="choice-word">Freezing</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="choice-section">
+        <h2>2. Choose a hobby</h2>
+
+        <div class="choice-grid" id="hobbyGrid">
+
+          <div class="choice-card" onclick="chooseHobby(this, 'go skiing')">
+            <div class="image-wrap">
+              <img src="assets/images/skiing.webp" alt="Skiing" class="choice-image">
+            </div>
+            <div class="choice-word">Skiing</div>
+          </div>
+
+          <div class="choice-card" onclick="chooseHobby(this, 'go shopping')">
+            <div class="image-wrap">
+              <img src="assets/images/shopping.webp" alt="Shopping" class="choice-image">
+            </div>
+            <div class="choice-word">Shopping</div>
+          </div>
+
+          <div class="choice-card" onclick="chooseHobby(this, 'go dancing')">
+            <div class="image-wrap">
+              <img src="assets/images/dancing.webp" alt="Dancing" class="choice-image">
+            </div>
+            <div class="choice-word">Dancing</div>
+          </div>
+
+          <div class="choice-card" onclick="chooseHobby(this, 'go bowling')">
+            <div class="image-wrap">
+              <img src="assets/images/bowling.webp" alt="Bowling" class="choice-image">
+            </div>
+            <div class="choice-word">Bowling</div>
+          </div>
+
+          <div class="choice-card" onclick="chooseHobby(this, 'go swimming')">
+            <div class="image-wrap">
+              <img src="assets/images/swimming.webp" alt="Swimming" class="choice-image">
+            </div>
+            <div class="choice-word">Swimming</div>
+          </div>
+
+          <div class="choice-card" onclick="chooseHobby(this, 'go ice skating')">
+            <div class="image-wrap">
+              <img src="assets/images/ice-skating.webp" alt="Ice Skating" class="choice-image">
+            </div>
+            <div class="choice-word">Ice Skating</div>
+          </div>
+
+          <div class="choice-card" onclick="chooseHobby(this, 'read books')">
+            <div class="image-wrap">
+              <img src="assets/images/reading-books.webp" alt="Reading Books" class="choice-image">
+            </div>
+            <div class="choice-word">Reading Books</div>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <script>
+    let selectedWeather = "";
+    let selectedHobby = "";
+
+    function chooseWeather(card, weather) {
+      selectedWeather = weather;
+      clearSelected("weatherGrid");
+      card.classList.add("selected");
+      playWordAudio(weather);
+      updateSentence();
+    }
+
+    function chooseHobby(card, hobby) {
+      selectedHobby = hobby;
+      clearSelected("hobbyGrid");
+      card.classList.add("selected");
+
+      const hobbyAudioMap = {
+        "go skiing": "skiing",
+        "go shopping": "shopping",
+        "go dancing": "dancing",
+        "go bowling": "bowling",
+        "go swimming": "swimming",
+        "go ice skating": "ice-skating",
+        "read books": "reading-books"
+      };
+
+      playWordAudio(hobbyAudioMap[hobby]);
+      updateSentence();
+    }
+
+    function clearSelected(gridId) {
+      const cards = document.querySelectorAll(`#${gridId} .choice-card`);
+      cards.forEach(card => card.classList.remove("selected"));
+    }
+
+    function updateSentence() {
+      const sentenceText = document.getElementById("sentenceText");
+
+      const weatherPart = selectedWeather
+        ? selectedWeather
+        : '<span class="blank">weather</span>';
+
+      const hobbyPart = selectedHobby
+        ? selectedHobby
+        : '<span class="blank">hobby</span>';
+
+      sentenceText.innerHTML = `On ${weatherPart} days, I like to ${hobbyPart}.`;
+    }
+
+    function speakSentence() {
+      if (!selectedWeather || !selectedHobby) {
+        const reminder = new SpeechSynthesisUtterance("Choose the weather and choose a hobby.");
+        reminder.rate = 0.8;
+        window.speechSynthesis.cancel();
+        window.speechSynthesis.speak(reminder);
+        return;
+      }
+
+      const sentence = `On ${selectedWeather} days, I like to ${selectedHobby}.`;
+
+      const utterance = new SpeechSynthesisUtterance(sentence);
+      utterance.lang = "en-GB";
+      utterance.rate = 0.75;
+      utterance.pitch = 1.05;
+
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function playWordAudio(fileName) {
+      if (!fileName) return;
+
+      const audio = new Audio(`assets/audio/words/${fileName}.m4a`);
+
+      audio.play().catch(error => {
+        console.log("Word audio could not play:", error);
+      });
+    }
+
+    function resetGame() {
+      selectedWeather = "";
+      selectedHobby = "";
+
+      clearSelected("weatherGrid");
+      clearSelected("hobbyGrid");
+
+      document.getElementById("sentenceText").innerHTML =
+        'On <span class="blank">weather</span> days, I like to <span class="blank">hobby</span>.';
+
+      window.speechSynthesis.cancel();
+    }
+  </script>
+</body>
+</html>
