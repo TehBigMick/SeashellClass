@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How's the weather today?</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Comic Sans MS", "Trebuchet MS", Arial, sans-serif;
+      background: linear-gradient(180deg, #dff7ff 0%, #f8fdff 100%);
+      color: #16435c;
+      min-height: 100vh;
+      padding: 24px;
+    }
+
+    .page-wrap {
+      max-width: 1150px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .back-button {
+      display: inline-block;
+      margin-bottom: 20px;
+      padding: 12px 22px;
+      background: #ffffff;
+      color: #16435c;
+      border: 4px solid #7ed6df;
+      border-radius: 999px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 6px 0 #4db6c4;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .back-button:hover {
+      transform: translateY(2px);
+      box-shadow: 0 4px 0 #4db6c4;
+    }
+
+    h1 {
+      display: inline-block;
+      background: #ffffff;
+      padding: 18px 34px;
+      border-radius: 40px;
+      border: 5px solid #ffcf5c;
+      box-shadow: 0 8px 0 #f4a742;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: #ff7a59;
+      margin: 10px 0 26px;
+    }
+
+    .instruction {
+      font-size: 1.25rem;
+      margin-bottom: 24px;
+      color: #2e6078;
+      font-weight: bold;
+    }
+
+    .question-bubble {
+      max-width: 680px;
+      margin: 0 auto 34px;
+      background: #ffffff;
+      border: 5px solid #b18cff;
+      border-radius: 999px;
+      padding: 18px 24px;
+      box-shadow: 0 8px 0 #7d5fd6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .question-bubble:hover {
+      transform: translateY(3px);
+      box-shadow: 0 5px 0 #7d5fd6;
+    }
+
+    .question-bubble:active {
+      transform: translateY(7px);
+      box-shadow: 0 1px 0 #7d5fd6;
+    }
+
+    .question-bubble span {
+      font-size: clamp(1.4rem, 4vw, 2.1rem);
+      font-weight: bold;
+      color: #6a4ccf;
+    }
+
+    .question-audio-button {
+      padding: 10px 18px;
+      border: none;
+      border-radius: 999px;
+      background: #ff8fab;
+      color: #ffffff;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 5px 0 #d95f81;
+      font-family: inherit;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .question-audio-button:hover {
+      transform: translateY(2px);
+      box-shadow: 0 3px 0 #d95f81;
+    }
+
+    .weather-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 28px;
+      margin-top: 20px;
+    }
+
+    .weather-card {
+      background: #ffffff;
+      border: 5px solid #9be7ff;
+      border-radius: 34px;
+      padding: 18px;
+      box-shadow: 0 9px 0 #59c6df;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .weather-card:hover {
+      transform: translateY(3px);
+      box-shadow: 0 6px 0 #59c6df;
+    }
+
+    .weather-card:active {
+      transform: translateY(7px);
+      box-shadow: 0 2px 0 #59c6df;
+    }
+
+    .weather-image-wrap {
+      width: 100%;
+      height: 170px;
+      border-radius: 26px;
+      background: #f1fbff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+
+    .weather-image {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .weather-word {
+      background: #ffe985;
+      border: 4px solid #ffc94d;
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-size: 1.35rem;
+      font-weight: bold;
+      color: #16435c;
+      width: 100%;
+    }
+
+    .speak-button {
+      margin-top: 12px;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 999px;
+      background: #ff8fab;
+      color: #ffffff;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 5px 0 #d95f81;
+      font-family: inherit;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .speak-button:hover {
+      transform: translateY(2px);
+      box-shadow: 0 3px 0 #d95f81;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 16px;
+      }
+
+      h1 {
+        padding: 15px 24px;
+      }
+
+      .question-bubble {
+        border-radius: 32px;
+        padding: 16px;
+      }
+
+      .question-bubble span {
+        width: 100%;
+      }
+
+      .weather-grid {
+        grid-template-columns: 1fr;
+        gap: 22px;
+      }
+
+      .weather-card {
+        min-height: 250px;
+      }
+
+      .weather-image-wrap {
+        height: 150px;
+      }
+
+      .weather-word {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page-wrap">
+    <a href="index.html" class="back-button">← Back</a>
+
+    <h1>How's the weather today?</h1>
+
+    <p class="instruction">Click a bubble to hear the word.</p>
+
+    <div class="question-bubble" onclick="playAudio('hows-the-weather-today')">
+      <span>How's the weather today?</span>
+      <button class="question-audio-button" onclick="event.stopPropagation(); playAudio('hows-the-weather-today')">
+        ▶ Listen
+      </button>
+    </div>
+
+    <section class="weather-grid">
+
+      <div class="weather-card" onclick="playAudio('sunny')">
+        <div class="weather-image-wrap">
+          <img src="assets/images/sunny.webp" alt="Sunny" class="weather-image">
+        </div>
+        <div class="weather-word">Sunny</div>
+        <button class="speak-button" onclick="event.stopPropagation(); playAudio('sunny')">Listen</button>
+      </div>
+
+      <div class="weather-card" onclick="playAudio('cloudy')">
+        <div class="weather-image-wrap">
+          <img src="assets/images/cloudy.webp" alt="Cloudy" class="weather-image">
+        </div>
+        <div class="weather-word">Cloudy</div>
+        <button class="speak-button" onclick="event.stopPropagation(); playAudio('cloudy')">Listen</button>
+      </div>
+
+      <div class="weather-card" onclick="playAudio('rainy')">
+        <div class="weather-image-wrap">
+          <img src="assets/images/rainy.webp" alt="Rainy" class="weather-image">
+        </div>
+        <div class="weather-word">Rainy</div>
+        <button class="speak-button" onclick="event.stopPropagation(); playAudio('rainy')">Listen</button>
+      </div>
+
+      <div class="weather-card" onclick="playAudio('snowy')">
+        <div class="weather-image-wrap">
+          <img src="assets/images/snowy.webp" alt="Snowy" class="weather-image">
+        </div>
+        <div class="weather-word">Snowy</div>
+        <button class="speak-button" onclick="event.stopPropagation(); playAudio('snowy')">Listen</button>
+      </div>
+
+      <div class="weather-card" onclick="playAudio('windy')">
+        <div class="weather-image-wrap">
+          <img src="assets/images/windy.webp" alt="Windy" class="weather-image">
+        </div>
+        <div class="weather-word">Windy</div>
+        <button class="speak-button" onclick="event.stopPropagation(); playAudio('windy')">Listen</button>
+      </div>
+
+      <div class="weather-card" onclick="playAudio('stormy')">
+        <div class="weather-image-wrap">
+          <img src="assets/images/stormy.webp" alt="Stormy" class="weather-image">
+        </div>
+        <div class="weather-word">Stormy</div>
+        <button class="speak-button" onclick="event.stopPropagation(); playAudio('stormy')">Listen</button>
+      </div>
+
+      <div class="weather-card" onclick="playAudio('hot')">
+        <div class="weather-image-wrap">
+          <img src="assets/images/hot.webp" alt="Hot" class="weather-image">
+        </div>
+        <div class="weather-word">Hot</div>
+        <button class="speak-button" onclick="event.stopPropagation(); playAudio('hot')">Listen</button>
+      </div>
+
+      <div class="weather-card" onclick="playAudio('warm')">
+        <div class="weather-image-wrap">
+          <img src="assets/images/warm.webp" alt="Warm" class="weather-image">
+        </div>
+        <div class="weather-word">Warm</div>
+        <button class="speak-button" onclick="event.stopPropagation(); playAudio('warm')">Listen</button>
+      </div>
+
+      <div class="weather-card" onclick="playAudio('cold')">
+        <div class="weather-image-wrap">
+          <img src="assets/images/cold.webp" alt="Cold" class="weather-image">
+        </div>
+        <div class="weather-word">Cold</div>
+        <button class="speak-button" onclick="event.stopPropagation(); playAudio('cold')">Listen</button>
+      </div>
+
+      <div class="weather-card" onclick="playAudio('freezing')">
+        <div class="weather-image-wrap">
+          <img src="assets/images/freezing.webp" alt="Freezing" class="weather-image">
+        </div>
+        <div class="weather-word">Freezing</div>
+        <button class="speak-button" onclick="event.stopPropagation(); playAudio('freezing')">Listen</button>
+      </div>
+
+    </section>
+  </main>
+
+  <script>
+    let currentAudio = null;
+
+    function playAudio(fileName) {
+      if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+      }
+
+      currentAudio = new Audio(`assets/audio/words/${fileName}.m4a`);
+
+      currentAudio.play().catch(error => {
+        console.log("Audio could not play:", error);
+      });
+    }
+  </script>
+</body>
+</html>
