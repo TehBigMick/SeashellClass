@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Perfect Pet</title>
+  <link rel="stylesheet" href="phonics.css">
+</head>
+<body>
+  <div class="book-container">
+    <img id="book-image" src="assets/images/perfect-pet1.webp" alt="The Perfect Pet">
+    
+    <div class="text-box">
+      <p id="teacher-text"></p>
+      <p id="student-text"></p>
+    </div>
+
+    <audio id="audio" src=""></audio>
+
+    <div class="nav-buttons">
+      <button id="prev-btn">⬅ Previous</button>
+      <button id="play-btn">🔊 Play</button>
+      <button id="next-btn">Next ➡</button>
+    </div>
+  </div>
+
+  <script>
+    const pages = [
+      {image: "perfect-pet1.webp", teacher: "", student: "", audio: ""}, // Title page
+      {
+        image: "perfect-pet2.webp",
+        teacher: `Nell doesn't care for shopping.
+"Dad! Are we finished yet?"
+She sees a store that looks more fun.`,
+        student: `Can I go in and pick a pet?`,
+        audio: "perfect2.m4a"
+      },
+      {
+        image: "perfect-pet3.webp",
+        teacher: `Here's Tess and Ted.
+They're glad to help,
+with pets both small and big.`,
+        student: `"A dog is a lot of fun."
+"A pup can beg and dig."`,
+        audio: "perfect3.m4a"
+      },
+      {
+        image: "perfect-pet4.webp",
+        teacher: `Dad's not so sure.
+"Dogs make a mess.
+And who would clean it up?"
+Nell begs and pleads,
+but Dad won't budge.`,
+        student: `No, Nell, not a pup.`,
+        audio: "perfect4.m4a"
+      },
+      {
+        image: "perfect-pet5.webp",
+        teacher: `"Well, how about a snake?" says Ted.
+"Sid's very friendly, miss."
+Sid ties himself around Dad's neck.`,
+        student: `Pat him.
+Let him hiss.`,
+        audio: "perfect5.m4a"
+      },
+      {
+        image: "perfect-pet6.webp",
+        teacher: `A parrot snatches at Dad's cap,
+And perches on a rack.
+"No need to worry, sir," says Tess.`,
+        student: `Ted can get it back.`,
+        audio: "perfect6.m4a"
+      },
+      {
+        image: "perfect-pet7.webp",
+        teacher: `Dad helps Ted chase the parrot.
+They just can't jump high enough.
+Ted tries to catch it in a net.`,
+        student: `Dad and Ted huff and puff.`,
+        audio: "perfect7.m4a"
+      },
+      {
+        image: "perfect-pet8.webp",
+        teacher: `Nell sees a bat hang upside down.
+It looks so very still,
+Dad thinks there's something wrong with it.`,
+        student: `Tess, tell us,, is it ill?`,
+        audio: "perfect8.m4a"
+      },
+      {
+        image: "perfect-pet9.webp",
+        teacher: `"He's only sleeping, sir," says Tess.
+"Bats do a lot of that."
+"I think he's really cute," says Nell.`,
+        student: `Dad, can I get a bat?`,
+        audio: "perfect9.m4a"
+      },
+      {
+        image: "perfect-pet10.webp",
+        teacher: `Nell counts out all her money, but-
+"That's not enough," says Tess.
+Then Ted finds something cheaper.
+"Look!"`,
+        student: `A bug on a log is less.`,
+        audio: "perfect10.m4a"
+      },
+      {
+        image: "perfect-pet11.webp",
+        teacher: `"Is this the pet you want?" asks Dad.
+Nell nods and smiles, "You bet!
+That was the greatest shopping trip."`,
+        student: `I had fun and I got a pet.`,
+        audio: "perfect11.m4a"
+      }
+    ];
+
+    let currentPage = 0;
+
+    const imgEl = document.getElementById('book-image');
+    const teacherEl = document.getElementById('teacher-text');
+    const studentEl = document.getElementById('student-text');
+    const audioEl = document.getElementById('audio');
+
+    function loadPage(page) {
+      imgEl.src = `assets/images/${pages[page].image}`;
+      teacherEl.textContent = pages[page].teacher;
+      studentEl.textContent = pages[page].student;
+      audioEl.src = pages[page].audio ? `assets/audio/words/${pages[page].audio}` : '';
+    }
+
+    document.getElementById('next-btn').addEventListener('click', () => {
+      if(currentPage < pages.length - 1) currentPage++;
+      loadPage(currentPage);
+    });
+
+    document.getElementById('prev-btn').addEventListener('click', () => {
+      if(currentPage > 0) currentPage--;
+      loadPage(currentPage);
+    });
+
+    document.getElementById('play-btn').addEventListener('click', () => {
+      if(audioEl.src) audioEl.play();
+    });
+
+    // Initialize
+    loadPage(currentPage);
+  </script>
+</body>
+</html>
