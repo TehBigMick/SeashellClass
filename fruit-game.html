@@ -20,15 +20,8 @@
 
   h1 {
     color: #1f6fb2;
-    margin-bottom: 5px;
   }
 
-  .subtitle {
-    color: #4aa3ff;
-    margin-bottom: 15px;
-  }
-
-  /* Seashell card style */
   .card {
     background: white;
     border-radius: 20px;
@@ -51,7 +44,7 @@
     object-fit: cover;
   }
 
-  /* grid overlay */
+  /* GRID */
   .grid {
     position: absolute;
     inset: 0;
@@ -63,7 +56,12 @@
   .tile {
     background: #4aa3ff;
     border: 2px solid white;
+    cursor: pointer;
     transition: opacity 0.3s ease;
+  }
+
+  .tile:hover {
+    background: #2d7ef7;
   }
 
   .clue {
@@ -73,11 +71,6 @@
     font-weight: bold;
   }
 
-  .controls {
-    margin-top: 15px;
-  }
-
-  /* bubble buttons (matches your hub style) */
   button {
     background: #4aa3ff;
     color: white;
@@ -94,10 +87,6 @@
     transform: translateY(2px);
     box-shadow: 0 1px 0 #2d7ef7;
   }
-
-  button:hover {
-    background: #2d7ef7;
-  }
 </style>
 </head>
 
@@ -105,7 +94,6 @@
 
 <div class="container">
   <h1>🍓 Fruit & Veg Reveal Game</h1>
-  <div class="subtitle">Can you guess the hidden food?</div>
 
   <div class="card">
 
@@ -115,23 +103,24 @@
       <img id="mainImage" src="" alt="hidden image">
 
       <div class="grid" id="grid">
-        <div class="tile"></div>
-        <div class="tile"></div>
-        <div class="tile"></div>
-        <div class="tile"></div>
-        <div class="tile"></div>
-        <div class="tile"></div>
-        <div class="tile"></div>
-        <div class="tile"></div>
-        <div class="tile"></div>
+
+        <div class="tile" onclick="removeTile(this)"></div>
+        <div class="tile" onclick="removeTile(this)"></div>
+        <div class="tile" onclick="removeTile(this)"></div>
+
+        <div class="tile" onclick="removeTile(this)"></div>
+        <div class="tile" onclick="removeTile(this)"></div>
+        <div class="tile" onclick="removeTile(this)"></div>
+
+        <div class="tile" onclick="removeTile(this)"></div>
+        <div class="tile" onclick="removeTile(this)"></div>
+        <div class="tile" onclick="removeTile(this)"></div>
+
       </div>
     </div>
 
-    <div class="controls">
-      <button onclick="removeRandomTile()">Remove Square</button>
-      <button onclick="revealAll()">Reveal All</button>
-      <button onclick="nextWord()">Next Word</button>
-    </div>
+    <button onclick="nextWord()">Next Word</button>
+    <button onclick="revealAll()">Reveal All</button>
 
   </div>
 </div>
@@ -154,45 +143,40 @@ const wordBank = [
 ];
 
 let currentWord = "";
-let remainingTiles = [];
 
 function nextWord() {
   const index = Math.floor(Math.random() * wordBank.length);
   currentWord = wordBank[index];
 
-  document.getElementById("mainImage").src = `/assets/images/${currentWord}.png;
+  document.getElementById("mainImage").src =
+    `/assets/images/${currentWord}.png`;
 
-  // LETTER CLUE
-  const firstLetter = currentWord.charAt(0).toUpperCase();
+  const letter = currentWord.charAt(0).toUpperCase();
   document.getElementById("clueText").textContent =
-    `Starts with: ${firstLetter}`;
+    `Starts with: ${letter}`;
 
   resetGrid();
 }
 
 function resetGrid() {
-  const tiles = document.querySelectorAll(".tile");
-
-  tiles.forEach(t => t.style.opacity = 1);
-
-  remainingTiles = Array.from(tiles);
+  document.querySelectorAll(".tile").forEach(tile => {
+    tile.style.opacity = 1;
+    tile.style.pointerEvents = "auto";
+  });
 }
 
-function removeRandomTile() {
-  if (remainingTiles.length === 0) return;
-
-  const index = Math.floor(Math.random() * remainingTiles.length);
-  const tile = remainingTiles.splice(index, 1)[0];
-
+function removeTile(tile) {
   tile.style.opacity = 0;
+  tile.style.pointerEvents = "none";
 }
 
 function revealAll() {
-  document.querySelectorAll(".tile").forEach(t => t.style.opacity = 0);
-  remainingTiles = [];
+  document.querySelectorAll(".tile").forEach(tile => {
+    tile.style.opacity = 0;
+    tile.style.pointerEvents = "none";
+  });
 }
 
-// start
 nextWord();
 
 </script>
