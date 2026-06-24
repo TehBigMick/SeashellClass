@@ -5,8 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Seashell Class Resources</title>
 
-  <!-- Use root path so it works everywhere -->
   <link rel="stylesheet" href="/styles.css">
+
+  <style>
+    /* ICON ANIMATION */
+    .icon-anim {
+      display: inline-block;
+      animation: bounce 1.5s infinite;
+      transform-origin: center;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    /* Highlight new game button slightly */
+    .highlight-new {
+      background: #fff3e6;
+      border: 2px solid #ffb347;
+      border-radius: 14px;
+      padding: 6px;
+    }
+  </style>
 </head>
 
 <body>
@@ -37,19 +58,16 @@
 
     <div id="phonics-links" class="sub-buttons">
 
-      <!-- LEVEL 1 + PIRATE PAT -->
       <div style="display:flex; gap:10px; width:100%; justify-content:center; flex-wrap:wrap;">
         <a href="/resources/phonics-level1.html" class="sub-bubble">Level 1</a>
         <a href="/pirate-pat.html" class="sub-bubble">📖 Pirate Pat</a>
       </div>
 
-      <!-- LEVEL 2 + DRESSING UP -->
       <div style="display:flex; gap:10px; width:100%; justify-content:center; flex-wrap:wrap;">
         <a href="/resources/phonics-level2.html" class="sub-bubble">Level 2</a>
         <a href="/dressing-up.html" class="sub-bubble">👗 Dressing Up</a>
       </div>
 
-      <!-- LEVEL 3 + THE PERFECT PET -->
       <div style="display:flex; gap:10px; width:100%; justify-content:center; flex-wrap:wrap;">
         <a href="/resources/phonics-level3.html" class="sub-bubble">Level 3</a>
         <a href="/perfect-pet.html" class="sub-bubble">📖 The Perfect Pet</a>
@@ -65,8 +83,27 @@
     </button>
 
     <div id="esl-links" class="sub-buttons">
-      <a href="/resources/esl-i-have-a-pet.html" class="sub-bubble">I Have a Pet</a>
-      <a href="/resources/supertato.html" class="sub-bubble">Supertato!</a>
+
+      <a href="/resources/esl-i-have-a-pet.html" class="sub-bubble">
+        I Have a Pet
+      </a>
+
+      <a href="/resources/supertato.html" class="sub-bubble">
+        Supertato!
+      </a>
+
+      <!-- NEW GAME BUTTON -->
+      <div class="highlight-new">
+
+        <a href="/fruit-game.html" class="sub-bubble">
+
+          <span class="icon-anim">🍓</span>
+          Fruit & Veg Reveal Game
+
+        </a>
+
+      </div>
+
     </div>
   </div>
 
