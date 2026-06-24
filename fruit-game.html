@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Seashell Fruit & Veg Game</title>
 
 <style>
@@ -20,6 +21,12 @@
 
   h1 {
     color: #1f6fb2;
+    margin-bottom: 5px;
+  }
+
+  .subtitle {
+    color: #4aa3ff;
+    margin-bottom: 15px;
   }
 
   .card {
@@ -27,6 +34,13 @@
     border-radius: 20px;
     padding: 20px;
     box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  }
+
+  .clue {
+    font-size: 22px;
+    margin: 10px 0;
+    color: #1f6fb2;
+    font-weight: bold;
   }
 
   .game-container {
@@ -57,20 +71,14 @@
     background: #4aa3ff;
     border: 2px solid white;
     cursor: pointer;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.25s ease;
   }
 
   .tile:hover {
     background: #2d7ef7;
   }
 
-  .clue {
-    font-size: 22px;
-    margin: 10px 0;
-    color: #1f6fb2;
-    font-weight: bold;
-  }
-
+  /* BUTTONS (Seashell style) */
   button {
     background: #4aa3ff;
     color: white;
@@ -87,13 +95,19 @@
     transform: translateY(2px);
     box-shadow: 0 1px 0 #2d7ef7;
   }
+
+  button:hover {
+    background: #2d7ef7;
+  }
 </style>
 </head>
 
 <body>
 
 <div class="container">
+
   <h1>🍓 Fruit & Veg Reveal Game</h1>
+  <div class="subtitle">Click squares to reveal the hidden word</div>
 
   <div class="card">
 
@@ -119,8 +133,10 @@
       </div>
     </div>
 
-    <button onclick="nextWord()">Next Word</button>
-    <button onclick="revealAll()">Reveal All</button>
+    <div>
+      <button onclick="nextWord()">Next Word</button>
+      <button onclick="revealAll()">Reveal All</button>
+    </div>
 
   </div>
 </div>
@@ -143,40 +159,84 @@ const wordBank = [
 ];
 
 let currentWord = "";
+let remainingTiles = [];
+let currentAudio = null;
 
 function nextWord() {
+
+  // pick random word
   const index = Math.floor(Math.random() * wordBank.length);
   currentWord = wordBank[index];
 
+  // image
   document.getElementById("mainImage").src =
     `/assets/images/${currentWord}.png`;
 
+  // clue
   const letter = currentWord.charAt(0).toUpperCase();
   document.getElementById("clueText").textContent =
     `Starts with: ${letter}`;
 
+  // reset grid
   resetGrid();
+
+  // stop previous audio
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio = null;
+  }
 }
 
 function resetGrid() {
-  document.querySelectorAll(".tile").forEach(tile => {
+  const tiles = document.querySelectorAll(".tile");
+
+  tiles.forEach(tile => {
     tile.style.opacity = 1;
     tile.style.pointerEvents = "auto";
   });
+
+  remainingTiles = Array.from(tiles);
 }
 
 function removeTile(tile) {
+
+  if (tile.style.opacity === "0") return;
+
   tile.style.opacity = 0;
   tile.style.pointerEvents = "none";
+
+  remainingTiles = remainingTiles.filter(t => t !== tile);
+
+  // AUTO PLAY WHEN COMPLETE
+  if (remainingTiles.length === 0) {
+    playWordAudio();
+  }
 }
 
 function revealAll() {
+
   document.querySelectorAll(".tile").forEach(tile => {
     tile.style.opacity = 0;
     tile.style.pointerEvents = "none";
   });
+
+  remainingTiles = [];
+
+  playWordAudio();
 }
 
+function playWordAudio() {
+
+  const audioPath = `/assets/audio/words/${currentWord}.m4a`;
+
+  currentAudio = new Audio(audioPath);
+
+  currentAudio.play().catch(err => {
+    console.log("Audio playback blocked or missing file:", err);
+  });
+}
+
+// start game
 nextWord();
 
 </script>
