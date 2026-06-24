@@ -160,7 +160,7 @@ function nextWord() {
   const index = Math.floor(Math.random() * wordBank.length);
   currentWord = wordBank[index];
 
-  document.getElementById("mainImage").src = `images/${currentWord}.png`;
+  document.getElementById("mainImage").src = `/assets/images/${currentWord}.png;
 
   // LETTER CLUE
   const firstLetter = currentWord.charAt(0).toUpperCase();
