@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Seashell Fruit & Veg Game</title>
+<title>Seashell Fruit &amp; Veg Game</title>
+<link rel="stylesheet" href="/styles.css">
+<script src="/scripts/site.js" defer></script>
 
 <style>
   body {
@@ -117,7 +119,7 @@
 
 <div class="container">
 
-  <h1>🍓 Fruit & Veg Reveal Game</h1>
+  <h1>🍓 Fruit &amp; Veg Reveal Game</h1>
   <div class="subtitle">Call out the number or letter to choose a square</div>
 
   <div class="card">
@@ -135,7 +137,7 @@
 
     <div class="game-container">
 
-      <img id="mainImage" src="" alt="hidden image">
+      <img id="mainImage" src="/assets/images/potato.webp" alt="Hidden food to guess">
 
       <div class="grid" id="grid">
 
@@ -156,8 +158,8 @@
     </div>
 
     <div>
-      <button onclick="nextWord()">Next Word</button>
-      <button onclick="revealAll()">Reveal All</button>
+      <button type="button" onclick="nextWord()">Next Word</button>
+      <button type="button" onclick="revealAll()">Reveal All</button>
     </div>
 
   </div>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Match vocabulary pictures to written words.">
+  <title>Picture Pairs | Seashell Class</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/scripts/site.js" defer></script>
+</head>
+<body>
+  <main class="activity-shell" id="main-content">
+    <header class="activity-heading"><span class="eyebrow">Vocabulary · Memory</span><h1>Picture Pairs</h1><p>Turn over two cards. Match each picture to its written word.</p></header>
+    <section class="activity-card" aria-labelledby="game-status">
+      <div class="activity-toolbar"><label>Theme <select id="theme-select"><option value="pets">Pets</option><option value="food">Food</option><option value="weather">Weather</option><option value="feelings">Feelings</option></select></label><span class="score-pill" id="moves">Moves: 0</span></div>
+      <div class="progress-track" aria-hidden="true"><div class="progress-track__bar" id="progress"></div></div>
+      <p class="feedback" id="game-status" aria-live="polite">Find your first pair.</p>
+      <div class="memory-grid" id="memory-grid"></div>
+      <div class="control-row"><button class="button button--light" id="restart-button" type="button">Shuffle cards</button></div>
+    </section>
+  </main>
+  <script>
+    const themes = {
+      pets: [['dog','/assets/animals/dog.webp'],['cat','/assets/animals/cat.webp'],['fish','/assets/animals/fish.webp'],['bird','/assets/animals/bird.webp'],['rabbit','/assets/animals/rabbit.webp'],['hamster','/assets/animals/hamster.webp']],
+      food: [['potato','/assets/images/potato.webp'],['carrot','/assets/images/carrot.webp'],['broccoli','/assets/images/broccoli.webp'],['tomato','/assets/images/tomato.webp'],['pear','/assets/images/pear.webp'],['strawberry','/assets/images/strawberry.webp']],
+      weather: [['sunny','/assets/images/sunny.webp'],['cloudy','/assets/images/cloudy.webp'],['rainy','/assets/images/rainy.webp'],['snowy','/assets/images/snowy.webp'],['windy','/assets/images/windy.webp'],['stormy','/assets/images/stormy.webp']],
+      feelings: [['happy','/assets/images/happy.webp'],['sad','/assets/images/sad.webp'],['angry','/assets/images/angry.webp'],['bored','/assets/images/bored.webp'],['shy','/assets/images/shy.webp'],['sick','/assets/images/sick.webp']]
+    };
+    let first = null, second = null, lock = false, moves = 0, matches = 0;
+    const grid = document.getElementById('memory-grid'); const status = document.getElementById('game-status');
+    function shuffle(items) { return [...items].sort(() => Math.random() - 0.5); }
+    function speak(word) { if ('speechSynthesis' in window) { speechSynthesis.cancel(); const speech = new SpeechSynthesisUtterance(word); speech.lang = 'en-GB'; speech.rate = 0.78; speechSynthesis.speak(speech); } }
+    function startGame() {
+      first = null; second = null; lock = false; moves = 0; matches = 0; grid.innerHTML = ''; status.textContent = 'Find your first pair.'; updateStatus();
+      const cards = themes[document.getElementById('theme-select').value].flatMap(([word, image]) => [{word, type:'picture', image}, {word, type:'word', image}]);
+      shuffle(cards).forEach((card, index) => {
+        const button = document.createElement('button'); button.type = 'button'; button.className = 'memory-card'; button.dataset.word = card.word; button.dataset.type = card.type; button.dataset.index = index;
+        button.setAttribute('aria-label', 'Hidden card');
+        button.innerHTML = card.type === 'picture' ? `<img src="${card.image}" alt="${card.word}">` : `<span class="memory-card__word">${card.word}</span>`;
+        button.addEventListener('click', () => flip(button)); grid.append(button);
+      });
+    }
+    function flip(card) {
+      if (lock || card.classList.contains('is-flipped') || card.classList.contains('is-matched')) return;
+      card.classList.add('is-flipped'); card.setAttribute('aria-label', `${card.dataset.word} ${card.dataset.type}`); speak(card.dataset.word);
+      if (!first) { first = card; return; }
+      second = card; lock = true; moves += 1;
+      if (first.dataset.word === second.dataset.word && first.dataset.type !== second.dataset.type) {
+        first.classList.replace('is-flipped', 'is-matched'); second.classList.replace('is-flipped', 'is-matched'); first.disabled = true; second.disabled = true; matches += 1; status.textContent = 'That is a pair!'; resetTurn(); updateStatus();
+        if (matches === 6) status.textContent = `You found every pair in ${moves} moves!`;
+      } else {
+        status.textContent = 'Not this time. Remember where they are.';
+        setTimeout(() => { first.classList.remove('is-flipped'); second.classList.remove('is-flipped'); first.setAttribute('aria-label','Hidden card'); second.setAttribute('aria-label','Hidden card'); resetTurn(); }, 850);
+        updateStatus();
+      }
+    }
+    function resetTurn() { first = null; second = null; lock = false; }
+    function updateStatus() { document.getElementById('moves').textContent = `Moves: ${moves}`; document.getElementById('progress').style.width = `${(matches / 6) * 100}%`; }
+    document.getElementById('theme-select').addEventListener('change', startGame); document.getElementById('restart-button').addEventListener('click', startGame); startGame();
+  </script>
+</body>
+</html>

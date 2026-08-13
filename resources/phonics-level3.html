@@ -6,6 +6,8 @@
 
   <!-- Root path ensures it works from /resources/ -->
   <link rel="stylesheet" href="/styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="/scripts/site.js" defer></script>
 </head>
 
 <body>
@@ -43,79 +45,78 @@
       <span onclick="playSound('b')">b</span>
       <span onclick="playSound('a')">a</span>
       <span onclick="playSound('d')">d</span>
-      <button class="bubble-btn" onclick="playWord('bad')">🔊</button>
+      <button type="button" class="bubble-btn" onclick="playWord('bad')">🔊</button>
     </div>
 
     <div class="word-row">
       <span onclick="playSound('k')">k</span>
       <span onclick="playSound('i')">i</span>
       <span onclick="playSound('ss')">ss</span>
-      <button class="bubble-btn" onclick="playWord('kiss')">🔊</button>
+      <button type="button" class="bubble-btn" onclick="playWord('kiss')">🔊</button>
     </div>
 
     <div class="word-row">
       <span onclick="playSound('b')">b</span>
       <span onclick="playSound('e')">e</span>
       <span onclick="playSound('ll')">ll</span>
-      <button class="bubble-btn" onclick="playWord('bell')">🔊</button>
+      <button type="button" class="bubble-btn" onclick="playWord('bell')">🔊</button>
     </div>
 
     <div class="word-row">
       <span onclick="playSound('b')">b</span>
       <span onclick="playSound('u')">u</span>
       <span onclick="playSound('g')">g</span>
-      <button class="bubble-btn" onclick="playWord('bug')">🔊</button>
+      <button type="button" class="bubble-btn" onclick="playWord('bug')">🔊</button>
     </div>
 
     <div class="word-row">
       <span onclick="playSound('f')">f</span>
       <span onclick="playSound('o')">o</span>
       <span onclick="playSound('g')">g</span>
-      <button class="bubble-btn" onclick="playWord('fog')">🔊</button>
+      <button type="button" class="bubble-btn" onclick="playWord('fog')">🔊</button>
     </div>
 
     <div class="word-row">
       <span onclick="playSound('f')">f</span>
       <span onclick="playSound('u')">u</span>
       <span onclick="playSound('ss')">ss</span>
-      <button class="bubble-btn" onclick="playWord('fuss')">🔊</button>
+      <button type="button" class="bubble-btn" onclick="playWord('fuss')">🔊</button>
     </div>
 
     <div class="word-row">
       <span onclick="playSound('h')">h</span>
       <span onclick="playSound('i')">i</span>
       <span onclick="playSound('ll')">ll</span>
-      <button class="bubble-btn" onclick="playWord('hill')">🔊</button>
+      <button type="button" class="bubble-btn" onclick="playWord('hill')">🔊</button>
     </div>
 
     <div class="word-row">
       <span onclick="playSound('h')">h</span>
       <span onclick="playSound('a')">a</span>
       <span onclick="playSound('t')">t</span>
-      <button class="bubble-btn" onclick="playWord('hat')">🔊</button>
+      <button type="button" class="bubble-btn" onclick="playWord('hat')">🔊</button>
     </div>
 
     <div class="word-row">
       <span onclick="playSound('m')">m</span>
       <span onclick="playSound('e')">e</span>
       <span onclick="playSound('ss')">ss</span>
-      <button class="bubble-btn" onclick="playWord('mess')">🔊</button>
+      <button type="button" class="bubble-btn" onclick="playWord('mess')">🔊</button>
     </div>
 
     <div class="word-row">
       <span onclick="playSound('m')">m</span>
       <span onclick="playSound('i')">i</span>
       <span onclick="playSound('ll')">ll</span>
-      <button class="bubble-btn" onclick="playWord('mill')">🔊</button>
+      <button type="button" class="bubble-btn" onclick="playWord('mill')">🔊</button>
     </div>
 
   </div>
 
   <!-- NAV -->
   <div class="section">
-    <a href="/resources/level3-wordbank.html">
-      <button class="bubble-btn game-btn">📚 Full Word Bank</button>
-    </a>
+    <a href="/phonics-game.html" class="bubble-btn">🎮 Build the Word</a>
+    <a href="/resources/level3-wordbank.html" class="bubble-btn game-btn">📚 Full Word Bank</a>
   </div>
 
 </div>
@@ -126,7 +127,15 @@ function playSound(letter) {
 }
 
 function playWord(word) {
-  new Audio("/assets/audio/words/" + word + ".mp3").play();
+  const audio = new Audio("/assets/audio/words/" + word + ".m4a");
+  audio.play().catch(() => {
+    if ('speechSynthesis' in window) {
+      const speech = new SpeechSynthesisUtterance(word);
+      speech.lang = 'en-GB';
+      speech.rate = 0.75;
+      speechSynthesis.speak(speech);
+    }
+  });
 }
 </script>
 

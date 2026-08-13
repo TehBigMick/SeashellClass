@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Choose the missing vocabulary word to complete a sentence.">
+  <title>Sentence Builder | Seashell Class</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/scripts/site.js" defer></script>
+</head>
+<body>
+  <main class="activity-shell" id="main-content">
+    <header class="activity-heading"><span class="eyebrow">Vocabulary · Speaking</span><h1>Sentence Builder</h1><p>Look at the picture and choose the missing word. Then say the whole sentence.</p></header>
+    <section class="activity-card" aria-labelledby="sentence-status">
+      <div class="activity-toolbar"><label>Topic <select id="topic-select"><option value="weather">Weather</option><option value="hobbies">Hobbies</option><option value="feelings">Feelings</option><option value="health">Health</option></select></label><span class="score-pill" id="score">Score: 0 / 0</span></div>
+      <div class="progress-track" aria-hidden="true"><div class="progress-track__bar" id="progress"></div></div>
+      <div class="picture-prompt"><img id="prompt-image" src="/assets/images/sunny.webp" alt="Picture clue"></div>
+      <div class="sentence-frame" id="sentence-frame"></div>
+      <div class="choice-grid" id="choices"></div>
+      <p class="feedback" id="sentence-status" aria-live="polite"></p>
+      <div class="control-row"><button class="button" id="next-button" type="button" hidden>Next sentence →</button><button class="button button--light" id="restart-button" type="button">Start again</button></div>
+    </section>
+  </main>
+  <script>
+    const topics = {
+      weather: { frame: ['It is ', '.'], items: [['sunny','sunny.webp'],['cloudy','cloudy.webp'],['rainy','rainy.webp'],['snowy','snowy.webp'],['windy','windy.webp'],['stormy','stormy.webp'],['hot','hot.webp'],['cold','cold.webp']] },
+      hobbies: { frame: ['I like ', '.'], items: [['skiing','skiing.webp'],['shopping','shopping.webp'],['dancing','dancing.webp'],['bowling','bowling.webp'],['swimming','swimming.webp'],['reading books','reading-books.webp']] },
+      feelings: { frame: ['I feel ', '.'], items: [['happy','happy.webp'],['sad','sad.webp'],['angry','angry.webp'],['bored','bored.webp'],['shy','shy.webp'],['sick','sick.webp']] },
+      health: { frame: ['I have a ', '.'], items: [['headache','headache.webp'],['toothache','toothache.webp'],['tummy ache','tummyache.webp'],['sore throat','sore_throat.webp'],['cough','cough.webp'],['runny nose','runny_nose.webp']] }
+    };
+    const totalRounds = 8; let round = 0, score = 0, answer = '', sentence = '', answered = false, last = '';
+    const choices = document.getElementById('choices'); const status = document.getElementById('sentence-status'); const topic = document.getElementById('topic-select'); const next = document.getElementById('next-button');
+    function shuffle(items) { return [...items].sort(() => Math.random() - 0.5); }
+    function speak(text) { if ('speechSynthesis' in window) { speechSynthesis.cancel(); const speech = new SpeechSynthesisUtterance(text); speech.lang = 'en-GB'; speech.rate = 0.78; speechSynthesis.speak(speech); } }
+    function newRound() {
+      if (round >= totalRounds) return finish(); answered = false; status.textContent = ''; next.hidden = true; choices.innerHTML = '';
+      const set = topics[topic.value]; let item; do { item = set.items[Math.floor(Math.random() * set.items.length)]; } while (item[0] === last && set.items.length > 1); last = item[0]; answer = item[0]; sentence = `${set.frame[0]}${answer}${set.frame[1]}`;
+      const image = document.getElementById('prompt-image'); image.src = `/assets/images/${item[1]}`; image.alt = `${answer} clue`;
+      document.getElementById('sentence-frame').innerHTML = `${set.frame[0]}<span class="sentence-blank">?</span>${set.frame[1]}`;
+      const options = shuffle([answer, ...shuffle(set.items.map((entry) => entry[0]).filter((word) => word !== answer)).slice(0, 3)]);
+      options.forEach((word) => { const button = document.createElement('button'); button.type = 'button'; button.className = 'choice-button'; button.textContent = word; button.addEventListener('click', () => check(word, button)); choices.append(button); });
+    }
+    function check(word, button) {
+      if (answered) return; answered = true; round += 1; const correct = Array.from(choices.children).find((item) => item.textContent === answer);
+      if (word === answer) { score += 1; button.classList.add('is-correct'); status.textContent = 'Yes! Say the whole sentence.'; }
+      else { button.classList.add('is-wrong'); correct.classList.add('is-correct'); status.textContent = `The missing words are “${answer}”.`; }
+      Array.from(choices.children).forEach((item) => item.disabled = true); document.querySelector('.sentence-blank').textContent = answer; speak(sentence); updateStatus(); next.hidden = false; if (round === totalRounds) next.textContent = 'See my result →';
+    }
+    function updateStatus() { document.getElementById('score').textContent = `Score: ${score} / ${round}`; document.getElementById('progress').style.width = `${(round / totalRounds) * 100}%`; }
+    function finish() { choices.innerHTML = ''; document.querySelector('.picture-prompt').hidden = true; document.getElementById('sentence-frame').textContent = score >= 6 ? 'Excellent sentence work!' : 'Good practice!'; status.textContent = `You completed ${totalRounds} sentences and chose ${score} correctly.`; next.hidden = true; }
+    function restart() { round = 0; score = 0; answer = ''; last = ''; next.textContent = 'Next sentence →'; document.querySelector('.picture-prompt').hidden = false; updateStatus(); newRound(); }
+    next.addEventListener('click', newRound); document.getElementById('restart-button').addEventListener('click', restart); topic.addEventListener('change', restart); restart();
+  </script>
+</body>
+</html>

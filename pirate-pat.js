@@ -24,14 +24,18 @@ function loadPage(index) {
   const imgEl = document.getElementById('page-image');
   const teacherTextEl = document.getElementById('teacher-text');
   const playTeacherBtn = document.getElementById('play-teacher');
+  document.getElementById('page-indicator').textContent = `Page ${index + 1} of ${bookPages.length}`;
+  document.getElementById('prev-page').disabled = index === 0;
+  document.getElementById('next-page').disabled = index === bookPages.length - 1;
 
   imgEl.src = `/assets/images/${page.image}`;
   teacherTextEl.innerText = page.teacherText;
 
   const teacherAudio = page.teacherAudio ? new Audio(`/assets/audio/words/${page.teacherAudio}`) : null;
   playTeacherBtn.onclick = () => {
-    if (teacherAudio) teacherAudio.play();
+    if (teacherAudio) teacherAudio.play().catch(() => speak(page.teacherText));
   };
+  playTeacherBtn.hidden = !teacherAudio;
 
   // ===== Student Section =====
   const cvcContainer = document.getElementById('cvc-words');
@@ -58,7 +62,7 @@ function loadPage(index) {
     const wordAudio = new Audio(`/assets/audio/words/${word}.m4a`);
     const playWordBtn = document.createElement('button');
     playWordBtn.innerText = '🔊 Play Word';
-    playWordBtn.onclick = () => wordAudio.play();
+    playWordBtn.onclick = () => wordAudio.play().catch(() => speak(word));
     playWordBtn.style.marginLeft = '10px';
     playWordBtn.classList.add('play-word-button');
 
@@ -84,3 +88,12 @@ document.getElementById('next-page').onclick = () => {
 
 // ===== Initialize first page =====
 loadPage(currentPage);
+
+function speak(text) {
+  if (!text || !('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  const speech = new SpeechSynthesisUtterance(text);
+  speech.lang = 'en-GB';
+  speech.rate = 0.76;
+  speechSynthesis.speak(speech);
+}

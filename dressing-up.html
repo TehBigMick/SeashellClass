@@ -4,21 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dressing-up Box - Interactive Book</title>
+  <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="pirate-pat.css">
+  <script src="/scripts/site.js" defer></script>
 </head>
 <body>
-
+  <main class="book-page-shell" id="main-content">
+  <header class="book-heading"><span class="eyebrow">Decodable story · Level 2</span><h1>Dressing-up Box</h1><p>Read together and let the child try each “I can…” line.</p></header>
   <div class="book-container">
     <!-- Previous Page -->
-    <button class="nav-button" id="prev-page">‹</button>
+    <button type="button" class="nav-button" id="prev-page">‹</button>
 
     <!-- Page Content -->
     <div class="page" id="page-container">
       <!-- Teacher Section -->
       <div class="teacher-section">
-        <img id="page-image" src="" alt="Page Image">
+        <img id="page-image" src="/assets/images/dressing-up1.webp" alt="Dressing-up Box story page">
         <p id="teacher-text"></p>
-        <button class="play-audio" id="play-teacher">🔊 Read Story</button>
+        <button type="button" class="play-audio" id="play-teacher">🔊 Read Story</button>
       </div>
 
       <!-- Student Section -->
@@ -30,8 +33,10 @@
     </div>
 
     <!-- Next Page -->
-    <button class="nav-button" id="next-page">›</button>
+    <button type="button" class="nav-button" id="next-page">›</button>
   </div>
+  <p class="page-indicator" id="page-indicator" aria-live="polite"></p>
+  </main>
 
   <script src="dressing-up.js"></script>
 </body>

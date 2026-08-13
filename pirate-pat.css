@@ -1,144 +1,28 @@
-/* ===== General body & container ===== */
-body {
-  font-family: sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0;
-  background: #f0f8ff;
-}
-
-.book-container {
-  display: flex;
-  align-items: center;
-}
-
-/* ===== Book page styling ===== */
-.page {
-  width: 650px; /* slightly larger to make images bigger */
-  padding: 20px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-  text-align: center;
-}
-
-/* ===== Teacher Section ===== */
-.teacher-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.teacher-section img {
-  width: 100%;       /* fill the page width */
-  max-width: 600px;  /* larger than before to match Pirate Pat */
-  height: auto;      /* maintain aspect ratio */
-  border-radius: 8px;
-  margin-bottom: 10px;
-  position: relative;
-  z-index: 1;
-}
-
-.teacher-section button {
-  margin: 5px;
-  padding: 10px 15px;
-  border-radius: 20px;
-  border: none;
-  background-color: #ffcc00;
-  cursor: pointer;
-  font-size: 1em;
-}
-
-.teacher-section button:hover {
-  transform: scale(1.1);
-}
-
-/* ===== Student Section ===== */
-.student-section {
-  margin-top: 20px;
-}
-
-#cvc-words {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.word-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-/* Letter buttons */
-.letter-button {
-  margin: 2px;
-  padding: 10px 15px;
-  border-radius: 25px;
-  border: none;
-  background-color: #ffeb3b;
-  cursor: pointer;
-  font-size: 1em;
-}
-
-.letter-button:hover {
-  transform: scale(1.1);
-}
-
-/* Play word button */
-.play-word-button {
-  padding: 10px 15px;
-  border-radius: 25px;
-  border: none;
-  background-color: #4caf50;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  margin-left: 10px;
-}
-
-.play-word-button:hover {
-  transform: scale(1.1);
-}
-
-/* ===== Navigation buttons ===== */
-.nav-button {
-  font-size: 2em;
-  background: none;
-  border: none;
-  cursor: pointer;
-  user-select: none;
-  margin: 0 10px;
-  transition: transform 0.2s;
-}
-
-.nav-button:hover {
-  transform: scale(1.2);
-}
-
-/* ===== Responsive adjustments ===== */
-@media screen and (max-width: 400px) {
-  .page {
-    width: 90%; /* shrink container on small screens */
-    padding: 10px;
-  }
-
-  .teacher-section img {
-    max-width: 100%; /* fill container */
-  }
-
-  .nav-button {
-    font-size: 1.8em;
-  }
-}
-
-@media screen and (min-width: 1200px) {
-  .page {
-    width: 700px; /* slightly bigger container for large screens */
-  }
-
-  .teacher-section img {
-    max-width: 650px; /* larger image on big desktop screens */
-  }
+.book-page-shell { width: min(1040px, calc(100% - 32px)); margin: 38px auto 0; }
+.book-heading { margin-bottom: 22px; text-align: center; }
+.book-heading h1 { margin: 0 0 6px; font-size: clamp(2rem, 6vw, 3.4rem); letter-spacing: -0.04em; line-height: 1.08; }
+.book-heading p { margin: 0; color: var(--muted); }
+.book-container { display: grid; grid-template-columns: 58px minmax(0, 1fr) 58px; align-items: center; gap: 14px; }
+.page { overflow: hidden; min-width: 0; padding: clamp(16px, 3vw, 28px); border: 1px solid rgba(23, 50, 77, 0.09); border-radius: 28px; background: #fff; box-shadow: var(--shadow-md); text-align: center; }
+.teacher-section { display: flex; align-items: center; flex-direction: column; }
+.teacher-section img { display: block; width: 100%; max-width: 720px; max-height: 56vh; margin-bottom: 14px; border-radius: 20px; object-fit: contain; }
+.teacher-section p, .student-section > p { max-width: 690px; margin: 8px auto; white-space: pre-line; }
+.teacher-section p { color: var(--muted); font-size: clamp(1rem, 2vw, 1.2rem); }
+.student-section > p { color: var(--ink); font-size: clamp(1.25rem, 3vw, 1.8rem); font-weight: 850; }
+.play-audio, .play-word-button { min-height: 44px; padding: 10px 16px; border: 0; border-radius: 999px; background: var(--ocean-900); color: #fff; cursor: pointer; font-weight: 850; }
+.student-section { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--line); }
+#cvc-words { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 10px; }
+.word-container { display: flex; margin: 4px !important; padding: 8px; border-radius: 15px; align-items: center; background: var(--sky); }
+.letter-button { width: 42px; height: 42px; margin: 2px; padding: 0; border: 0; border-radius: 13px; background: var(--sun); color: var(--ink); cursor: pointer; font-size: 1.1rem; font-weight: 900; }
+.play-word-button { margin-left: 7px !important; background: var(--leaf); font-size: 0.86rem; }
+.nav-button { display: grid; width: 56px; height: 56px; padding: 0; border: 0; border-radius: 18px; place-items: center; background: var(--ocean-900); box-shadow: 0 6px 0 #053f4e; color: #fff; cursor: pointer; font-size: 2rem; line-height: 1; }
+.nav-button:disabled { opacity: 0.35; cursor: not-allowed; }
+.page-indicator { margin: 16px 0 0; color: var(--muted); font-weight: 800; text-align: center; }
+@media (max-width: 620px) {
+  .book-page-shell { width: min(100% - 18px, 1040px); }
+  .book-container { grid-template-columns: 44px minmax(0, 1fr) 44px; gap: 5px; }
+  .nav-button { width: 42px; height: 48px; border-radius: 14px; }
+  .page { padding: 11px; border-radius: 20px; }
+  .teacher-section img { border-radius: 14px; }
+  .word-container { width: 100%; justify-content: center; flex-wrap: wrap; }
 }
