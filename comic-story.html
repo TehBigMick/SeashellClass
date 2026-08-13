@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Comic Story</title>
   <link rel="stylesheet" href="/styles.css">
+  <script src="/scripts/site.js" defer></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -113,30 +114,30 @@
   <!-- Vocabulary Flashcards -->
   <h2>Vocabulary Basics</h2>
   <div class="flashcards-container">
-    <div class="flashcard"><img src="/assets/images/lion.webp" alt="Lion"><span>Lion</span><button onclick="playAudio('lion')">🔊</button></div>
-    <div class="flashcard"><img src="/assets/images/cat.webp" alt="Cat"><span>Cat</span><button onclick="playAudio('cat')">🔊</button></div>
-    <div class="flashcard"><img src="/assets/images/dog.webp" alt="Dog"><span>Dog</span><button onclick="playAudio('dog')">🔊</button></div>
-    <div class="flashcard"><img src="/assets/images/superhero.webp" alt="Superhero"><span>Superhero</span><button onclick="playAudio('superhero')">🔊</button></div>
-    <div class="flashcard"><img src="/assets/images/princess.webp" alt="Princess"><span>Princess</span><button onclick="playAudio('princess')">🔊</button></div>
-    <div class="flashcard"><img src="/assets/images/astronaut.webp" alt="Astronaut"><span>Astronaut</span><button onclick="playAudio('astronaut')">🔊</button></div>
-    <div class="flashcard"><img src="/assets/images/pirate.webp" alt="Pirate"><span>Pirate</span><button onclick="playAudio('pirate')">🔊</button></div>
-    <div class="flashcard"><img src="/assets/images/fairy.webp" alt="Fairy"><span>Fairy</span><button onclick="playAudio('fairy')">🔊</button></div>
-    <div class="flashcard"><img src="/assets/images/dragon.webp" alt="Dragon"><span>Dragon</span><button onclick="playAudio('dragon')">🔊</button></div>
-    <div class="flashcard"><img src="/assets/images/robot.webp" alt="Robot"><span>Robot</span><button onclick="playAudio('robot')">🔊</button></div>
+    <div class="flashcard"><img src="/assets/images/lion.webp" alt="Lion"><span>Lion</span><button type="button" onclick="playAudio('lion')">🔊</button></div>
+    <div class="flashcard"><img src="/assets/images/cat.webp" alt="Cat"><span>Cat</span><button type="button" onclick="playAudio('cat')">🔊</button></div>
+    <div class="flashcard"><img src="/assets/images/dog.webp" alt="Dog"><span>Dog</span><button type="button" onclick="playAudio('dog')">🔊</button></div>
+    <div class="flashcard"><img src="/assets/images/superhero.webp" alt="Superhero"><span>Superhero</span><button type="button" onclick="playAudio('superhero')">🔊</button></div>
+    <div class="flashcard"><img src="/assets/images/princess.webp" alt="Princess"><span>Princess</span><button type="button" onclick="playAudio('princess')">🔊</button></div>
+    <div class="flashcard"><img src="/assets/images/astronaut.webp" alt="Astronaut"><span>Astronaut</span><button type="button" onclick="playAudio('astronaut')">🔊</button></div>
+    <div class="flashcard"><img src="/assets/images/pirate.webp" alt="Pirate"><span>Pirate</span><button type="button" onclick="playAudio('pirate')">🔊</button></div>
+    <div class="flashcard"><img src="/assets/images/fairy.webp" alt="Fairy"><span>Fairy</span><button type="button" onclick="playAudio('fairy')">🔊</button></div>
+    <div class="flashcard"><img src="/assets/images/dragon.webp" alt="Dragon"><span>Dragon</span><button type="button" onclick="playAudio('dragon')">🔊</button></div>
+    <div class="flashcard"><img src="/assets/images/robot.webp" alt="Robot"><span>Robot</span><button type="button" onclick="playAudio('robot')">🔊</button></div>
   </div>
 
   <!-- Background Selector -->
   <h3>Select Background</h3>
   <div class="background-selector">
-    <button onclick="changeBackground(1)">Background 1</button>
-    <button onclick="changeBackground(2)">Background 2</button>
-    <button onclick="changeBackground(3)">Background 3</button>
-    <button onclick="changeBackground(4)">Background 4</button>
-    <button onclick="changeBackground(5)">Background 5</button>
+    <button type="button" onclick="changeBackground(1)">Background 1</button>
+    <button type="button" onclick="changeBackground(2)">Background 2</button>
+    <button type="button" onclick="changeBackground(3)">Background 3</button>
+    <button type="button" onclick="changeBackground(4)">Background 4</button>
+    <button type="button" onclick="changeBackground(5)">Background 5</button>
   </div>
 
   <!-- Comic Board -->
-  <div class="comic-board" id="comic-board" style="background-image:url('/assets/images/background-1.webp');"></div>
+  <div class="comic-board comic-board--default" id="comic-board"></div>
 
   <!-- Character Palette -->
   <h3>Character Palette</h3>

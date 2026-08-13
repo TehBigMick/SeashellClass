@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Listen to a phoneme and identify the matching grapheme.">
+  <title>Sound Detective | Seashell Class</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/scripts/site.js" defer></script>
+</head>
+<body>
+  <main class="activity-shell" id="main-content">
+    <header class="activity-heading"><span class="eyebrow">Phonics · Listening</span><h1>Sound Detective</h1><p>Press the sound button, listen carefully and choose the grapheme you hear.</p></header>
+    <section class="activity-card" aria-labelledby="round-title">
+      <div class="activity-toolbar">
+        <label>Sound set <select id="level-select"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option></select></label>
+        <span class="score-pill" id="score">Score: 0 / 0</span>
+      </div>
+      <div class="progress-track" aria-hidden="true"><div class="progress-track__bar" id="progress"></div></div>
+      <div class="prompt-panel"><h2 id="round-title">Which sound can you hear?</h2><p>Listen more than once if you need to.</p><div class="control-row"><button class="button button--coral" id="listen-button" type="button">🔊 Play sound</button></div></div>
+      <div class="choice-grid" id="choices" role="group" aria-label="Sound choices"></div>
+      <p class="feedback" id="feedback" aria-live="polite"></p>
+      <div class="control-row"><button class="button" id="next-button" type="button" hidden>Next sound →</button><button class="button button--light" id="restart-button" type="button">Start again</button></div>
+    </section>
+  </main>
+  <script>
+    const sets = {
+      1: ['s', 'a', 't', 'p', 'i', 'n', 'm', 'd'],
+      2: ['g', 'o', 'c', 'k', 'ck', 'e', 'u', 'r'],
+      3: ['h', 'b', 'f', 'ff', 'l', 'll', 'ss']
+    };
+    const totalRounds = 10;
+    let round = 0, score = 0, target = '', answered = false, lastTarget = '';
+    const choices = document.getElementById('choices');
+    const feedback = document.getElementById('feedback');
+    const next = document.getElementById('next-button');
+    const listen = document.getElementById('listen-button');
+    const level = document.getElementById('level-select');
+
+    function shuffle(items) { return [...items].sort(() => Math.random() - 0.5); }
+    function playTarget() { if (target) new Audio(`/assets/audio/phonemes/${target}.mp3`).play().catch(() => {}); }
+    function updateStatus() {
+      document.getElementById('score').textContent = `Score: ${score} / ${round}`;
+      document.getElementById('progress').style.width = `${(round / totalRounds) * 100}%`;
+    }
+    function newRound() {
+      if (round >= totalRounds) return finish();
+      answered = false; feedback.textContent = ''; next.hidden = true; choices.innerHTML = '';
+      const pool = sets[level.value];
+      do { target = pool[Math.floor(Math.random() * pool.length)]; } while (target === lastTarget && pool.length > 1);
+      lastTarget = target;
+      const options = shuffle([target, ...shuffle(pool.filter((sound) => sound !== target)).slice(0, 3)]);
+      options.forEach((sound) => {
+        const button = document.createElement('button');
+        button.type = 'button'; button.className = 'choice-button'; button.textContent = sound;
+        button.addEventListener('click', () => checkAnswer(sound, button)); choices.append(button);
+      });
+      setTimeout(playTarget, 250);
+    }
+    function checkAnswer(sound, button) {
+      if (answered) return; answered = true; round += 1;
+      const correctButton = Array.from(choices.children).find((item) => item.textContent === target);
+      if (sound === target) { score += 1; button.classList.add('is-correct'); feedback.textContent = 'Great listening!'; }
+      else { button.classList.add('is-wrong'); correctButton.classList.add('is-correct'); feedback.textContent = `That was ${target}. Listen once more.`; setTimeout(playTarget, 300); }
+      Array.from(choices.children).forEach((item) => item.disabled = true); updateStatus(); next.hidden = false;
+      if (round === totalRounds) next.textContent = 'See my result →';
+    }
+    function finish() {
+      choices.innerHTML = ''; listen.hidden = true; next.hidden = true;
+      document.getElementById('round-title').textContent = score >= 8 ? 'Brilliant sound work!' : score >= 5 ? 'Good detective work!' : 'Every listen helps.';
+      feedback.textContent = `You found ${score} of ${totalRounds} sounds. Choose Start again to practise another set.`;
+    }
+    function restart() {
+      round = 0; score = 0; target = ''; lastTarget = ''; answered = false; listen.hidden = false; next.textContent = 'Next sound →';
+      document.getElementById('round-title').textContent = 'Which sound can you hear?'; updateStatus(); newRound();
+    }
+    listen.addEventListener('click', playTarget); next.addEventListener('click', newRound); document.getElementById('restart-button').addEventListener('click', restart); level.addEventListener('change', restart); restart();
+  </script>
+</body>
+</html>

@@ -3,118 +3,72 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Seashell Class Resources</title>
-
+  <meta name="description" content="Browse Seashell Class phonics, English, story and game resources.">
+  <title>Learning Library | Seashell Class</title>
   <link rel="stylesheet" href="/styles.css">
-
-  <style>
-    /* ICON ANIMATION */
-    .icon-anim {
-      display: inline-block;
-      animation: bounce 1.5s infinite;
-      transform-origin: center;
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-4px); }
-    }
-
-    /* Highlight new game button slightly */
-    .highlight-new {
-      background: #fff3e6;
-      border: 2px solid #ffb347;
-      border-radius: 14px;
-      padding: 6px;
-    }
-  </style>
+  <script src="/scripts/site.js" defer></script>
 </head>
-
 <body>
-
-<div class="container">
-
-  <!-- HEADER CARD -->
-  <div class="card hero-card">
-
-    <div class="logo-wrap">
-      <img src="/assets/seashell-banner.webp" alt="Seashell Class Banner" class="hero-logo">
-    </div>
-
-    <h1>📚 Seashell Class Resources</h1>
-    <p class="subtitle">Choose a category below</p>
-
-    <a href="/index.html">
-      <button class="bubble-btn">⬅ Back to Homepage</button>
-    </a>
-
-  </div>
-
-  <!-- PHONICS -->
-  <div class="card">
-    <button class="bubble-btn large-btn" onclick="toggleLinks('phonics-links')">
-      🎵 Phonics
-    </button>
-
-    <div id="phonics-links" class="sub-buttons">
-
-      <div style="display:flex; gap:10px; width:100%; justify-content:center; flex-wrap:wrap;">
-        <a href="/resources/phonics-level1.html" class="sub-bubble">Level 1</a>
-        <a href="/pirate-pat.html" class="sub-bubble">📖 Pirate Pat</a>
+  <main class="page-shell" id="main-content">
+    <section class="page-hero page-hero--compact"><div><span class="eyebrow">Learning library</span><h1>Find the right activity.</h1><p class="page-hero__lead">Search every phonics resource, topic page, interactive story and game in one place.</p></div></section>
+    <section class="section" aria-labelledby="library-heading">
+      <div class="section-heading"><div><h2 id="library-heading">All resources</h2><p id="result-count" aria-live="polite">Showing all resources</p></div></div>
+      <section class="filter-bar" aria-label="Resource filters">
+        <div class="filter-chips" role="group" aria-label="Filter by type">
+          <button class="filter-chip is-active" type="button" data-filter="all">All</button>
+          <button class="filter-chip" type="button" data-filter="phonics">Phonics</button>
+          <button class="filter-chip" type="button" data-filter="language">English topics</button>
+          <button class="filter-chip" type="button" data-filter="stories">Stories</button>
+          <button class="filter-chip" type="button" data-filter="games">Games</button>
+        </div>
+        <label><span class="skip-link">Search resources</span><input class="search-field" id="resource-search" type="search" placeholder="Search resources…" autocomplete="off"></label>
+      </section>
+      <div class="resource-grid" id="resource-grid">
+        <article class="resource-card" data-category="phonics" data-search="phonics level one sounds satpin blending word bank"><div class="resource-card__body"><div class="resource-card__meta"><span class="tag">Phonics</span><span class="tag tag--gold">Level 1</span></div><span class="resource-card__icon" aria-hidden="true">s a t</span><h3>Level 1 sound steps</h3><p>Hear s, a, t, p, i, n, m and d, then blend the first word set.</p><a class="resource-card__action" href="/resources/phonics-level1.html">Open Level 1</a></div></article>
+        <article class="resource-card" data-category="phonics" data-search="phonics level two sounds gockeur blending word bank"><div class="resource-card__body"><div class="resource-card__meta"><span class="tag">Phonics</span><span class="tag tag--gold">Level 2</span></div><span class="resource-card__icon" aria-hidden="true">g o ck</span><h3>Level 2 sound steps</h3><p>Add g, o, c, k, ck, e, u and r and practise a wider word set.</p><a class="resource-card__action" href="/resources/phonics-level2.html">Open Level 2</a></div></article>
+        <article class="resource-card" data-category="phonics" data-search="phonics level three sounds hbflss blending word bank"><div class="resource-card__body"><div class="resource-card__meta"><span class="tag">Phonics</span><span class="tag tag--gold">Level 3</span></div><span class="resource-card__icon" aria-hidden="true">h b ff</span><h3>Level 3 sound steps</h3><p>Practise h, b, f, ff, l, ll and ss with longer decodable words.</p><a class="resource-card__action" href="/resources/phonics-level3.html">Open Level 3</a></div></article>
+        <article class="resource-card" data-category="phonics games" data-search="phonics word builder game blending tap sounds"><div class="resource-card__body"><div class="resource-card__meta"><span class="tag">Phonics</span><span class="tag tag--coral">Game</span></div><span class="resource-card__icon" aria-hidden="true">🧩</span><h3>Build the word</h3><p>Put phonemes in order, hear the finished word and move through three levels.</p><a class="resource-card__action" href="/phonics-game.html">Build words</a></div></article>
+        <article class="resource-card" data-category="phonics games" data-search="sound detective listening phoneme identify game"><div class="resource-card__body"><div class="resource-card__meta"><span class="tag">Listening</span><span class="tag tag--coral">New game</span></div><span class="resource-card__icon" aria-hidden="true">👂</span><h3>Sound Detective</h3><p>Listen to one phoneme and choose the matching grapheme.</p><a class="resource-card__action" href="/sound-detective.html">Start listening</a></div></article>
+        <article class="resource-card" data-category="stories phonics" data-search="pirate pat decodable interactive story book"><div class="resource-card__media"><img src="/assets/images/pirate-pat-1.webp" alt="Pirate Pat cover"></div><div class="resource-card__body"><div class="resource-card__meta"><span class="tag">Story</span><span class="tag tag--gold">Level 1</span></div><h3>Pirate Pat</h3><p>A read-along adventure with tappable sounds and words.</p><a class="resource-card__action" href="/pirate-pat.html">Read Pirate Pat</a></div></article>
+        <article class="resource-card" data-category="stories phonics" data-search="dressing up box decodable interactive story book"><div class="resource-card__media"><img src="/assets/images/dressing-up1.webp" alt="Dressing-up Box cover"></div><div class="resource-card__body"><div class="resource-card__meta"><span class="tag">Story</span><span class="tag tag--gold">Level 2</span></div><h3>Dressing-up Box</h3><p>Read simple “I can…” sentences while exploring imaginative roles.</p><a class="resource-card__action" href="/dressing-up.html">Open the story</a></div></article>
+        <article class="resource-card" data-category="stories phonics" data-search="perfect pet decodable interactive story book"><div class="resource-card__media"><img src="/assets/images/perfect-pet1.webp" alt="The Perfect Pet cover"></div><div class="resource-card__body"><div class="resource-card__meta"><span class="tag">Story</span><span class="tag tag--gold">Level 3</span></div><h3>The Perfect Pet</h3><p>Share a funny pet-shop story and read the shorter child lines.</p><a class="resource-card__action" href="/perfect-pet.html">Read the story</a></div></article>
+        <article class="resource-card" data-category="stories language" data-search="comic story creator character speaking vocabulary"><div class="resource-card__media"><img src="/assets/images/dragon.webp" alt="Dragon character"></div><div class="resource-card__body"><div class="resource-card__meta"><span class="tag">Create</span><span class="tag tag--coral">Speaking</span></div><h3>Comic Story Studio</h3><p>Choose characters, move them into a scene and tell a new story.</p><a class="resource-card__action" href="/comic-story.html">Make a story</a></div></article>
+        <article class="resource-card" data-category="language" data-search="weather sunny cloudy rainy snowy windy hot cold vocabulary"><div class="resource-card__media"><img src="/assets/images/sunny.webp" alt="Sunny weather"></div><div class="resource-card__body"><div class="resource-card__meta"><span class="tag">Topic</span><span class="tag tag--coral">Weather</span></div><h3>Weather words</h3><p>Listen to ten weather words and say “It is…”.</p><a class="resource-card__action" href="/weather.html">Explore weather</a></div></article>
+        <article class="resource-card" data-category="language" data-search="hobbies skiing shopping dancing bowling swimming reading speaking"><div class="resource-card__media"><img src="/assets/images/swimming.webp" alt="Child swimming"></div><div class="resource-card__body"><div class="resource-card__meta"><span class="tag">Topic</span><span class="tag tag--coral">Hobbies</span></div><h3>Things we like to do</h3><p>Hear hobby words and practise “I like…”.</p><a class="resource-card__action" href="/hobbies.html">Practise hobbies</a></div></article>
+        <article class="resource-card" data-category="language" data-search="pets dog cat fish bird rabbit hamster song flashcards"><div class="resource-card__media"><img src="/assets/animals/cat.webp" alt="Cat illustration"></div><div class="resource-card__body"><div class="resource-card__meta"><span class="tag">Topic</span><span class="tag tag--coral">Pets</span></div><h3>I Have a Pet</h3><p>Watch the class song and review seven pet words.</p><a class="resource-card__action" href="/resources/esl-i-have-a-pet.html">Learn pet words</a></div></article>
+        <article class="resource-card" data-category="language" data-search="supertato fruit vegetables food vocabulary broccoli carrot potato"><div class="resource-card__media"><img src="/assets/images/potato.webp" alt="Potato illustration"></div><div class="resource-card__body"><div class="resource-card__meta"><span class="tag">Topic</span><span class="tag tag--coral">Food</span></div><h3>Supertato word wall</h3><p>Tap colourful fruit and vegetable cards to hear each word.</p><a class="resource-card__action" href="/supertato.html">Open the word wall</a></div></article>
+        <article class="resource-card" data-category="games language" data-search="fruit vegetable reveal guessing numbers letters game"><div class="resource-card__media"><img src="/assets/images/strawberry.webp" alt="Strawberry illustration"></div><div class="resource-card__body"><div class="resource-card__meta"><span class="tag">Game</span><span class="tag tag--coral">Food</span></div><h3>Fruit &amp; Veg Reveal</h3><p>Remove numbered tiles, use the initial sound clue and guess the food.</p><a class="resource-card__action" href="/fruit-game.html">Play the reveal game</a></div></article>
+        <article class="resource-card" data-category="games language" data-search="weather hobbies sentence matching game speaking"><div class="resource-card__media"><img src="/assets/images/skiing.webp" alt="Child skiing"></div><div class="resource-card__body"><div class="resource-card__meta"><span class="tag">Game</span><span class="tag tag--coral">Sentences</span></div><h3>Weather + Hobbies</h3><p>Choose two pictures and build a complete spoken sentence.</p><a class="resource-card__action" href="/weather-hobbies-game.html">Build a sentence</a></div></article>
+        <article class="resource-card" data-category="games language" data-search="picture word pairs memory matching pets food weather feelings"><div class="resource-card__media"><img src="/assets/images/happy.webp" alt="Happy child"></div><div class="resource-card__body"><div class="resource-card__meta"><span class="tag">Game</span><span class="tag tag--coral">New</span></div><h3>Picture Pairs</h3><p>Match six pictures to six written words across four themes.</p><a class="resource-card__action" href="/picture-match.html">Play Picture Pairs</a></div></article>
+        <article class="resource-card" data-category="games language" data-search="sentence builder weather hobbies feelings health speaking game"><div class="resource-card__media"><img src="/assets/images/reading-books.webp" alt="Child reading books"></div><div class="resource-card__body"><div class="resource-card__meta"><span class="tag">Game</span><span class="tag tag--coral">New</span></div><h3>Sentence Builder</h3><p>Look at a picture, choose the missing word and hear the full sentence.</p><a class="resource-card__action" href="/sentence-builder.html">Build sentences</a></div></article>
+        <article class="resource-card" data-category="games language" data-search="pet game animal listening sentence i have a pet"><div class="resource-card__media"><img src="/assets/animals/rabbit.webp" alt="Rabbit illustration"></div><div class="resource-card__body"><div class="resource-card__meta"><span class="tag">Game</span><span class="tag tag--coral">Pets</span></div><h3>Which Pet?</h3><p>Listen to “I have a…” and choose the correct animal picture.</p><a class="resource-card__action" href="/resources/esl-i-have-a-pet-game.html">Play the pet game</a></div></article>
       </div>
-
-      <div style="display:flex; gap:10px; width:100%; justify-content:center; flex-wrap:wrap;">
-        <a href="/resources/phonics-level2.html" class="sub-bubble">Level 2</a>
-        <a href="/dressing-up.html" class="sub-bubble">👗 Dressing Up</a>
-      </div>
-
-      <div style="display:flex; gap:10px; width:100%; justify-content:center; flex-wrap:wrap;">
-        <a href="/resources/phonics-level3.html" class="sub-bubble">Level 3</a>
-        <a href="/perfect-pet.html" class="sub-bubble">📖 The Perfect Pet</a>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ESL -->
-  <div class="card">
-    <button class="bubble-btn large-btn" onclick="toggleLinks('esl-links')">
-      🐾 ESL
-    </button>
-
-    <div id="esl-links" class="sub-buttons">
-
-      <a href="/resources/esl-i-have-a-pet.html" class="sub-bubble">
-        I Have a Pet
-      </a>
-
-      <a href="/resources/supertato.html" class="sub-bubble">
-        Supertato!
-      </a>
-
-      <!-- NEW GAME BUTTON -->
-      <div class="highlight-new">
-
-        <a href="/fruit-game.html" class="sub-bubble">
-
-          <span class="icon-anim">🍓</span>
-          Fruit & Veg Reveal Game
-
-        </a>
-
-      </div>
-
-    </div>
-  </div>
-
-</div>
-
-<script>
-function toggleLinks(id) {
-  const el = document.getElementById(id);
-  el.style.display = (el.style.display === "flex") ? "none" : "flex";
-}
-</script>
-
+      <div class="empty-state" id="empty-state" hidden>No matching resource. Try a different word or category.</div>
+    </section>
+  </main>
+  <script>
+    const cards = Array.from(document.querySelectorAll('.resource-card'));
+    const chips = Array.from(document.querySelectorAll('.filter-chip'));
+    const search = document.getElementById('resource-search');
+    const count = document.getElementById('result-count');
+    const empty = document.getElementById('empty-state');
+    let activeFilter = new URLSearchParams(window.location.search).get('filter') || 'all';
+    function applyFilters() {
+      const query = search.value.trim().toLowerCase(); let visible = 0;
+      cards.forEach((card) => {
+        const matchesFilter = activeFilter === 'all' || card.dataset.category.split(' ').includes(activeFilter);
+        const matchesSearch = !query || `${card.dataset.search} ${card.textContent}`.toLowerCase().includes(query);
+        card.hidden = !(matchesFilter && matchesSearch); if (!card.hidden) visible += 1;
+      });
+      count.textContent = visible === cards.length ? `Showing all ${visible} resources` : `Showing ${visible} resource${visible === 1 ? '' : 's'}`;
+      empty.hidden = visible !== 0;
+    }
+    if (!chips.some((chip) => chip.dataset.filter === activeFilter)) activeFilter = 'all';
+    chips.forEach((chip) => {
+      if (chip.dataset.filter === activeFilter) { chips.forEach((item) => item.classList.remove('is-active')); chip.classList.add('is-active'); }
+      chip.addEventListener('click', () => { activeFilter = chip.dataset.filter; chips.forEach((item) => item.classList.toggle('is-active', item === chip)); applyFilters(); });
+    });
+    search.addEventListener('input', applyFilters); applyFilters();
+  </script>
 </body>
 </html>

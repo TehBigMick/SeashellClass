@@ -1,1 +1,35 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Listen to a pet sentence and choose the correct animal.">
+  <title>Which Pet? | Seashell Class</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/scripts/site.js" defer></script>
+</head>
+<body>
+  <main class="activity-shell" id="main-content">
+    <header class="activity-heading"><span class="eyebrow">Pets · Listening</span><h1>Which Pet?</h1><p>Listen to the sentence and tap the matching animal.</p></header>
+    <section class="activity-card" aria-labelledby="pet-prompt">
+      <div class="activity-toolbar"><span class="status-pill" id="round">Round 1 of 8</span><span class="score-pill" id="score">Score: 0</span></div>
+      <div class="progress-track" aria-hidden="true"><div class="progress-track__bar" id="progress"></div></div>
+      <div class="prompt-panel"><h2 id="pet-prompt">Which pet did you hear?</h2><div class="control-row"><button class="button button--coral" id="listen-button" type="button">🔊 Play sentence</button></div></div>
+      <div class="choice-grid" id="choices"></div><p class="feedback" id="feedback" aria-live="polite"></p>
+      <div class="control-row"><button class="button" id="next-button" type="button" hidden>Next pet →</button><button class="button button--light" id="restart-button" type="button">Start again</button></div>
+    </section>
+  </main>
+  <script>
+    const pets = [['dog','dog.webp'],['cat','cat.webp'],['fish','fish.webp'],['bird','bird.webp'],['rabbit','rabbit.webp'],['hamster','hamster.webp'],['guinea pig','guinea-pig.webp']];
+    const total = 8; let round = 0, score = 0, answer = null, answered = false, last = '';
+    const choices = document.getElementById('choices'), feedback = document.getElementById('feedback'), next = document.getElementById('next-button');
+    function shuffle(items) { return [...items].sort(() => Math.random() - .5); }
+    function speak() { if (!answer || !('speechSynthesis' in window)) return; speechSynthesis.cancel(); const speech = new SpeechSynthesisUtterance(`I have a ${answer[0]}.`); speech.lang = 'en-GB'; speech.rate = .76; speechSynthesis.speak(speech); }
+    function newRound() { if (round >= total) return finish(); answered = false; feedback.textContent = ''; next.hidden = true; choices.innerHTML = ''; do { answer = pets[Math.floor(Math.random() * pets.length)]; } while (answer[0] === last); last = answer[0]; document.getElementById('round').textContent = `Round ${round + 1} of ${total}`; const options = shuffle([answer, ...shuffle(pets.filter((pet) => pet[0] !== answer[0])).slice(0,2)]); options.forEach((pet) => { const button = document.createElement('button'); button.type = 'button'; button.className = 'choice-button'; button.innerHTML = `<img src="/assets/animals/${pet[1]}" alt="${pet[0]}"><span>${pet[0]}</span>`; button.addEventListener('click', () => check(pet[0], button)); choices.append(button); }); setTimeout(speak, 250); }
+    function check(word, button) { if (answered) return; answered = true; round += 1; const correct = Array.from(choices.children).find((item) => item.querySelector('span').textContent === answer[0]); if (word === answer[0]) { score += 1; button.classList.add('is-correct'); feedback.textContent = 'Yes! That is the pet.'; } else { button.classList.add('is-wrong'); correct.classList.add('is-correct'); feedback.textContent = `It is a ${answer[0]}.`; } Array.from(choices.children).forEach((item) => item.disabled = true); document.getElementById('score').textContent = `Score: ${score}`; document.getElementById('progress').style.width = `${round / total * 100}%`; next.hidden = false; if (round === total) next.textContent = 'See my result →'; }
+    function finish() { choices.innerHTML = ''; document.getElementById('pet-prompt').textContent = score >= 6 ? 'Wonderful listening!' : 'Good pet practice!'; feedback.textContent = `You chose ${score} of ${total} pets correctly.`; document.getElementById('listen-button').hidden = true; next.hidden = true; }
+    function restart() { round = 0; score = 0; last = ''; document.getElementById('score').textContent = 'Score: 0'; document.getElementById('progress').style.width = '0'; document.getElementById('pet-prompt').textContent = 'Which pet did you hear?'; document.getElementById('listen-button').hidden = false; next.textContent = 'Next pet →'; newRound(); }
+    document.getElementById('listen-button').addEventListener('click', speak); next.addEventListener('click', newRound); document.getElementById('restart-button').addEventListener('click', restart); restart();
+  </script>
+</body>
+</html>

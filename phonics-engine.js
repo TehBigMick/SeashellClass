@@ -1,116 +1,46 @@
-let currentLevel = PHONICS_DATA.level1;
-let currentWord = "";
-let index = 0;
-let mode = "tap";
+(function () {
+  const levelSelect = document.getElementById('level-select');
+  const gameArea = document.getElementById('game-area');
+  const slots = document.getElementById('word-slots');
+  const feedback = document.getElementById('feedback');
+  const nextButton = document.getElementById('next-button');
+  let tokens = [], position = 0, correctWords = 0, lastWord = '';
 
-function playSound(letter) {
-  new Audio("assets/audio/phonemes/" + letter + ".mp3").play();
-}
-
-function playWord(word) {
-  new Audio("assets/audio/words/" + word + ".mp3").play();
-}
-
-/* ===== MODE SWITCH ===== */
-function setMode(newMode) {
-  mode = newMode;
-  document.getElementById("mode-title").innerText =
-    mode === "tap" ? "Tap the Sounds" : "Build the Word";
-
-  nextRound();
-}
-
-/* ===== NEXT ROUND ===== */
-function nextRound() {
-  currentWord = currentLevel.words[Math.floor(Math.random() * currentLevel.words.length)];
-  index = 0;
-
-  document.getElementById("target-word").innerText = "Word: " + currentWord;
-  document.getElementById("feedback").innerText = "";
-
-  renderGame();
-}
-
-/* ===== RENDER ===== */
-function renderGame() {
-  let area = document.getElementById("game-area");
-  area.innerHTML = "";
-
-  if (mode === "tap") {
-    renderTapMode(area);
-  } else {
-    renderBuildMode(area);
+  function shuffle(items) { return [...items].sort(() => Math.random() - 0.5); }
+  function word() { return tokens.join(''); }
+  function speakWord() {
+    const audio = new Audio(`/assets/audio/words/${word()}.m4a`);
+    audio.play().catch(() => {
+      if ('speechSynthesis' in window) { speechSynthesis.cancel(); const speech = new SpeechSynthesisUtterance(word()); speech.lang = 'en-GB'; speech.rate = 0.72; speechSynthesis.speak(speech); }
+    });
   }
-}
-
-/* ===== TAP MODE ===== */
-function renderTapMode(area) {
-  let shuffled = currentWord.split('').sort(() => Math.random() - 0.5);
-
-  shuffled.forEach(letter => {
-    let el = createLetter(letter);
-    el.onclick = () => checkTap(letter, el);
-    area.appendChild(el);
-  });
-}
-
-function checkTap(letter, el) {
-  if (letter === currentWord[index]) {
-    playSound(letter);
-    el.style.background = "#81c784";
-    index++;
-
-    if (index === currentWord.length) {
-      success();
+  function playSound(sound) { new Audio(`/assets/audio/phonemes/${sound}.mp3`).play().catch(() => {}); }
+  function renderSlots() {
+    slots.innerHTML = tokens.map((token, index) => `<span aria-hidden="true">${index < position ? token : '＿'}</span>`).join(' ');
+    slots.setAttribute('aria-label', `${position} of ${tokens.length} sounds completed`);
+  }
+  function nextWord() {
+    const set = PHONICS_DATA[levelSelect.value]; let selected;
+    do { selected = set.words[Math.floor(Math.random() * set.words.length)]; } while (selected.join('') === lastWord && set.words.length > 1);
+    tokens = [...selected]; lastWord = word(); position = 0; feedback.textContent = ''; nextButton.hidden = true; gameArea.innerHTML = ''; renderSlots();
+    const distractors = shuffle(set.phonemes.filter((phoneme) => !tokens.includes(phoneme))).slice(0, 4);
+    shuffle([...new Set([...tokens, ...distractors])]).forEach((sound) => {
+      const button = document.createElement('button'); button.type = 'button'; button.className = 'phoneme'; button.textContent = sound; button.setAttribute('aria-label', `Sound ${sound}`); button.addEventListener('click', () => choose(sound, button)); gameArea.append(button);
+    });
+    setTimeout(speakWord, 250);
+  }
+  function choose(sound, button) {
+    if (position >= tokens.length) return;
+    if (sound === tokens[position]) {
+      playSound(sound); position += 1; button.style.background = '#55a86d'; setTimeout(() => button.removeAttribute('style'), 320); renderSlots(); feedback.textContent = position === tokens.length ? 'You built the word!' : 'Good. Find the next sound.';
+      if (position === tokens.length) { correctWords += 1; document.getElementById('score').textContent = `Words: ${correctWords}`; setTimeout(speakWord, 300); Array.from(gameArea.children).forEach((item) => item.disabled = true); nextButton.hidden = false; }
+    } else {
+      button.style.background = '#f46f62'; feedback.textContent = 'Try a different sound.'; setTimeout(() => button.removeAttribute('style'), 420);
     }
-  } else {
-    fail(el);
   }
-}
-
-/* ===== BUILD MODE ===== */
-function renderBuildMode(area) {
-  let letters = currentLevel.phonemes;
-  let shuffled = [...letters].sort(() => Math.random() - 0.5);
-
-  shuffled.forEach(letter => {
-    let el = createLetter(letter);
-    el.onclick = () => checkBuild(letter, el);
-    area.appendChild(el);
-  });
-}
-
-function checkBuild(letter, el) {
-  if (letter === currentWord[index]) {
-    playSound(letter);
-    el.style.background = "#4fc3f7";
-    index++;
-
-    if (index === currentWord.length) {
-      success();
-    }
-  } else {
-    fail(el);
-  }
-}
-
-/* ===== UI HELPERS ===== */
-function createLetter(letter) {
-  let el = document.createElement("span");
-  el.className = "phoneme";
-  el.innerText = letter;
-  return el;
-}
-
-function success() {
-  document.getElementById("feedback").innerText = "⭐ Great!";
-  playWord(currentWord);
-}
-
-function fail(el) {
-  el.style.background = "#ef5350";
-  document.getElementById("feedback").innerText = "Try again!";
-}
-
-/* ===== INIT ===== */
-nextRound();
+  document.getElementById('listen-button').addEventListener('click', speakWord);
+  document.getElementById('reset-button').addEventListener('click', nextWord);
+  nextButton.addEventListener('click', nextWord);
+  levelSelect.addEventListener('change', () => { correctWords = 0; document.getElementById('score').textContent = 'Words: 0'; lastWord = ''; nextWord(); });
+  nextWord();
+})();

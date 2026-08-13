@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Level 3 phonics word bank for h, b, f, ff, l, ll and ss.">
+  <title>Level 3 Word Bank | Seashell Class</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/scripts/site.js" defer></script>
+</head>
+<body>
+  <main class="page-shell" id="main-content">
+    <section class="page-hero page-hero--compact"><div><span class="eyebrow">Phonics · Level 3</span><h1>Word bank</h1><p class="page-hero__lead">Tap a word to hear it. Look for h, b, f, ff, l, ll and ss.</p></div></section>
+    <section class="section" aria-labelledby="words-heading"><div class="section-heading"><div><h2 id="words-heading">Decodable words</h2><p>Blend each word from left to right before pressing Listen.</p></div><a class="button button--coral" href="/phonics-game.html">Build a word</a></div><div class="resource-grid" id="word-grid"></div></section>
+    <section class="section section--soft" aria-labelledby="tricky-heading"><div class="section-heading"><div><h2 id="tricky-heading">Useful words</h2><p>These common words help children read complete sentences.</p></div></div><div class="resource-grid" id="useful-grid"></div></section>
+  </main>
+  <script>
+    const decodable = ['bad','bag','bat','bed','beg','big','bug','bus','fun','fog','fit','fell','fill','fuss','huff','hat','hill','hit','kiss','less','loss','mess','mill','muff','sell','shell','tell','bell','doll','hiss','boss','full'];
+    const useful = ['he','she','we','me','be','was','will','this','that','with'];
+    function speak(word) { const audio = new Audio(`/assets/audio/words/${word}.m4a`); audio.play().catch(() => { if ('speechSynthesis' in window) { speechSynthesis.cancel(); const speech = new SpeechSynthesisUtterance(word); speech.lang = 'en-GB'; speech.rate = .72; speechSynthesis.speak(speech); } }); }
+    function render(words, target) { const grid = document.getElementById(target); words.forEach((word) => { const card = document.createElement('article'); card.className = 'resource-card'; card.style.minHeight = '0'; card.innerHTML = `<div class="resource-card__body"><h3 style="font-size:1.55rem">${word}</h3><p>${word.split('').join(' · ')}</p><button class="button button--small" type="button">🔊 Listen</button></div>`; card.querySelector('button').addEventListener('click', () => speak(word)); grid.append(card); }); }
+    render(decodable, 'word-grid'); render(useful, 'useful-grid');
+  </script>
+</body>
+</html>

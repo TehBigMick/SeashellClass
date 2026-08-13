@@ -1,79 +1,24 @@
-<main style="display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%;">
-
-  <!-- Song Video -->
-  <div class="bubble-button" onclick="toggleDisplay('song-video')">
-    🎵 Play Song Video
-  </div>
-  <div id="song-video" class="video-container" style="display:none; margin:12px 0;">
-    <video controls width="360">
-      <source src="../assets/video/i-have-a-pet-song.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-  </div>
-
-  <!-- Flashcards -->
-  <div class="bubble-button" onclick="toggleDisplay('flashcards')">
-    🃏 Flashcards
-  </div>
-  <div id="flashcards" class="flashcards-container" style="display:none; margin:12px 0; display:flex; flex-wrap:wrap; justify-content:center; gap:16px;">
-    <div class="flashcard" style="display:flex; flex-direction:column; align-items:center; max-width:120px;">
-      <img src="../assets/animals/dog.webp" alt="Dog" style="width:100px; height:100px; object-fit:contain; border-radius:8px;">
-      <span>Dog</span>
-      <button onclick="playAudio('dog')">🔊</button>
-    </div>
-    <div class="flashcard" style="display:flex; flex-direction:column; align-items:center; max-width:120px;">
-      <img src="../assets/animals/cat.webp" alt="Cat" style="width:100px; height:100px; object-fit:contain; border-radius:8px;">
-      <span>Cat</span>
-      <button onclick="playAudio('cat')">🔊</button>
-    </div>
-    <div class="flashcard" style="display:flex; flex-direction:column; align-items:center; max-width:120px;">
-      <img src="../assets/animals/fish.webp" alt="Fish" style="width:100px; height:100px; object-fit:contain; border-radius:8px;">
-      <span>Fish</span>
-      <button onclick="playAudio('fish')">🔊</button>
-    </div>
-    <div class="flashcard" style="display:flex; flex-direction:column; align-items:center; max-width:120px;">
-      <img src="../assets/animals/bird.webp" alt="Bird" style="width:100px; height:100px; object-fit:contain; border-radius:8px;">
-      <span>Bird</span>
-      <button onclick="playAudio('bird')">🔊</button>
-    </div>
-    <div class="flashcard" style="display:flex; flex-direction:column; align-items:center; max-width:120px;">
-      <img src="../assets/animals/rabbit.webp" alt="Rabbit" style="width:100px; height:100px; object-fit:contain; border-radius:8px;">
-      <span>Rabbit</span>
-      <button onclick="playAudio('rabbit')">🔊</button>
-    </div>
-    <div class="flashcard" style="display:flex; flex-direction:column; align-items:center; max-width:120px;">
-      <img src="../assets/animals/hamster.webp" alt="Hamster" style="width:100px; height:100px; object-fit:contain; border-radius:8px;">
-      <span>Hamster</span>
-      <button onclick="playAudio('hamster')">🔊</button>
-    </div>
-    <div class="flashcard" style="display:flex; flex-direction:column; align-items:center; max-width:120px;">
-      <img src="../assets/animals/guinea-pig.webp" alt="Guinea Pig" style="width:100px; height:100px; object-fit:contain; border-radius:8px;">
-      <span>Guinea Pig</span>
-      <button onclick="playAudio('guinea-pig')">🔊</button>
-    </div>
-  </div>
-
-  <!-- Sentence -->
-  <div class="bubble-button" onclick="playAudio('sentence')">
-    🗣️ Play Sentence
-  </div>
-
-  <!-- Game -->
-  <div class="bubble-button" onclick="location.href='esl-i-have-a-pet-game.html'">
-    🎮 Play Game
-  </div>
-
-</main>
-
-<script>
-function toggleDisplay(id) {
-  const el = document.getElementById(id);
-  el.style.display = (el.style.display === "none" || el.style.display === "") ? "flex" : "none";
-}
-
-// Example playAudio function — adjust if your audio folder differs
-function playAudio(word) {
-  const audio = new Audio(`../assets/audio/${word}.m4a`);
-  audio.play();
-}
-</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn pet vocabulary with a song, picture cards and a listening game.">
+  <title>I Have a Pet | Seashell Class</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/scripts/site.js" defer></script>
+</head>
+<body>
+  <main class="page-shell" id="main-content">
+    <section class="page-hero page-hero--compact"><div><span class="eyebrow">English topic · Pets</span><h1>I Have a Pet</h1><p class="page-hero__lead">Watch the song, tap the picture cards and practise “I have a…”.</p></div></section>
+    <section class="section section--soft" aria-labelledby="song-heading"><div class="section-heading"><div><h2 id="song-heading">Sing together</h2><p>Listen once, then join in with the animal words.</p></div></div><video class="topic-video" controls preload="metadata"><source src="/assets/video/i-have-a-pet-song.mp4" type="video/mp4">Your browser does not support this video.</video></section>
+    <section class="section" aria-labelledby="words-heading"><div class="section-heading"><div><h2 id="words-heading">Pet picture cards</h2><p>Tap a card to hear the word and a model sentence.</p></div><a class="button button--coral" href="/resources/esl-i-have-a-pet-game.html">Play Which Pet?</a></div><div class="resource-grid" id="pet-cards"></div></section>
+  </main>
+  <script>
+    const pets = [['dog','dog.webp'],['cat','cat.webp'],['fish','fish.webp'],['bird','bird.webp'],['rabbit','rabbit.webp'],['hamster','hamster.webp'],['guinea pig','guinea-pig.webp']];
+    const grid = document.getElementById('pet-cards');
+    function speak(text) { if ('speechSynthesis' in window) { speechSynthesis.cancel(); const speech = new SpeechSynthesisUtterance(text); speech.lang = 'en-GB'; speech.rate = .78; speechSynthesis.speak(speech); } }
+    pets.forEach(([word,file]) => { const card = document.createElement('article'); card.className = 'resource-card'; card.innerHTML = `<div class="resource-card__media"><img src="/assets/animals/${file}" alt="${word}"></div><div class="resource-card__body"><h3>${word.replace(/\b\w/g, (letter) => letter.toUpperCase())}</h3><p>I have a ${word}.</p><button type="button" class="button button--small">🔊 Listen</button></div>`; card.querySelector('button').addEventListener('click', () => speak(`I have a ${word}.`)); grid.append(card); });
+  </script>
+</body>
+</html>

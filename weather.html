@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>How's the weather today?</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/scripts/site.js" defer></script>
 
   <style>
     * {
@@ -246,7 +248,7 @@
 
     <div class="question-bubble" onclick="playAudio('hows-the-weather-today')">
       <span>How's the weather today?</span>
-      <button class="question-audio-button" onclick="event.stopPropagation(); playAudio('hows-the-weather-today')">
+      <button type="button" class="question-audio-button" onclick="event.stopPropagation(); playAudio('hows-the-weather-today')">
         ▶ Listen
       </button>
     </div>
@@ -258,7 +260,7 @@
           <img src="assets/images/sunny.webp" alt="Sunny" class="weather-image">
         </div>
         <div class="weather-word">Sunny</div>
-        <button class="speak-button" onclick="event.stopPropagation(); playAudio('sunny')">Listen</button>
+        <button type="button" class="speak-button" onclick="event.stopPropagation(); playAudio('sunny')">Listen</button>
       </div>
 
       <div class="weather-card" onclick="playAudio('cloudy')">
@@ -266,7 +268,7 @@
           <img src="assets/images/cloudy.webp" alt="Cloudy" class="weather-image">
         </div>
         <div class="weather-word">Cloudy</div>
-        <button class="speak-button" onclick="event.stopPropagation(); playAudio('cloudy')">Listen</button>
+        <button type="button" class="speak-button" onclick="event.stopPropagation(); playAudio('cloudy')">Listen</button>
       </div>
 
       <div class="weather-card" onclick="playAudio('rainy')">
@@ -274,7 +276,7 @@
           <img src="assets/images/rainy.webp" alt="Rainy" class="weather-image">
         </div>
         <div class="weather-word">Rainy</div>
-        <button class="speak-button" onclick="event.stopPropagation(); playAudio('rainy')">Listen</button>
+        <button type="button" class="speak-button" onclick="event.stopPropagation(); playAudio('rainy')">Listen</button>
       </div>
 
       <div class="weather-card" onclick="playAudio('snowy')">
@@ -282,7 +284,7 @@
           <img src="assets/images/snowy.webp" alt="Snowy" class="weather-image">
         </div>
         <div class="weather-word">Snowy</div>
-        <button class="speak-button" onclick="event.stopPropagation(); playAudio('snowy')">Listen</button>
+        <button type="button" class="speak-button" onclick="event.stopPropagation(); playAudio('snowy')">Listen</button>
       </div>
 
       <div class="weather-card" onclick="playAudio('windy')">
@@ -290,7 +292,7 @@
           <img src="assets/images/windy.webp" alt="Windy" class="weather-image">
         </div>
         <div class="weather-word">Windy</div>
-        <button class="speak-button" onclick="event.stopPropagation(); playAudio('windy')">Listen</button>
+        <button type="button" class="speak-button" onclick="event.stopPropagation(); playAudio('windy')">Listen</button>
       </div>
 
       <div class="weather-card" onclick="playAudio('stormy')">
@@ -298,7 +300,7 @@
           <img src="assets/images/stormy.webp" alt="Stormy" class="weather-image">
         </div>
         <div class="weather-word">Stormy</div>
-        <button class="speak-button" onclick="event.stopPropagation(); playAudio('stormy')">Listen</button>
+        <button type="button" class="speak-button" onclick="event.stopPropagation(); playAudio('stormy')">Listen</button>
       </div>
 
       <div class="weather-card" onclick="playAudio('hot')">
@@ -306,7 +308,7 @@
           <img src="assets/images/hot.webp" alt="Hot" class="weather-image">
         </div>
         <div class="weather-word">Hot</div>
-        <button class="speak-button" onclick="event.stopPropagation(); playAudio('hot')">Listen</button>
+        <button type="button" class="speak-button" onclick="event.stopPropagation(); playAudio('hot')">Listen</button>
       </div>
 
       <div class="weather-card" onclick="playAudio('warm')">
@@ -314,7 +316,7 @@
           <img src="assets/images/warm.webp" alt="Warm" class="weather-image">
         </div>
         <div class="weather-word">Warm</div>
-        <button class="speak-button" onclick="event.stopPropagation(); playAudio('warm')">Listen</button>
+        <button type="button" class="speak-button" onclick="event.stopPropagation(); playAudio('warm')">Listen</button>
       </div>
 
       <div class="weather-card" onclick="playAudio('cold')">
@@ -322,7 +324,7 @@
           <img src="assets/images/cold.webp" alt="Cold" class="weather-image">
         </div>
         <div class="weather-word">Cold</div>
-        <button class="speak-button" onclick="event.stopPropagation(); playAudio('cold')">Listen</button>
+        <button type="button" class="speak-button" onclick="event.stopPropagation(); playAudio('cold')">Listen</button>
       </div>
 
       <div class="weather-card" onclick="playAudio('freezing')">
@@ -330,7 +332,7 @@
           <img src="assets/images/freezing.webp" alt="Freezing" class="weather-image">
         </div>
         <div class="weather-word">Freezing</div>
-        <button class="speak-button" onclick="event.stopPropagation(); playAudio('freezing')">Listen</button>
+        <button type="button" class="speak-button" onclick="event.stopPropagation(); playAudio('freezing')">Listen</button>
       </div>
 
     </section>
@@ -347,9 +349,16 @@
 
       currentAudio = new Audio(`assets/audio/words/${fileName}.m4a`);
 
-      currentAudio.play().catch(error => {
-        console.log("Audio could not play:", error);
-      });
+      currentAudio.play().catch(() => speakText(fileName));
+    }
+
+    function speakText(text) {
+      if (!('speechSynthesis' in window)) return;
+      speechSynthesis.cancel();
+      const speech = new SpeechSynthesisUtterance(text.replace('-', ' '));
+      speech.lang = 'en-GB';
+      speech.rate = 0.76;
+      speechSynthesis.speak(speech);
     }
   </script>
 </body>
